@@ -1,0 +1,18 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<div class="diagram-placeholder" role="img" aria-label={title}>
+  <div class="diagram-placeholder-card">
+    <p class="diagram-placeholder-kicker">Predicted Molecule</p>
+    <h4>Diagram in preparation</h4>
+    <p>
+      The Evaluator Agent remains part of the Phase 1 molecule set, but its canonical structural diagram is not yet
+      published. This placeholder preserves the catalogue without presenting a guessed geometry as final.
+    </p>
+  </div>
+</div>

@@ -1,23 +1,41 @@
 - type: covalent
-  notation: solid double line
+  label: Covalent
+  notation: Solid line
   meaning: Load-bearing; removing it collapses molecule function.
-
-- type: ionic
-  notation: dotted line
-  meaning: Optional extension; system remains with reduced capability.
-
-- type: protocol
-  notation: labeled boundary bracket
-  meaning: External exchange surface (Mc/A2/A3).
+  stroke_style: solid
+  accent_color: "#6A9FD4"
 
 - type: double-bond
-  notation: emphasized ring or bold connector
-  meaning: Primary structural constraint defining molecule identity.
+  label: Double Bond
+  notation: Parallel solid lines
+  meaning: Primary structural constraint that defines molecule identity.
+  stroke_style: double
+  accent_color: "#D4B26A"
 
-- type: feedback-loop
-  notation: circular arrow
-  meaning: Adaptive reflexive cycle.
+- type: ionic
+  label: Ionic
+  notation: Dashed line
+  meaning: Optional extension; the molecule remains valid with reduced capability.
+  stroke_style: dashed
+  accent_color: "#9FD46A"
+
+- type: protocol
+  label: Protocol Bond
+  notation: Short dashed connector
+  meaning: Boson-mediated exchange surface for tool, delegation, or human closure.
+  stroke_style: protocol
+  accent_color: "#EF9F27"
 
 - type: absent-by-design
-  notation: crossed node
-  meaning: Structural guarantee of intentional absence.
+  label: Absent by Design
+  notation: Ghosted dashed link
+  meaning: Intentional structural absence that acts as a guarantee, not a missing feature.
+  stroke_style: absent
+  accent_color: "#555555"
+
+- type: feedback-loop
+  label: Feedback Loop
+  notation: Curved return path
+  meaning: Adaptive cycle where prior outcomes condition future routing or behavior.
+  stroke_style: loop
+  accent_color: "#1D9E75"

@@ -1,0 +1,36 @@
+---
+import ReactAgentDiagram from './ReactAgentDiagram.astro';
+import PlanExecuteDiagram from './PlanExecuteDiagram.astro';
+import RagDiagram from './RagDiagram.astro';
+import PersistentDiagram from './PersistentDiagram.astro';
+import OrchestratorDiagram from './OrchestratorDiagram.astro';
+import ReflexiveDiagram from './ReflexiveDiagram.astro';
+import StatelessCatalystDiagram from './StatelessCatalystDiagram.astro';
+import SensoryAgentDiagram from './SensoryAgentDiagram.astro';
+import ToolCompletenessDiagram from './ToolCompletenessDiagram.astro';
+import EvaluatorPlaceholderDiagram from './EvaluatorPlaceholderDiagram.astro';
+
+type Props = {
+  diagramId: string;
+  title: string;
+};
+
+const { diagramId, title } = Astro.props;
+
+const diagrams = {
+  'react-agent': ReactAgentDiagram,
+  'plan-execute-agent': PlanExecuteDiagram,
+  'memory-augmented-agent': RagDiagram,
+  'persistent-agent': PersistentDiagram,
+  orchestrator: OrchestratorDiagram,
+  'reflexive-agent': ReflexiveDiagram,
+  'stateless-catalyst': StatelessCatalystDiagram,
+  'sensory-agent': SensoryAgentDiagram,
+  'tool-molecule-completeness': ToolCompletenessDiagram,
+  'evaluator-agent': EvaluatorPlaceholderDiagram
+};
+
+const Diagram = diagrams[diagramId as keyof typeof diagrams] ?? EvaluatorPlaceholderDiagram;
+---
+
+<Diagram title={title} />

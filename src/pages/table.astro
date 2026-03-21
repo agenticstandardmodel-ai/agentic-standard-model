@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import { getCollection } from 'astro:content';
+import { getElements } from '../lib/data';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+const elements = getElements().sort((a, b) => {
+  if (typeof a.number === 'number' && typeof b.number === 'number') {
+    return a.number - b.number;
+  }
+  if (typeof a.number === 'number') return -1;
+  if (typeof b.number === 'number') return 1;
+  return String(a.number).localeCompare(String(b.number));
+});
+
+const periodLabels: Record<string, string> = {
+  P1: 'Infrastructure',
+  P2: 'Context',
+  P3: 'Short-Horizon Retention',
+  P4: 'Semantic Processing',
+  P5: 'Long-Horizon Retention and Action',
+  P6: 'Reasoning Patterns',
+};
+
+const groupNotes: Record<string, string> = {
+  Infrastructure: 'Provides the computational and connectivity substrate required before any higher-order agentic behavior can function.',
+  State: 'Captures live operational context during execution and keeps a running system coherent across steps.',
+  Retention: 'Holds information across time, from active session context to durable long-horizon memory.',
+  Cognition: 'Generates or encodes meaning and defines the semantic core of the framework.',
+  Action: 'Directs cognition toward effect in the world through observation, mutation, computation, or communication.',
+  Pattern: 'Structures how cognition operates without directly acting on the world.',
+  Exchange: 'Mediates protocol-level interaction between molecules, tools, and humans.',
+  'Predicted Gap': 'Marks a structurally expected element whose behavior is visible in practice but not yet fully formalized.',
+};
+---
+
+<BaseLayout
+  title="The Agentic Periodic Table — The Agentic Standard Model"
+  description="Standalone reference page for the ASM periodic table, dependency-derived periods, functional groups, and boson-class protocols."
+  canonicalPath="/table/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
+    <TopBar chapters={chapters} currentNav="table" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="table" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content page-content table-page" data-doc-content>
+        <p class="chapter-index">Flagship Reference</p>
+        <h1>The Agentic Periodic Table</h1>
+        <p class="chapter-meta">
+          The central artifact of the framework: a dependency-derived taxonomy of confirmed elements, predicted gaps,
+          and boson-class interaction protocols.
+        </p>
+
+        <section class="table-page-intro">
+          <h2>What This Page Is For</h2>
+          <p>
+            The table is the fastest path into the framework. It shows what must exist, what remains predicted, and
+            how periods and groups emerge from structural dependencies rather than naming preference.
+          </p>
+          <p>
+            Use it as the reference surface for chapter reading, molecule interpretation, and discussions of predicted
+            gaps.
+          </p>
+        </section>
+
+        <section class="table-frame-full">
+          <div class="frame-wrap standalone-frame" role="group" aria-label="The Agentic periodic table">
+            <iframe
+              src="/interactive/asm_periodic_table.html"
+              title="The Agentic Periodic Table"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <p class="table-links">
+            <a href="/chapter-2-periodic-table/">Read the table chapter</a>
+            <a href="/figures/fig-2-1/">Open the shareable figure page</a>
+          </p>
+        </section>
+
+        <section class="element-index" aria-labelledby="elements-heading">
+          <div class="element-index-head">
+            <div>
+              <p class="chapter-index">Reference Index</p>
+              <h2 id="elements-heading">Elements</h2>
+            </div>
+            <label class="element-search" for="element-search">
+              <span aria-hidden="true">Search</span>
+              <input
+                id="element-search"
+                type="search"
+                placeholder="Search elements"
+                autocomplete="off"
+                data-element-search
+              />
+            </label>
+          </div>
+
+          <div class="element-table" data-element-table>
+            <div class="element-table-head" aria-hidden="true">
+              <span>Element Name</span>
+              <span>Symbol</span>
+              <span>Atomic Number</span>
+              <span></span>
+            </div>
+
+            <div class="element-table-body">
+              {elements.map((element) => {
+                const searchText = [
+                  element.name,
+                  element.symbol,
+                  String(element.number),
+                  element.group,
+                  element.period,
+                  element.kind,
+                  element.description,
+                  element.current_instantiation ?? '',
+                ]
+                  .join(' ')
+                  .toLowerCase();
+
+                return (
+                  <details class="element-row" data-element-row data-search={searchText}>
+                    <summary>
+                      <span>{element.name}</span>
+                      <span class="element-row-symbol">{element.symbol}</span>
+                      <span>{element.number}</span>
+                      <span class="element-row-toggle" aria-hidden="true"></span>
+                    </summary>
+
+                    <div class="element-row-body">
+                      <div class="element-row-detail">
+                        <div class="element-row-chip" data-kind={element.kind}>
+                          <span class="element-row-chip-symbol">{element.symbol}</span>
+                          <span class="element-row-chip-number">{element.number}</span>
+                          <span class="element-row-chip-name">{element.name}</span>
+                        </div>
+
+                        <div class="element-row-copy">
+                          <p>{element.description}</p>
+                          <p class="element-row-context">
+                            <strong>{element.period}</strong> {periodLabels[element.period] ?? element.period}.{' '}
+                            {groupNotes[element.group] ?? ''}
+                          </p>
+                        </div>
+                      </div>
+
+                      <dl class="element-row-meta">
+                        <div>
+                          <dt>Group</dt>
+                          <dd>{element.group}</dd>
+                        </div>
+                        <div>
+                          <dt>Period</dt>
+                          <dd>{element.period}</dd>
+                        </div>
+                        <div>
+                          <dt>Type</dt>
+                          <dd>{element.kind}</dd>
+                        </div>
+                        {element.current_instantiation && (
+                          <div>
+                            <dt>Current Instantiation</dt>
+                            <dd>{element.current_instantiation}</dd>
+                          </div>
+                        )}
+                      </dl>
+                    </div>
+                  </details>
+                );
+              })}
+            </div>
+
+            <p class="element-empty" data-element-empty hidden>No matching elements.</p>
+          </div>
+        </section>
+      </article>
+    </section>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  const searchInput = document.querySelector('[data-element-search]');
+  const rows = Array.from(document.querySelectorAll('[data-element-row]'));
+  const emptyState = document.querySelector('[data-element-empty]');
+
+  if (searchInput && rows.length) {
+    const updateElementFilter = () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      rows.forEach((row) => {
+        const haystack = row.dataset.search ?? '';
+        const matches = haystack.includes(query);
+        row.hidden = !matches;
+        if (!matches) {
+          row.removeAttribute('open');
+          return;
+        }
+        visibleCount += 1;
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount !== 0;
+      }
+    };
+
+    searchInput.addEventListener('input', updateElementFilter);
+    updateElementFilter();
+  }
+
+  rows.forEach((row) => {
+    row.addEventListener('toggle', () => {
+      if (!row.open) return;
+      rows.forEach((otherRow) => {
+        if (otherRow !== row) {
+          otherRow.removeAttribute('open');
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import BondLegend from '../components/BondLegend.astro';
+import MoleculeCard from '../components/MoleculeCard.astro';
+import MoleculeReferenceCard from '../components/MoleculeReferenceCard.astro';
+import { getBonds, getMoleculeReferences, getMolecules } from '../lib/data';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+
+const molecules = getMolecules();
+const references = getMoleculeReferences();
+const bonds = getBonds();
+
+const confirmedMolecules = molecules.filter((molecule) => molecule.status === 'confirmed');
+const predictedMolecules = molecules.filter((molecule) => molecule.status === 'predicted');
+---
+
+<BaseLayout
+  title="The Agentic Standard Model Molecules"
+  description="Native SVG bond-diagram browser for confirmed and predicted ASM molecules, plus chemistry references."
+  canonicalPath="/molecules/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#D85A30">
+    <TopBar chapters={chapters} currentNav="molecules" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="molecules" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content molecule-route" data-doc-content>
+        <p class="chapter-index">Chemistry Layer Reference</p>
+        <h1>Molecules and Bond Diagrams</h1>
+        <p class="chapter-meta">
+          Native SVG browser for the Phase 1 molecule catalogue: five confirmed molecules, four predicted molecules,
+          and a chemistry reference surface for tool completeness.
+        </p>
+
+        <section class="panel molecule-intro">
+          <h2>Bond Legend</h2>
+          <p>
+            Bond notation is structural, not decorative. The legend below is shared across the molecule browser so
+            covalent, ionic, double-bond, protocol, absence, and feedback semantics stay consistent.
+          </p>
+          <BondLegend bonds={bonds} />
+        </section>
+
+        <section class="molecule-section">
+          <h2>Confirmed Molecules</h2>
+          <p class="section-copy">
+            The stable set currently includes the minimum viable agent, planning agents, memory-augmented retrieval,
+            restartable persistence, and orchestrated delegation.
+          </p>
+          <div class="molecule-stack">
+            {confirmedMolecules.map((molecule) => <MoleculeCard molecule={molecule} />)}
+          </div>
+        </section>
+
+        <section class="molecule-section">
+          <h2>Predicted Molecules</h2>
+          <p class="section-copy">
+            These entries preserve the predicted frontier from the engineering brief. Where a canonical diagram has not
+            yet been authored, the card remains text-complete and explicitly marked as pending.
+          </p>
+          <div class="molecule-stack">
+            {predictedMolecules.map((molecule) => <MoleculeCard molecule={molecule} />)}
+          </div>
+        </section>
+
+        <section class="molecule-section">
+          <h2>Chemistry References</h2>
+          <p class="section-copy">
+            Reference samples stay separate from the agent catalogue so the molecule browser can show both stable
+            molecules and structural proofs without conflating them.
+          </p>
+          <div class="molecule-stack">
+            {references.map((reference) => <MoleculeReferenceCard reference={reference} />)}
+          </div>
+        </section>
+      </article>
+    </section>
+
+  </div>
+</BaseLayout>

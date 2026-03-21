@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ChapterSidebar from '../components/ChapterSidebar.astro';
 import TopBar from '../components/TopBar.astro';
-import OutlineSidebar from '../components/OutlineSidebar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
 import { getCollection } from 'astro:content';
-import { statusLabels } from '../lib/chapters';
 
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
@@ -12,65 +10,168 @@ const chapters = (await getCollection('chapters')).sort(
 ---
 
 <BaseLayout
-  title="Agentic Standard Model — Interactive Textbook"
+  title="The Agentic Standard Model"
   description="The Agentic Standard Model is a theory for classifying and composing agentic systems from irreducible elements with explicit dependency and force structure."
   canonicalPath="/"
 >
-  <div class="app-shell" style="--chapter-accent:#378ADD">
-    <TopBar chapters={chapters} />
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
+    <TopBar chapters={chapters} currentNav="home" />
     <div class="mobile-nav-overlay" data-nav-overlay></div>
 
-    <aside class="sidenav" data-sidenav>
-      <ChapterSidebar chapters={chapters} />
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="home" />
     </aside>
 
     <section class="content-pane">
-      <article class="doc-content home-page" data-doc-content>
-        <p class="chapter-index">Interactive Textbook</p>
-        <h1>Agentic Standard Model</h1>
-        <p class="chapter-meta">
-          A structural theory for agentic systems: what must exist, how components compose, and which conservation
-          constraints govern valid architectures.
-        </p>
-
-        <section class="panel">
-          <h2>Thesis</h2>
+      <article class="doc-content landing-page" data-doc-content>
+        <p class="chapter-index">Framework v0.3</p>
+        <section class="landing-hero">
+          <h1>The Agentic Standard Model</h1>
+          <p class="chapter-meta landing-hero-meta">
+            A structural framework for agentic systems. It defines the irreducible elements of agentic AI, the lawful
+            ways they compose, and the interaction channels that constrain what a valid system can be.
+          </p>
           <p>
-            ASM argues that agentic systems are not arbitrary stacks of tools and prompts. They are structured
-            compositions of irreducible elements with dependency-derived periods, functional groups, and force-channel
-            constraints.
+            It was developed to replace ad hoc descriptions of agents with a shared reference model that researchers,
+            architects, engineers, and students can use to reason about design from first principles.
+          </p>
+          <p class="hero-actions">
+            <a class="cta-primary" href="/table/">View the full table</a>
+            <a class="cta-secondary" href="/chapter-1-foundations/">Read the foundations</a>
           </p>
         </section>
 
-        <section class="panel">
-          <h2>Read Path</h2>
-          <p>
-            Start with <a href="/chapter-1-foundations/">Chapter 1</a> for problem framing and historical method,
-            then move to <a href="/chapter-2-periodic-table/">Chapter 2</a> for the taxonomy and dependency logic.
-          </p>
-          <p>
-            Flagship visual: <a href="/figures/fig-2-1/">Figure 2.1 — ASM Periodic Table</a>.
-          </p>
+        <section class="landing-primer">
+          <article>
+            <p class="card-num">What It Is</p>
+            <p>
+              A reference standard for describing agentic systems in terms of elements, molecules, and force laws.
+            </p>
+          </article>
+          <article>
+            <p class="card-num">Why It Exists</p>
+            <p>
+              To give the field a rigorous vocabulary for dependency, composition, and structural error instead of
+              relying on vendor terminology.
+            </p>
+          </article>
+          <article>
+            <p class="card-num">Who It Is For</p>
+            <p>
+              AI researchers, system architects, engineers, and students who need a durable model rather than a moving
+              collection of implementation patterns.
+            </p>
+          </article>
         </section>
 
-        <section class="panel chapter-cards">
-          <h2>Table of Contents</h2>
-          <div class="cards">
-            {chapters.map((chapter) => (
-              <article class="card">
-                <p class="card-num">Chapter {chapter.data.chapter_number.toString().padStart(2, '0')}</p>
-                <h3><a href={`/${chapter.slug}/`}>{chapter.data.title}</a></h3>
-                <p>{chapter.data.summary}</p>
-                <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
-              </article>
-            ))}
+        <section class="start-here">
+          <div class="landing-section-head">
+            <p class="chapter-index">Start Here</p>
+            <h2>A Clear Reading Path</h2>
+            <p>
+              The framework is new and dense. This path gets a first-time reader from the problem statement to the full
+              compositional model in the right order.
+            </p>
           </div>
+          <div class="start-here-grid">
+            <a class="start-step" href="/chapter-1-foundations/">
+              <span class="start-step-num">01</span>
+              <strong>Foundations</strong>
+              <span>Why agentic systems need a structural theory and what problem the framework is solving.</span>
+            </a>
+            <a class="start-step" href="/table/">
+              <span class="start-step-num">02</span>
+              <strong>The Agentic Periodic Table</strong>
+              <span>The 22 confirmed elements, 3 exchange protocols, and the predicted gaps that make the model testable.</span>
+            </a>
+            <a class="start-step" href="/molecules/">
+              <span class="start-step-num">03</span>
+              <strong>Molecules</strong>
+              <span>How valid agent structures emerge from bonds between elements rather than from arbitrary stacks.</span>
+            </a>
+            <a class="start-step" href="/chapter-4-force-laws/">
+              <span class="start-step-num">04</span>
+              <strong>Force Laws</strong>
+              <span>Why protocol surfaces are distinct, what each channel conserves, and where structural violations occur.</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="landing-table">
+          <div class="landing-section-head">
+            <p class="chapter-index">Primary Artifact</p>
+            <h2>The Agentic Periodic Table</h2>
+            <p>
+              This is the fastest way to understand the framework. Periods encode dependency layers. Groups encode
+              functional character. Gaps are predictions, not omissions.
+            </p>
+          </div>
+          <div class="frame-wrap standalone-frame" role="group" aria-label="Inline ASM periodic table">
+            <iframe
+              src="/interactive/asm_periodic_table.html"
+              title="Inline The Agentic Periodic Table"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <p class="table-links">
+            <a href="/table/">View full table</a>
+            <a href="/molecules/">Build from molecules</a>
+          </p>
+        </section>
+
+        <section class="landing-section">
+          <div class="landing-section-head">
+            <p class="chapter-index">Framework Boundaries</p>
+            <h2>What The Model Covers</h2>
+            <p>
+              The framework moves in layers. It starts with elemental structure, rises into composition, and ends with
+              the laws that govern interaction across system boundaries.
+            </p>
+          </div>
+          <div class="cards theory-cards">
+            <article class="card">
+              <p class="card-num">Physics Layer</p>
+              <h3><a href="/chapter-2-periodic-table/">Elements and Bosons</a></h3>
+              <p>The 22 elements, the boson-class protocols, and the dependency logic that determines period placement.</p>
+              <p>Example: the table itself predicts structure by leaving gaps rather than hiding them.</p>
+            </article>
+            <article class="card">
+              <p class="card-num">Chemistry Layer</p>
+              <h3><a href="/chapter-3-chemistry-layer/">Molecules and Bonds</a></h3>
+              <p>How elements compose into valid molecules, why some bonds are optional, and which couplings define identity.</p>
+              <p>Example: the ReAct molecule shows the minimum viable agent as a fully load-bearing structure.</p>
+            </article>
+            <article class="card">
+              <p class="card-num">Force Laws</p>
+              <h3><a href="/chapter-4-force-laws/">Channels and Constraints</a></h3>
+              <p>The three force channels that govern valid interaction, the conserved quantities they protect, and the forbidden patterns they exclude.</p>
+              <p>Example: invoking a sub-agent through Mc instead of A2 is a structural error, not a stylistic choice.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="landing-section contribute-section">
+          <div class="landing-section-head">
+            <p class="chapter-index">Contribution Model</p>
+            <h2>Help Stress-Test The Framework</h2>
+            <p class="section-copy">
+              This is a living standard. The right contributions are not feature requests in the usual sense, but
+              structural tests against the theory.
+            </p>
+          </div>
+          <div class="landing-inline-list">
+            <p><strong>Stress-tests</strong> for patterns that appear to require missing elements.</p>
+            <p><strong>Molecule submissions</strong> from real systems that validate or challenge known compositions.</p>
+            <p><strong>Force-law violations</strong> that map production failures to forbidden structural interactions.</p>
+          </div>
+          <p class="hero-actions">
+            <a class="cta-primary" href="https://github.com/agenticstandardmodel-ai/agentic-standard-model" target="_blank" rel="noreferrer">View the GitHub repository</a>
+            <a class="cta-secondary" href="/tools/">See the current references</a>
+          </p>
         </section>
       </article>
     </section>
-
-    <aside class="outline-pane">
-      <OutlineSidebar />
-    </aside>
   </div>
 </BaseLayout>

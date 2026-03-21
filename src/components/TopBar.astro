@@ -1,40 +1,67 @@
 ---
+import { chapterLabel, statusLabels } from '../lib/chapters';
+import { siteNavItems } from '../lib/site-nav';
+import type { SiteNavId } from '../lib/site-nav';
+import AsmLogo from './AsmLogo.astro';
+
 type ChapterItem = {
   slug: string;
   data: {
     chapter_number: number;
     title: string;
+    status?: 'placeholder' | 'draft' | 'published';
   };
 };
 
 type Props = {
   chapters: ChapterItem[];
   currentChapterNumber?: number;
+  currentNav?: SiteNavId;
 };
 
-const { chapters, currentChapterNumber } = Astro.props;
+const { chapters, currentChapterNumber, currentNav } = Astro.props;
 ---
 
 <header class="topbar" role="banner">
   <div class="topbar-left">
-    <button type="button" class="nav-toggle" data-nav-toggle aria-label="Open chapter navigation">≡</button>
-    <a href="/" class="wordmark">Agentic Standard Model</a>
+    <button type="button" class="nav-toggle" data-nav-toggle aria-label="Open site navigation">≡</button>
+    <a href="/" class="wordmark" aria-label="The Agentic Standard Model home">
+      <AsmLogo compact />
+    </a>
   </div>
 
-  <nav class="chapter-pills" aria-label="Top chapter navigation">
-    {chapters.map((chapter) => {
-      const active = chapter.data.chapter_number === currentChapterNumber;
-      return (
-        <a
-          href={`/${chapter.slug}/`}
-          class={active ? 'active' : ''}
-          aria-current={active ? 'page' : undefined}
-        >
-          <span>{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
-          <span>{chapter.data.title.replace(`Chapter ${chapter.data.chapter_number}: `, '')}</span>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a href="/" class={currentNav === 'home' ? 'active' : undefined}>Home</a>
+
+    <details class={`site-nav-dropdown ${currentNav === 'chapters' ? 'active' : ''}`}>
+      <summary aria-label="Open chapter navigation">
+        <span>Chapters</span>
+        <span class="site-nav-caret" aria-hidden="true">▾</span>
+      </summary>
+      <div class="site-nav-dropdown-panel">
+        <a href="/chapters/" class="site-nav-all-chapters">View all chapters</a>
+        {chapters.map((chapter) => {
+          const active = chapter.data.chapter_number === currentChapterNumber;
+          return (
+            <a href={`/${chapter.slug}/`} class={`site-nav-chapter-link ${active ? 'active' : ''}`}>
+              <span class="site-nav-chapter-num">{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
+              <span class="site-nav-chapter-copy">
+                <strong>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</strong>
+                {chapter.data.status && <small>{statusLabels[chapter.data.status] || chapter.data.status}</small>}
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </details>
+
+    {siteNavItems
+      .filter((item) => item.id !== 'home')
+      .map((item) => (
+        <a href={item.href} class={currentNav === item.id ? 'active' : undefined}>
+          {item.label}
         </a>
-      );
-    })}
+      ))}
   </nav>
 
   <div class="topbar-right">

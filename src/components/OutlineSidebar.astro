@@ -1,6 +1,41 @@
+---
+type FigureLink = {
+  id: string;
+  label: string;
+  title: string;
+  href?: string;
+};
+
+type Props = {
+  title?: string;
+  figureTitle?: string;
+  figures?: FigureLink[];
+};
+
+const { title = 'On this page', figureTitle = 'Figures', figures = [] } = Astro.props;
+---
+
 <aside class="outline-sidebar" aria-label="In-page outline">
-  <p class="outline-kicker">On this page</p>
+  <p class="outline-kicker">{title}</p>
   <nav>
     <ol data-outline-list></ol>
   </nav>
+
+  {figures.length > 0 && (
+    <div class="outline-figure-block">
+      <p class="outline-kicker">{figureTitle}</p>
+      <nav>
+        <ol class="outline-figure-list" data-figure-list>
+          {figures.map((figure) => (
+            <li>
+              <a href={figure.href || `#${figure.id}`} data-anchor-link>
+                <span>{figure.label}</span>
+                <small>{figure.title}</small>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  )}
 </aside>

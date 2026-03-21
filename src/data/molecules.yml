@@ -1,11 +1,116 @@
 - id: react-agent
   name: ReAct Agent
   status: confirmed
-  description: Alternating reasoning and acting loops with tool usage.
-  elements: [Lm, Rm]
+  formula: "Lm - Wm - Es - (Rt · Wt) [Mc]"
+  summary: "Minimum viable agent with a fully load-bearing chain and no optional elements."
+  defining_constraint: "Every bond is covalent; no optional elements or absent-by-design constraints are present."
+  predicted_property: "Smallest stable agent configuration and the most brittle: every element is a single point of failure."
+  diagram_id: react-agent
+  diagram_status: ready
+  notes: "Working Memory is scoped to active execution only. Each invocation begins with a clean state with no accumulated knowledge from prior tasks."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: plan-execute-agent
+  name: Plan-and-Execute Agent
+  status: confirmed
+  formula: "Lm - Pm - Lt - Ws= - Ds [Mc]"
+  summary: "Separates planning from execution through an identity-defining workflow-state bond."
+  defining_constraint: "Ws= is the double bond. Removing Workflow State transforms the molecule into a reactive loop rather than degrading the same agent."
+  predicted_property: "Supports step separation, plan tracking, and conditional routing through the Lm=Ws coupling."
+  diagram_id: plan-execute-agent
+  diagram_status: ready
+  notes: "Every property that makes this a planning agent lives in the Workflow State coupling, not in the presence of additional tools alone."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: memory-augmented-agent
+  name: Memory-Augmented Agent (RAG)
+  status: confirmed
+  formula: "Lm - Ec - Sm - Wm - (Rt · Em·) - Is [Mc]"
+  summary: "Semantic retrieval agent whose memory layer depends on an explicit encoder."
+  defining_constraint: "Ec is load-bearing. Semantic Memory without an Encoder is storage, not semantic retrieval."
+  predicted_property: "Supports retrieval-grounded reasoning, with Episodic Memory adding optional adaptive behavior through an ionic bond."
+  diagram_id: memory-augmented-agent
+  diagram_status: ready
+  notes: "Ec was the critical missing element before v0.3. The stress-test showed that embedding cannot be treated as an implementation detail of Semantic Memory."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: persistent-agent
+  name: Persistent Agent
+  status: confirmed
+  formula: "Lm - Ws= - Cp - (Rt · Wt) - Es [Mc]"
+  summary: "Long-running execution molecule built to survive process boundaries."
+  defining_constraint: "Workflow State and Checkpoint State form the defining structural pair; neither is sufficient on its own."
+  predicted_property: "Supports restartable execution with retained position and state continuity after interruption."
+  diagram_id: persistent-agent
+  diagram_status: ready
+  notes: "Checkpoint State without Workflow State can restart but not resume position. Workflow State without Checkpoint State tracks position but loses it on restart."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
 
 - id: orchestrator
-  name: Orchestrator Molecule
+  name: Orchestrator
   status: confirmed
-  description: Compositional coordinator for sub-agents and workflow state.
-  elements: [Lm, Mc]
+  formula: "Lm - Ws= - Ds - (Ag1 · Ag2 · Agn·) [Mc][A2][A3]"
+  summary: "First multicellular composition with governed delegation and configurable sub-agent sets."
+  defining_constraint: "A2 is structurally required. Using Mc instead strips sub-agents of intent chain and governance surface."
+  predicted_property: "Supports delegating across a configurable population of sub-agents while preserving authority and human-closure channels."
+  diagram_id: orchestrator
+  diagram_status: ready
+  notes: "The distinction between Mc and A2 is structural, not stylistic: tools are invoked, delegates inherit task, authority, and traceable intent."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: reflexive-agent
+  name: Reflexive Agent
+  status: predicted
+  formula: "Lm - Em - Ds - [Em⟲Ds]"
+  summary: "Predicted learning-oriented configuration with a feedback loop between episodic record and decision routing."
+  defining_constraint: "The Em⟲Ds feedback loop is identity-defining; adaptation emerges from the quality of that loop."
+  predicted_property: "Each execution adds to Episodic Memory, and each addition shifts future routing behavior through Decision Skill."
+  diagram_id: reflexive-agent
+  diagram_status: ready
+  notes: "The loop also introduces a new failure mode: biased episodic records can recursively bias routing decisions and amplify their own errors."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: stateless-catalyst
+  name: Stateless Catalyst
+  status: predicted
+  formula: "Lm - Pm - Lt ∅state"
+  summary: "Lowest-mass agent configuration for deterministic transformation with explicit state absence."
+  defining_constraint: "State elements are absent by design; that absence is the specification, not a temporary omission."
+  predicted_property: "Produces identical behavior on every invocation with no cross-run dependencies or accumulated side effects."
+  diagram_id: stateless-catalyst
+  diagram_status: ready
+  notes: "This pattern fits high-frequency transformation tasks where statelessness is a correctness guarantee rather than a convenience."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: sensory-agent
+  name: Sensory Agent
+  status: predicted
+  formula: "Lm - Rt - Ss - Is ∅Wt, ∅A2"
+  summary: "Purely observational molecule that reads, classifies, and records without mutation or delegation."
+  defining_constraint: "Write Tool and A2 are absent by design, making non-mutating observation an architectural guarantee."
+  predicted_property: "Supports monitoring and classification workflows whose non-delegating, non-mutating behavior must be structurally enforced."
+  diagram_id: sensory-agent
+  diagram_status: ready
+  notes: "Configured restrictions can be removed at runtime. Architectural absence cannot; that distinction is the entire point of the molecule."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/
+
+- id: evaluator-agent
+  name: Evaluator Agent
+  status: predicted
+  formula: "Formal notation pending"
+  summary: "Predicted evaluation-centric molecule that supplies corrective signal quality for adaptive and reflexive systems."
+  defining_constraint: "Final structural notation and bond geometry are still being authored; the role is known, the canonical diagram is not yet published."
+  predicted_property: "Expected to generate the corrective signal that keeps episodic feedback loops aligned rather than self-reinforcing error."
+  diagram_id: evaluator-agent
+  diagram_status: placeholder
+  notes: "Diagram in preparation. This entry remains in Phase 1 so the predicted set matches the engineering brief without presenting a guessed structure as final."
+  implementation_examples: []
+  chapter_link: /chapter-3-chemistry-layer/

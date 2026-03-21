@@ -1,0 +1,50 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<svg class="molecule-svg" width="680" height="200" viewBox="0 0 680 200" role="img" aria-label={title}>
+  <line x1="208" y1="80" x2="268" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="328" y1="80" x2="388" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="180" y1="52" x2="180" y2="28" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="180" y1="108" x2="180" y2="130" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="124" y1="150" x2="152" y2="150" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="208" y1="150" x2="250" y2="150" stroke="#9fd46a" stroke-width="1.5" stroke-dasharray="5,3"></line>
+  <line x1="300" y1="52" x2="300" y2="28" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3,3"></line>
+
+  <circle cx="180" cy="80" r="28" fill="#2e1308" stroke="#D85A30" stroke-width="1.5"></circle>
+  <text x="180" y="76" text-anchor="middle" class="mol-sym" fill="#F0997B">Lm</text>
+  <text x="180" y="98" text-anchor="middle" class="mol-lbl">LLM</text>
+
+  <circle cx="298" cy="80" r="28" fill="#2e1308" stroke="#D85A30" stroke-width="1"></circle>
+  <text x="298" y="76" text-anchor="middle" class="mol-sym" fill="#F0997B">Ec</text>
+  <text x="298" y="98" text-anchor="middle" class="mol-lbl">Encoder</text>
+
+  <circle cx="414" cy="80" r="28" fill="#0a2219" stroke="#1D9E75" stroke-width="1"></circle>
+  <text x="414" y="76" text-anchor="middle" class="mol-sym" fill="#5DCAA5">Sm</text>
+  <text x="414" y="98" text-anchor="middle" class="mol-lbl">Semantic Mem.</text>
+
+  <circle cx="180" cy="18" r="18" fill="#131e07" stroke="#639922" stroke-width="1"></circle>
+  <text x="180" y="22" text-anchor="middle" class="mol-mono" fill="#97C459">Is</text>
+
+  <circle cx="180" cy="150" r="26" fill="#0a2219" stroke="#1D9E75" stroke-width="1"></circle>
+  <text x="180" y="146" text-anchor="middle" class="mol-sym-sm" fill="#5DCAA5">Wm</text>
+  <text x="180" y="163" text-anchor="middle" class="mol-lbl">Working Mem.</text>
+
+  <circle cx="102" cy="150" r="22" fill="#280e1c" stroke="#D4537E" stroke-width="1"></circle>
+  <text x="102" y="155" text-anchor="middle" class="mol-sym-sm" fill="#ED93B1">Rt</text>
+
+  <circle cx="272" cy="150" r="24" fill="#0a2219" stroke="#1D9E75" stroke-width="1" stroke-dasharray="5,3"></circle>
+  <text x="272" y="146" text-anchor="middle" class="mol-sym-sm" fill="#5DCAA5">Em</text>
+  <text x="272" y="162" text-anchor="middle" class="mol-lbl">Episodic Mem.</text>
+
+  <text x="229" y="143" text-anchor="middle" class="mol-bond-label" fill="#9fd46a">ionic·</text>
+
+  <rect x="265" y="4" width="70" height="22" rx="4" fill="#261c00" stroke="#EF9F27" stroke-width="0.75"></rect>
+  <text x="300" y="19" text-anchor="middle" class="mol-mono" fill="#EF9F27">[Mc]</text>
+
+  <text x="298" y="118" text-anchor="middle" class="mol-lbl" fill="#D85A30">load-bearing</text>
+</svg>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import { getCollection } from 'astro:content';
+import { chapterLabel, statusLabels } from '../lib/chapters';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+---
+
+<BaseLayout
+  title="Chapters — The Agentic Standard Model"
+  description="Guided reading order and chapter index for The Agentic Standard Model."
+  canonicalPath="/chapters/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
+    <TopBar chapters={chapters} currentNav="chapters" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="chapters" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content page-content" data-doc-content>
+        <p class="chapter-index">Reading Path</p>
+        <h1>Chapters</h1>
+        <p class="chapter-meta">
+          Read the framework in sequence if you are new: foundations first, then the table, then molecules, then
+          force laws. Later chapters widen the scope into cell models, open problems, and boundary questions.
+        </p>
+
+        <section class="chapters-hero">
+          <div>
+            <p class="card-num">Start with Chapter 1</p>
+            <h2>Foundations</h2>
+            <p>
+              This is the guided entry point for first-time visitors. It explains the problem, the historical method,
+              and why the structure of the framework is derived rather than decorative.
+            </p>
+          </div>
+          <p class="hero-actions">
+            <a class="cta-primary" href="/chapter-1-foundations/">Start reading</a>
+            <a class="cta-secondary" href="/table/">Jump to the table</a>
+          </p>
+        </section>
+
+        <section class="chapter-index-grid">
+          {chapters.map((chapter) => (
+            <article class="tool-card chapter-index-card">
+              <p class="card-num">Chapter {chapter.data.chapter_number.toString().padStart(2, '0')}</p>
+              <h2><a href={`/${chapter.slug}/`}>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</a></h2>
+              <p>{chapter.data.summary}</p>
+              <p class="chapter-index-status">{statusLabels[chapter.data.status] || chapter.data.status}</p>
+            </article>
+          ))}
+        </section>
+      </article>
+    </section>
+  </div>
+</BaseLayout>

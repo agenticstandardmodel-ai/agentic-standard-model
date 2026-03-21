@@ -49,3 +49,60 @@ The ASM follows exactly this logic. Its period structure is not a ranking of com
 ### The Three Precedents and What Each Contributes
 
 Mendeleev's Periodic Table contributes the method: organise by observable structure, commit to gaps as predictions, let the table demand what must exist. The Standard Model contributes the distinction between matter and force, between fermion-class components and boson-class interaction protocols. The OSI model contributes the derivation principle: layer boundaries are determined by dependency relations, not by convention. The ASM applies all three.
+
+<figure class="figure-embed inline-chapter-figure" id="fig-1-1" data-outline-track>
+  <figcaption>
+    <p class="figure-kicker">Figure 1.1 · interactive</p>
+    <h3>Three Historical Precedents</h3>
+    <p>Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.</p>
+  </figcaption>
+
+  <div class="frame-wrap" role="group" aria-label="Three Historical Precedents">
+    <iframe
+      src="/interactive/three-precedents.html"
+      title="Three Historical Precedents"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+
+  <div class="figure-legend">
+    <section>
+      <h4>What It Shows</h4>
+      <p>
+        This figure places the three intellectual precedents of ASM in one visual frame so the reader can see that
+        the framework inherits method, ontology, and dependency logic from distinct traditions.
+      </p>
+    </section>
+    <section>
+      <h4>How to Read It</h4>
+      <p>
+        Read left to right. Mendeleev contributes structural taxonomy and prediction through gaps, the Standard Model
+        contributes the distinction between matter and force carriers, and OSI contributes dependency-ordered layering.
+      </p>
+    </section>
+    <section>
+      <h4>Why It Matters</h4>
+      <p>
+        Chapter 1 argues that ASM is not an arbitrary analogy. This figure makes the derivation visible by showing
+        which part of the framework comes from which precedent.
+      </p>
+    </section>
+    <section>
+      <h4>Key Callouts</h4>
+      <ul>
+        <li>Mendeleev supplies the predictive table method.</li>
+        <li>The Standard Model supplies the matter-versus-force distinction.</li>
+        <li>OSI supplies dependency-derived layering and interface discipline.</li>
+      </ul>
+    </section>
+  </div>
+
+  <p class="a11y-note">Accessibility summary: Conceptual comparison chart showing the three foundational precedents.</p>
+
+  <div class="figure-actions">
+    <a class="figure-link" href="/figures/fig-1-1/">Open standalone figure page</a>
+    <a class="figure-link subdued" href="/interactive/three-precedents.html">Open interactive figure directly</a>
+  </div>
+</figure>

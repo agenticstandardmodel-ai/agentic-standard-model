@@ -8,8 +8,8 @@ type Props = {
 };
 
 const {
-  title = 'Agentic Standard Model',
-  description = 'Interactive textbook for the Agentic Standard Model.',
+  title = 'The Agentic Standard Model',
+  description = 'Interactive textbook for The Agentic Standard Model.',
   canonicalPath = '/'
 } = Astro.props;
 
@@ -35,7 +35,7 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl.href} />
-    <meta property="og:site_name" content="Agentic Standard Model" />
+    <meta property="og:site_name" content="The Agentic Standard Model" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -97,14 +97,13 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
         const contentRoot = document.querySelector('[data-doc-content]');
         const outlineList = document.querySelector('[data-outline-list]');
         const activeSectionList = document.querySelector('[data-active-section-list]');
+        const figureLists = [...document.querySelectorAll('[data-figure-list]')];
 
-        if (!contentRoot || (!outlineList && !activeSectionList)) return;
+        if (!contentRoot || (!outlineList && !activeSectionList && figureLists.length === 0)) return;
 
         const headingNodes = [
           ...contentRoot.querySelectorAll('h2, h3')
         ].filter((heading) => heading.textContent && heading.textContent.trim().length > 0);
-
-        if (!headingNodes.length) return;
 
         const slugify = (value) =>
           value
@@ -115,19 +114,21 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
             .replace(/-+/g, '-');
 
         const used = new Set();
-        headingNodes.forEach((heading) => {
-          if (!heading.id) {
-            const base = slugify(heading.textContent || 'section');
-            let candidate = base || 'section';
-            let count = 2;
-            while (used.has(candidate) || document.getElementById(candidate)) {
-              candidate = `${base}-${count}`;
-              count += 1;
+        if (headingNodes.length) {
+          headingNodes.forEach((heading) => {
+            if (!heading.id) {
+              const base = slugify(heading.textContent || 'section');
+              let candidate = base || 'section';
+              let count = 2;
+              while (used.has(candidate) || document.getElementById(candidate)) {
+                candidate = `${base}-${count}`;
+                count += 1;
+              }
+              heading.id = candidate;
             }
-            heading.id = candidate;
-          }
-          used.add(heading.id);
-        });
+            used.add(heading.id);
+          });
+        }
 
         const createItem = (heading) => {
           const li = document.createElement('li');
@@ -147,13 +148,25 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
           headingNodes.forEach((heading) => container.appendChild(createItem(heading)));
         };
 
-        populate(outlineList);
-        populate(activeSectionList);
+        if (headingNodes.length) {
+          populate(outlineList);
+          populate(activeSectionList);
+        }
 
         const allLinks = [
           ...(outlineList ? [...outlineList.querySelectorAll('a')] : []),
-          ...(activeSectionList ? [...activeSectionList.querySelectorAll('a')] : [])
+          ...(activeSectionList ? [...activeSectionList.querySelectorAll('a')] : []),
+          ...figureLists.flatMap((list) => [...list.querySelectorAll('a')])
         ];
+
+        const trackedIds = [...new Set(
+          allLinks
+            .map((link) => link.getAttribute('href') || '')
+            .filter((href) => href.startsWith('#'))
+            .map((href) => href.replace('#', ''))
+        )];
+
+        if (!allLinks.length || !trackedIds.length) return;
 
         const setActive = (id) => {
           allLinks.forEach((link) => {
@@ -178,15 +191,18 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
           }
         );
 
-        headingNodes.forEach((heading) => observer.observe(heading));
+        trackedIds.forEach((id) => {
+          const target = document.getElementById(id);
+          if (target) observer.observe(target);
+        });
 
         window.addEventListener('hashchange', () => {
           const hash = window.location.hash.replace('#', '');
           if (hash) setActive(hash);
         });
 
-        const initial = window.location.hash.replace('#', '') || headingNodes[0].id;
-        setActive(initial);
+        const initial = window.location.hash.replace('#', '') || trackedIds[0];
+        if (initial) setActive(initial);
       })();
     </script>
   </body>

@@ -1,5 +1,6 @@
 - id: fig-1-1
   chapter: 1
+  label: Figure 1.1
   title: Three Historical Precedents
   caption: Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.
   type: interactive
@@ -7,19 +8,35 @@
   source_path: /interactive/three-precedents.html
   share_path: /figures/fig-1-1/
   accessibility_summary: Conceptual comparison chart showing the three foundational precedents.
+  legend_overview: This figure places the three intellectual precedents of ASM in one visual frame so the reader can see that the framework inherits method, ontology, and dependency logic from distinct traditions.
+  legend_how_to_read: Read left to right. Mendeleev contributes structural taxonomy and prediction through gaps, the Standard Model contributes the distinction between matter and force carriers, and OSI contributes dependency-ordered layering.
+  legend_why_it_matters: Chapter 1 argues that ASM is not an arbitrary analogy. This figure makes the derivation visible by showing which part of the framework comes from which precedent.
+  legend_callouts:
+    - Mendeleev supplies the predictive table method.
+    - The Standard Model supplies the matter-versus-force distinction.
+    - OSI supplies dependency-derived layering and interface discipline.
 
 - id: fig-2-1
   chapter: 2
-  title: ASM Periodic Table
+  label: Figure 2.1
+  title: The Agentic Periodic Table
   caption: Flagship interactive periodic table with groups, periods, predicted gaps, and boson panel.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/asm_periodic_table.html
   share_path: /figures/fig-2-1/
   accessibility_summary: Interactive table for ASM elements organized by period and group with details panel.
+  legend_overview: The periodic table is the primary artifact of the framework, organizing confirmed elements, predicted gaps, and boson-class protocols into a dependency-derived taxonomy.
+  legend_how_to_read: Read periods as dependency depth and groups as functional families. Gaps indicate predicted but unconfirmed structure, while the boson panel separates interaction protocols from matter-like components.
+  legend_why_it_matters: This figure is the foundation for the rest of the site because every molecule, force law, and contribution model refers back to this taxonomy.
+  legend_callouts:
+    - Period placement is derived from dependency, not importance.
+    - Bosons exist in exchange, not inside a component.
+    - Predicted gaps are claims the framework is willing to defend publicly.
 
 - id: fig-2-2
   chapter: 2
+  label: Figure 2.2
   title: Dependency Chain Explorer
   caption: Select an element and inspect upward and downward dependency chain.
   type: interactive
@@ -27,9 +44,17 @@
   source_path: /interactive/dependency-chain-explorer.html
   share_path: /figures/fig-2-2/
   accessibility_summary: Visual dependency chain for selected ASM element.
+  legend_overview: This explorer surfaces the dependency ancestry and downstream consequences of any selected element in the table.
+  legend_how_to_read: Choose an element, then inspect what must already exist below it and what becomes possible above it once it is present.
+  legend_why_it_matters: The dependency chain is the operational proof that periods are derived rather than assigned by taste or convention.
+  legend_callouts:
+    - Upward chains show prerequisites.
+    - Downward chains show what the selected element enables.
+    - The explorer turns the table from a taxonomy into a structural argument.
 
 - id: fig-3-1
   chapter: 3
+  label: Figure 3.1
   title: Bond Type Legend
   caption: Interactive legend for six bond types and their architectural meaning.
   type: reference
@@ -37,9 +62,17 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-3-1/
   accessibility_summary: Bond notation reference with examples and structural definitions.
+  legend_overview: This figure defines the bond notation used throughout the chemistry layer so molecule formulas can be read as structural claims rather than decorative diagrams.
+  legend_how_to_read: "Match each line treatment to its semantic meaning: covalent for load-bearing, ionic for optional, protocol for boson-mediated exchange, double bond for identity-defining structure, feedback loop for adaptation, and absent-by-design for guaranteed omission."
+  legend_why_it_matters: Without a stable bond legend, molecule formulas collapse into pictures. The legend gives the notation interpretive precision.
+  legend_callouts:
+    - Bond types encode function, not visual flourish.
+    - Double bonds signal identity-defining constraints.
+    - Absent-by-design notation marks guarantees, not missing features.
 
 - id: fig-3-2
   chapter: 3
+  label: Figure 3.2
   title: Five Stable Agent Molecules
   caption: Tabbed molecular diagrams of five known stable molecules with node and bond interactions.
   type: interactive
@@ -47,9 +80,17 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-3-2/
   accessibility_summary: Interactive molecular diagrams demonstrating stable ASM molecule structures.
+  legend_overview: This figure collects the stable molecules that the chemistry layer treats as confirmed structural configurations.
+  legend_how_to_read: Compare each molecule by following its load-bearing chain, any optional ionic extensions, and any double-bond constraints that define its identity.
+  legend_why_it_matters: The stable set shows that ASM is not only a table of parts but a system for expressing valid agent configurations.
+  legend_callouts:
+    - Stable molecules are the bridge from taxonomy to architecture.
+    - Optional bonds change capability without redefining identity.
+    - The confirmed set provides the baseline for future predicted molecules.
 
 - id: fig-4-1
   chapter: 4
+  label: Figure 4.1
   title: Force Channels Summary
   caption: Visual summary of force channels, bosons, conserved quantities, and direction.
   type: reference
@@ -57,9 +98,17 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-4-1/
   accessibility_summary: Reference matrix of ASM force laws and conserved channels.
+  legend_overview: This figure summarizes the force channels, boson carriers, and conserved quantities that govern valid exchange in ASM.
+  legend_how_to_read: Read each row as a force channel pairing a boson with what it conserves and where it can legally operate.
+  legend_why_it_matters: The force laws turn protocol choices into structural claims. They explain why some interactions are valid and others are forbidden.
+  legend_callouts:
+    - Mc conserves contract integrity.
+    - A2 conserves authority scope and intent delegation.
+    - A3 closes the chain back to human-readable output.
 
 - id: fig-5-1
   chapter: 5
+  label: Figure 5.1
   title: Agentic Cell Model
   caption: Interactive biological-cell analogy for orchestrator, membrane, and sub-agent organelles.
   type: interactive
@@ -67,9 +116,17 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-5-1/
   accessibility_summary: Cell diagram mapping agentic components to biological structures.
+  legend_overview: This figure uses a bounded-cell analogy to explain membranes, orchestrators, and sub-agent roles without losing ASM precision.
+  legend_how_to_read: Treat the membrane as governance boundary, the nucleus-like center as orchestration logic, and the internal organelles as specialized agentic substructures.
+  legend_why_it_matters: The cell model gives the framework a way to talk about bounded operation and lifecycle control without reducing architecture to biology rhetoric.
+  legend_callouts:
+    - Boundaries are policy surfaces, not decoration.
+    - Organelles stand in for specialized sub-agents and support functions.
+    - The model is explanatory, not metaphor for its own sake.
 
 - id: fig-6-1
   chapter: 6
+  label: Figure 6.1
   title: Open Questions Matrix
   caption: Structured map of confirmed elements, predicted gaps, and falsifiability targets.
   type: reference
@@ -77,9 +134,17 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-6-1/
   accessibility_summary: Matrix of open ASM questions and prediction status.
+  legend_overview: This figure separates what ASM treats as confirmed from what remains predicted, contested, or open to falsification.
+  legend_how_to_read: Read the matrix by confidence state, then by what evidence would confirm, revise, or falsify each structural claim.
+  legend_why_it_matters: A theory gains seriousness by exposing its unresolved edges and its conditions for failure.
+  legend_callouts:
+    - Confirmed structure should be visually distinct from predictions.
+    - Predicted gaps imply future empirical work.
+    - Falsifiability targets protect the framework from becoming a slogan.
 
 - id: fig-7-1
   chapter: 7
+  label: Figure 7.1
   title: ASM Scope and AGI Boundary
   caption: Boundary diagram positioning ASM precision and limits relative to AGI claims.
   type: static
@@ -87,3 +152,10 @@
   source_path: /interactive/placeholder-figure.html
   share_path: /figures/fig-7-1/
   accessibility_summary: Conceptual boundary map between ASM scope and broader AGI discourse.
+  legend_overview: This figure marks the boundary between what ASM claims directly and what belongs to broader AGI speculation.
+  legend_how_to_read: Use the interior region for claims the framework is designed to support and the outer region for claims it can only inform indirectly.
+  legend_why_it_matters: Scope discipline is part of the framework’s credibility. The site should show where the model stops as clearly as where it speaks.
+  legend_callouts:
+    - ASM is a precision layer, not a total theory of intelligence.
+    - Some AGI questions are downstream of better structure, not answered by it.
+    - Clear scope limits are a feature, not a weakness.

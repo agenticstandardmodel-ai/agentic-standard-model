@@ -12,6 +12,12 @@ export const GET: APIRoute = async ({ site }) => {
 
   const urls = [
     `${base}/`,
+    `${base}/about/`,
+    `${base}/chapters/`,
+    `${base}/dependency-chain-explorer/`,
+    `${base}/tools/`,
+    `${base}/table/`,
+    `${base}/molecules/`,
     ...chapters.map((chapter) => `${base}/${chapter.slug}/`),
     ...figures.map((figure) => `${base}/figures/${figure.id}/`)
   ];

@@ -1,0 +1,25 @@
+---
+import MoleculeDiagram from './molecules/MoleculeDiagram.astro';
+import type { MoleculeReferenceMeta } from '../lib/data';
+
+type Props = {
+  reference: MoleculeReferenceMeta;
+};
+
+const { reference } = Astro.props;
+---
+
+<article class="molecule-card" id={reference.id}>
+  <header class="molecule-card-header">
+    <span class="molecule-badge reference">{reference.label}</span>
+    <h3>{reference.name}</h3>
+    <p class="molecule-formula">{reference.formula}</p>
+    <p class="molecule-summary">{reference.summary}</p>
+  </header>
+
+  <div class="diagram-surface">
+    <MoleculeDiagram diagramId={reference.diagram_id} title={reference.name} />
+  </div>
+
+  <p class="molecule-note">{reference.notes}</p>
+</article>

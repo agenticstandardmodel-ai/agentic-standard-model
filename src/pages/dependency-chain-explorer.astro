@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+---
+
+<BaseLayout
+  title="Dependency Chain Explorer — The Agentic Standard Model"
+  description="Standalone dependency explorer for tracing prerequisite and downstream relationships between ASM elements."
+  canonicalPath="/dependency-chain-explorer/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
+    <TopBar chapters={chapters} currentNav="tools" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="tools" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content page-content" data-doc-content>
+        <p class="chapter-index">Live Tool</p>
+        <h1>Dependency Chain Explorer</h1>
+        <p class="chapter-meta">
+          Trace what an element depends on and what it enables upstream. This tool is the quickest way to see the
+          dependency logic that drives the table’s period structure.
+        </p>
+
+        <section class="panel">
+          <h2>How to Use It</h2>
+          <p>
+            Select an element, inspect its prerequisites, and then follow what becomes structurally possible once that
+            element is present. The tool is meant to turn the table from a static taxonomy into a dependency argument.
+          </p>
+          <p class="table-links">
+            <a href="/chapter-2-periodic-table/">Read Chapter 2</a>
+            <a href="/figures/fig-2-2/">Open the figure share page</a>
+          </p>
+        </section>
+
+        <section class="table-frame panel">
+          <h2>Standalone Explorer</h2>
+          <div class="frame-wrap standalone-frame" role="group" aria-label="Dependency Chain Explorer">
+            <iframe
+              src="/interactive/dependency-chain-explorer.html"
+              title="Dependency Chain Explorer"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </section>
+      </article>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<svg class="molecule-svg" width="620" height="160" viewBox="0 0 620 160" role="img" aria-label={title}>
+  <line x1="130" y1="80" x2="195" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="255" y1="80" x2="320" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="225" y1="100" x2="225" y2="125" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="165" y1="140" x2="195" y2="140" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="255" y1="140" x2="285" y2="140" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="225" y1="60" x2="225" y2="32" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3,3"></line>
+
+  <circle cx="110" cy="80" r="28" fill="#0a2219" stroke="#1D9E75" stroke-width="1"></circle>
+  <text x="110" y="76" text-anchor="middle" class="mol-sym" fill="#5DCAA5">Wm</text>
+  <text x="110" y="98" text-anchor="middle" class="mol-lbl">Working Memory</text>
+
+  <circle cx="225" cy="80" r="28" fill="#2e1308" stroke="#D85A30" stroke-width="1.5"></circle>
+  <text x="225" y="76" text-anchor="middle" class="mol-sym" fill="#F0997B">Lm</text>
+  <text x="225" y="98" text-anchor="middle" class="mol-lbl">LLM</text>
+
+  <circle cx="340" cy="80" r="28" fill="#1a1535" stroke="#7F77DD" stroke-width="1"></circle>
+  <text x="340" y="76" text-anchor="middle" class="mol-sym" fill="#AFA9EC">Es</text>
+  <text x="340" y="98" text-anchor="middle" class="mol-lbl">Exec. State</text>
+
+  <circle cx="145" cy="140" r="22" fill="#280e1c" stroke="#D4537E" stroke-width="1"></circle>
+  <text x="145" y="145" text-anchor="middle" class="mol-sym-sm" fill="#ED93B1">Rt</text>
+
+  <circle cx="305" cy="140" r="22" fill="#280e1c" stroke="#D4537E" stroke-width="1"></circle>
+  <text x="305" y="145" text-anchor="middle" class="mol-sym-sm" fill="#ED93B1">Wt</text>
+
+  <text x="225" y="155" text-anchor="middle" class="mol-bond-label">Read / Write Tools</text>
+
+  <rect x="190" y="4" width="70" height="26" rx="4" fill="#261c00" stroke="#EF9F27" stroke-width="0.75"></rect>
+  <text x="225" y="21" text-anchor="middle" class="mol-mono" fill="#EF9F27">[Mc]</text>
+
+  <text x="162" y="73" text-anchor="middle" class="mol-bond-label">cov</text>
+  <text x="288" y="73" text-anchor="middle" class="mol-bond-label">cov</text>
+  <text x="236" y="118" text-anchor="middle" class="mol-bond-label">cov</text>
+</svg>

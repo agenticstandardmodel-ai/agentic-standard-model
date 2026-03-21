@@ -1,0 +1,48 @@
+---
+import { chapterLabel, statusLabels } from '../lib/chapters';
+import type { SiteNavId } from '../lib/site-nav';
+
+type ChapterItem = {
+  slug: string;
+  data: {
+    chapter_number: number;
+    title: string;
+    status?: 'placeholder' | 'draft' | 'published';
+  };
+};
+
+type Props = {
+  chapters: ChapterItem[];
+  currentNav?: SiteNavId;
+};
+
+const { chapters, currentNav } = Astro.props;
+---
+
+<div class="site-drawer-nav">
+  <nav class="site-drawer-primary" aria-label="Primary">
+    <a href="/" class={currentNav === 'home' ? 'active' : undefined}>Home</a>
+    <a href="/chapters/" class={currentNav === 'chapters' ? 'active' : undefined}>Chapters</a>
+    <a href="/about/" class={currentNav === 'about' ? 'active' : undefined}>About</a>
+    <a href="/tools/" class={currentNav === 'tools' ? 'active' : undefined}>Tools</a>
+    <a href="/table/" class={currentNav === 'table' ? 'active' : undefined}>The Periodic Table</a>
+    <a href="/molecules/" class={currentNav === 'molecules' ? 'active' : undefined}>Molecules</a>
+  </nav>
+
+  <section class="site-drawer-chapters">
+    <p class="kicker">Chapters</p>
+    <ol class="site-drawer-chapter-list">
+      {chapters.map((chapter) => (
+        <li>
+          <a href={`/${chapter.slug}/`} class={currentNav === 'chapters' ? 'chapter-link' : undefined}>
+            <span>{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
+            <span>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</span>
+            {chapter.data.status && (
+              <small>{statusLabels[chapter.data.status] || chapter.data.status}</small>
+            )}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+</div>

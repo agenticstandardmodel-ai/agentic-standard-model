@@ -1,0 +1,47 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<svg class="molecule-svg" width="580" height="180" viewBox="0 0 580 180" role="img" aria-label={title}>
+  <line x1="108" y1="80" x2="170" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="230" y1="80" x2="295" y2="80" stroke="#6a9fd4" stroke-width="2"></line>
+
+  <line x1="200" y1="108" x2="160" y2="138" stroke="#333" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"></line>
+  <line x1="200" y1="108" x2="200" y2="138" stroke="#333" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"></line>
+  <line x1="200" y1="108" x2="240" y2="138" stroke="#333" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"></line>
+  <line x1="200" y1="108" x2="280" y2="138" stroke="#333" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"></line>
+  <line x1="200" y1="108" x2="320" y2="138" stroke="#333" stroke-width="1" stroke-dasharray="3,5" opacity="0.5"></line>
+
+  <circle cx="82" cy="80" r="26" fill="#0a2219" stroke="#1D9E75" stroke-width="1"></circle>
+  <text x="82" y="76" text-anchor="middle" class="mol-sym-sm" fill="#5DCAA5">Pm</text>
+  <text x="82" y="92" text-anchor="middle" class="mol-lbl">Procedural</text>
+
+  <circle cx="200" cy="80" r="28" fill="#2e1308" stroke="#D85A30" stroke-width="1.5"></circle>
+  <text x="200" y="76" text-anchor="middle" class="mol-sym" fill="#F0997B">Lm</text>
+  <text x="200" y="98" text-anchor="middle" class="mol-lbl">LLM</text>
+
+  <circle cx="322" cy="80" r="26" fill="#280e1c" stroke="#D4537E" stroke-width="1"></circle>
+  <text x="322" y="76" text-anchor="middle" class="mol-sym-sm" fill="#ED93B1">Lt</text>
+  <text x="322" y="92" text-anchor="middle" class="mol-lbl">Logic Tool</text>
+
+  <g opacity="0.28">
+    <circle cx="140" cy="158" r="18" fill="#111" stroke="#333" stroke-width="1" stroke-dasharray="3,3"></circle>
+    <text x="140" y="162" text-anchor="middle" class="mol-mono-sm" fill="#444">Es</text>
+    <circle cx="180" cy="158" r="18" fill="#111" stroke="#333" stroke-width="1" stroke-dasharray="3,3"></circle>
+    <text x="180" y="162" text-anchor="middle" class="mol-mono-sm" fill="#444">Ws</text>
+    <circle cx="220" cy="158" r="18" fill="#111" stroke="#333" stroke-width="1" stroke-dasharray="3,3"></circle>
+    <text x="220" y="162" text-anchor="middle" class="mol-mono-sm" fill="#444">Cp</text>
+    <circle cx="260" cy="158" r="18" fill="#111" stroke="#333" stroke-width="1" stroke-dasharray="3,3"></circle>
+    <text x="260" y="162" text-anchor="middle" class="mol-mono-sm" fill="#444">Wm</text>
+    <circle cx="300" cy="158" r="18" fill="#111" stroke="#333" stroke-width="1" stroke-dasharray="3,3"></circle>
+    <text x="300" y="162" text-anchor="middle" class="mol-mono-sm" fill="#444">Em</text>
+  </g>
+
+  <text x="220" y="128" text-anchor="middle" class="mol-bond-label" fill="#3a3a4a">absent by design</text>
+  <rect x="360" y="60" width="80" height="22" rx="3" fill="#111" stroke="#333" stroke-width="0.5"></rect>
+  <text x="400" y="75" text-anchor="middle" class="mol-mono-sm" fill="#3a3a4a">∅ state</text>
+</svg>

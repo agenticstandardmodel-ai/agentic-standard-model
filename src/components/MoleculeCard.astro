@@ -1,0 +1,53 @@
+---
+import MoleculeDiagram from './molecules/MoleculeDiagram.astro';
+import type { MoleculeMeta } from '../lib/data';
+
+type Props = {
+  molecule: MoleculeMeta;
+};
+
+const { molecule } = Astro.props;
+const propertyLabel = molecule.status === 'predicted' ? 'Predicted Property' : 'Observed Property';
+---
+
+<article class="molecule-card" id={molecule.id}>
+  <header class="molecule-card-header">
+    <span class={`molecule-badge ${molecule.status}`}>{molecule.status === 'confirmed' ? 'Confirmed Stable Agent' : 'Predicted Molecule'}</span>
+    <h3>{molecule.name}</h3>
+    <p class="molecule-formula">{molecule.formula}</p>
+    <p class="molecule-summary">{molecule.summary}</p>
+  </header>
+
+  <div class="diagram-surface">
+    <MoleculeDiagram diagramId={molecule.diagram_id} title={molecule.name} />
+  </div>
+
+  <div class="molecule-facts">
+    <section class="molecule-fact">
+      <h4>Defining Constraint</h4>
+      <p>{molecule.defining_constraint}</p>
+    </section>
+
+    <section class="molecule-fact">
+      <h4>{propertyLabel}</h4>
+      <p>{molecule.predicted_property}</p>
+    </section>
+
+    <section class="molecule-fact">
+      <h4>Implementation Examples</h4>
+      {molecule.implementation_examples.length > 0 ? (
+        <ul>
+          {molecule.implementation_examples.map((example) => <li>{example}</li>)}
+        </ul>
+      ) : (
+        <p>None yet documented.</p>
+      )}
+    </section>
+  </div>
+
+  <p class="molecule-note">{molecule.notes}</p>
+  <p class="molecule-card-footer">
+    <a href={molecule.chapter_link}>Read the Chemistry Layer chapter</a>
+    {molecule.diagram_status === 'placeholder' && <span class="diagram-status">Diagram in preparation</span>}
+  </p>
+</article>

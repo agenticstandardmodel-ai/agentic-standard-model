@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+
+const tools = [
+  {
+    title: 'The Periodic Table',
+    href: '/table/',
+    status: 'Live',
+    copy: 'Standalone flagship reference for the ASM element taxonomy, bosons, and predicted gaps.'
+  },
+  {
+    title: 'Molecules',
+    href: '/molecules/',
+    status: 'Live',
+    copy: 'Native SVG browser for confirmed and predicted molecules, plus chemistry reference diagrams.'
+  },
+  {
+    title: 'Dependency Chain Explorer',
+    href: '/dependency-chain-explorer/',
+    status: 'Live',
+    copy: 'Interactive dependency explorer for tracing what an element depends on and what it enables.'
+  },
+  {
+    title: 'Force Laws Reference',
+    href: '/chapter-4-force-laws/',
+    status: 'Next',
+    copy: 'Reference surface for force channels, forbidden patterns, and the derived symmetry principle.'
+  },
+  {
+    title: 'Molecule Builder',
+    href: '/molecules/',
+    status: 'Planned',
+    copy: 'Drag-and-compose molecule surface with validation, formula generation, and shareable structures.'
+  }
+];
+---
+
+<BaseLayout
+  title="Tools — The Agentic Standard Model"
+  description="Reference and interactive tools for exploring the periodic table, molecules, dependencies, and future force-law surfaces."
+  canonicalPath="/tools/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#D85A30">
+    <TopBar chapters={chapters} currentNav="tools" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="tools" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content page-content" data-doc-content>
+        <p class="chapter-index">Tools</p>
+        <h1>References and Interactive Tools</h1>
+        <p class="chapter-meta">
+          The site’s tools are demonstrations of the framework’s core claim: agentic systems are structured
+          compositions governed by derivable rules.
+        </p>
+
+        <section class="tool-grid">
+          {tools.map((tool) => (
+            <article class="tool-card">
+              <p class="card-num">{tool.status}</p>
+              <h2><a href={tool.href}>{tool.title}</a></h2>
+              <p>{tool.copy}</p>
+            </article>
+          ))}
+        </section>
+      </article>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,7 @@
+- id: tool-molecule-completeness
+  name: Tool Molecule Completeness Sample
+  label: Tool Molecules - Level 1
+  formula: "Rt+Ex · Wt+Db · Lt+Ce · Ct+Cp+Ex+Rt"
+  summary: "Reference sample showing that tools reduce to action archetypes bonded with infrastructure substrates."
+  diagram_id: tool-molecule-completeness
+  notes: "The four action archetypes (Rt, Wt, Lt, Ct) over the four infrastructure substrates (Ce, Fs, Db, Ex) form a closed space. No tool requires an element outside the table."

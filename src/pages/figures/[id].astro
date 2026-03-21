@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FigureEmbed from '../../components/FigureEmbed.astro';
-import ChapterSidebar from '../../components/ChapterSidebar.astro';
 import TopBar from '../../components/TopBar.astro';
+import SiteDrawerNav from '../../components/SiteDrawerNav.astro';
+import OutlineSidebar from '../../components/OutlineSidebar.astro';
 import { getFigures } from '../../lib/data';
 import { getCollection } from 'astro:content';
 import { chapterAccents, chapterSlugFromNumber } from '../../lib/chapters';
@@ -24,15 +25,18 @@ const canonicalPath = `/figures/${figure.id}/`;
 const chapterSlug = chapterSlugFromNumber(figure.chapter);
 const chapterHref = `/${chapterSlug}/`;
 const chapterAccent = chapterAccents[figure.chapter] || chapterAccents[1];
+const relatedFigures = getFigures()
+  .filter((item) => item.chapter === figure.chapter && item.id !== figure.id)
+  .map((item) => ({ id: item.id, label: item.label, title: item.title, href: `/figures/${item.id}/` }));
 ---
 
 <BaseLayout title={`${figure.title} — ASM Figure`} description={figure.caption} canonicalPath={canonicalPath}>
   <div class="app-shell no-outline" style={`--chapter-accent:${chapterAccent}`}>
-    <TopBar chapters={chapters} currentChapterNumber={figure.chapter} />
+    <TopBar chapters={chapters} currentChapterNumber={figure.chapter} currentNav="chapters" />
     <div class="mobile-nav-overlay" data-nav-overlay></div>
 
-    <aside class="sidenav" data-sidenav>
-      <ChapterSidebar chapters={chapters} currentSlug={chapterSlug} />
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="chapters" />
     </aside>
 
     <section class="content-pane">
@@ -45,5 +49,9 @@ const chapterAccent = chapterAccents[figure.chapter] || chapterAccents[1];
         <FigureEmbed figure={figure} />
       </article>
     </section>
+
+    <aside class="outline-pane">
+      <OutlineSidebar title="Figure Reference" figureTitle="Related Figures" figures={relatedFigures} />
+    </aside>
   </div>
 </BaseLayout>

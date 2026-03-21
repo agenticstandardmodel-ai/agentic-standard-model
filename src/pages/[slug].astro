@@ -31,6 +31,11 @@ const { Content } = await chapter.render();
 const chapterFigures = chapter.data.figure_ids
   .map((id) => figureMap.get(id))
   .filter((figure) => figure !== undefined);
+const figureLinks = chapterFigures.map((figure) => ({
+  id: figure.id,
+  label: figure.label,
+  title: figure.title
+}));
 
 const chapterTitle = chapter.data.title;
 const chapterDescription = chapter.data.summary;
@@ -38,11 +43,15 @@ const canonicalPath = `/${chapter.slug}/`;
 const chapterNumber = chapter.data.chapter_number;
 const chapterAccent = chapterAccents[chapterNumber] || chapterAccents[1];
 const isScaffolded = chapter.data.status === 'placeholder';
+const hasInlineFigurePlacement = chapter.slug === 'chapter-1-foundations';
+const chapterIndex = chapters.findIndex((item) => item.slug === chapter.slug);
+const previousChapter = chapterIndex > 0 ? chapters[chapterIndex - 1] : undefined;
+const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex + 1] : undefined;
 ---
 
 <BaseLayout title={`${chapterTitle} — ASM`} description={chapterDescription} canonicalPath={canonicalPath}>
   <div class="app-shell" style={`--chapter-accent:${chapterAccent}`}>
-    <TopBar chapters={chapters} currentChapterNumber={chapterNumber} />
+    <TopBar chapters={chapters} currentChapterNumber={chapterNumber} currentNav="chapters" />
     <div class="mobile-nav-overlay" data-nav-overlay></div>
 
     <aside class="sidenav" data-sidenav>
@@ -70,21 +79,48 @@ const isScaffolded = chapter.data.status === 'placeholder';
           </section>
         )}
 
+        {!hasInlineFigurePlacement && chapterFigures.length > 0 && (
+          <section class="chapter-figure-flow transitional-figure-flow">
+            {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+          </section>
+        )}
+
         <section class="panel prose-block">
           <Content />
         </section>
 
-        <section class="panel">
-          <h2>Figures in This Chapter</h2>
-          <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
-        </section>
+        {(previousChapter || nextChapter) && (
+          <nav class="chapter-pagination" aria-label="Chapter continuation">
+            {previousChapter ? (
+              <a class="chapter-pagination-link previous" href={`/${previousChapter.slug}/`}>
+                <span class="card-num">Previous</span>
+                <strong>
+                  Chapter {previousChapter.data.chapter_number.toString().padStart(2, '0')} ·{' '}
+                  {previousChapter.data.title.replace(`Chapter ${previousChapter.data.chapter_number}: `, '')}
+                </strong>
+              </a>
+            ) : (
+              <span></span>
+            )}
 
-        {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+            {nextChapter ? (
+              <a class="chapter-pagination-link next" href={`/${nextChapter.slug}/`}>
+                <span class="card-num">Next</span>
+                <strong>
+                  Chapter {nextChapter.data.chapter_number.toString().padStart(2, '0')} ·{' '}
+                  {nextChapter.data.title.replace(`Chapter ${nextChapter.data.chapter_number}: `, '')}
+                </strong>
+              </a>
+            ) : (
+              <span></span>
+            )}
+          </nav>
+        )}
       </article>
     </section>
 
     <aside class="outline-pane">
-      <OutlineSidebar />
+      <OutlineSidebar title="On this page" figureTitle="Figures in this chapter" figures={figureLinks} />
     </aside>
   </div>
 </BaseLayout>
