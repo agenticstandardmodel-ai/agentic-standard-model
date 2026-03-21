@@ -1,7 +1,7 @@
 ---
 title: "Chapter 4: Force Laws"
 chapter_number: 4
-summary: "Conservation channels, constraints, and symmetry principle." 
+summary: "Conservation channels, constraints, and symmetry principle."
 status: placeholder
 figure_ids:
   - fig-4-1
@@ -9,10 +9,14 @@ figure_ids:
 
 This chapter formalizes the three force laws and their architectural implications.
 
-## Placeholder Scope
+## 4.1 Force Channel Inventory
 
-- Conservation statements and forbidden patterns are pending final source text.
+Scaffolded prose coming. This section defines each channel, boson correspondence, and conserved quantity.
 
-## Figure Slots
+## 4.2 Forbidden Patterns
 
-- `fig-4-1`: force channel summary matrix.
+Scaffolded prose coming. This section presents violations and their system-level consequences.
+
+## 4.3 Symmetry Principle Derivation
+
+Scaffolded prose coming. This section derives symmetry from force-law constraints.

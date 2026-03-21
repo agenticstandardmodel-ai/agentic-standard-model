@@ -9,10 +9,14 @@ figure_ids:
 
 This chapter frames what ASM predicts, what remains open, and what would falsify parts of the framework.
 
-## Placeholder Scope
+## 6.1 Confirmed vs Predicted Inventory
 
-- Research claims, evidence thresholds, and unresolved symbols pending canonical text.
+Scaffolded prose coming. This section separates validated structures from open predictions.
 
-## Figure Slots
+## 6.2 Falsifiability Conditions
 
-- `fig-6-1`: open questions matrix.
+Scaffolded prose coming. This section states what evidence would disconfirm key claims.
+
+## 6.3 Research Workstream Priorities
+
+Scaffolded prose coming. This section maps near-term and longer-term validation programs.

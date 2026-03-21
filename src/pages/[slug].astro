@@ -2,19 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChapterSidebar from '../components/ChapterSidebar.astro';
 import FigureEmbed from '../components/FigureEmbed.astro';
+import TopBar from '../components/TopBar.astro';
+import OutlineSidebar from '../components/OutlineSidebar.astro';
 import { getCollection } from 'astro:content';
 import { getFigureMap } from '../lib/data';
+import { chapterAccents, statusLabels } from '../lib/chapters';
 
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
 );
 const figureMap = getFigureMap();
-
-const statusLabels: Record<string, string> = {
-  placeholder: 'Scaffolded',
-  draft: 'In Development',
-  published: 'Published'
-};
 
 export async function getStaticPaths() {
   const chapters = await getCollection('chapters');
@@ -38,28 +35,56 @@ const chapterFigures = chapter.data.figure_ids
 const chapterTitle = chapter.data.title;
 const chapterDescription = chapter.data.summary;
 const canonicalPath = `/${chapter.slug}/`;
+const chapterNumber = chapter.data.chapter_number;
+const chapterAccent = chapterAccents[chapterNumber] || chapterAccents[1];
+const isScaffolded = chapter.data.status === 'placeholder';
 ---
 
 <BaseLayout title={`${chapterTitle} — ASM`} description={chapterDescription} canonicalPath={canonicalPath}>
-  <main class="site-grid">
-    <ChapterSidebar chapters={chapters} currentSlug={chapter.slug} />
+  <div class="app-shell" style={`--chapter-accent:${chapterAccent}`}>
+    <TopBar chapters={chapters} currentChapterNumber={chapterNumber} />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
 
-    <article class="content-shell chapter-page">
-      <p class="eyebrow">Chapter {chapter.data.chapter_number.toString().padStart(2, '0')}</p>
-      <h1>{chapter.data.title}</h1>
-      <p class="lead">{chapter.data.summary}</p>
-      <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
+    <aside class="sidenav" data-sidenav>
+      <ChapterSidebar chapters={chapters} currentSlug={chapter.slug} />
+    </aside>
 
-      <section class="panel prose-block">
-        <Content />
-      </section>
+    <section class="content-pane">
+      <article class="doc-content chapter-page" data-doc-content>
+        <header class="chapter-header">
+          <p class="chapter-index">Chapter {chapterNumber.toString().padStart(2, '0')}</p>
+          <h1>{chapter.data.title.replace(`Chapter ${chapterNumber}: `, '')}</h1>
+          <p class="chapter-meta">{chapter.data.summary}</p>
+          <div class="chapter-divider"></div>
+          <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
+        </header>
 
-      <section class="panel">
-        <h2>Figures in This Chapter</h2>
-        <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
-      </section>
+        {isScaffolded && (
+          <section class="panel scaffold-callout">
+            <p class="callout-title">Scaffolded — Prose Coming</p>
+            <p>
+              This chapter's structure is defined. Figure slots and section headings are stable. Full prose will be
+              published in sequential order from Chapter 1.
+            </p>
+            <p><a href="/chapter-1-foundations/">Read Chapter 1 (live)</a></p>
+          </section>
+        )}
 
-      {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
-    </article>
-  </main>
+        <section class="panel prose-block">
+          <Content />
+        </section>
+
+        <section class="panel">
+          <h2>Figures in This Chapter</h2>
+          <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
+        </section>
+
+        {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+      </article>
+    </section>
+
+    <aside class="outline-pane">
+      <OutlineSidebar />
+    </aside>
+  </div>
 </BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import { chapterAccents, chapterLabel, statusLabels } from '../lib/chapters';
+
 type ChapterItem = {
   slug: string;
   data: {
@@ -15,27 +17,44 @@ type Props = {
 };
 
 const { chapters, currentSlug } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <aside class="chapter-sidebar" aria-label="Chapters">
-  <p class="kicker">ASM Textbook</p>
-  <h2>Chapters</h2>
+  <div class="chapter-sidebar-header">
+    <p class="kicker">ASM v0.3</p>
+    <h2>Chapters</h2>
+  </div>
+
   <nav>
-    <ol>
+    <ol class="chapter-list">
       {chapters.map((chapter) => {
         const active = chapter.slug === currentSlug;
+        const chapterNum = chapter.data.chapter_number;
+        const accent = chapterAccents[chapterNum] || chapterAccents[1];
+        const statusLabel = statusLabels[chapter.data.status] || chapter.data.status;
+
         return (
-          <li>
-            <a href={`/${chapter.slug}/`} aria-current={active ? 'page' : undefined} class={active ? 'active' : ''}>
-              <span class="chapter-num">{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
-              <span>
-                <strong>{chapter.data.title.replace('Chapter ' + chapter.data.chapter_number + ': ', '')}</strong>
+          <li class={`chapter-item ${active ? 'active' : ''}`} data-chapter-item data-chapter={chapterNum}>
+            <a href={`/${chapter.slug}/`} aria-current={active ? 'page' : undefined}>
+              <span class="chapter-num" style={`color:${accent}`}>{chapterNum.toString().padStart(2, '0')}</span>
+              <span class="chapter-main">
+                <span class="chapter-title-row">
+                  <strong>{chapterLabel(chapter.data.title, chapterNum)}</strong>
+                  <span class={`status-badge ${chapter.data.status}`}>{statusLabel}</span>
+                </span>
                 <small>{chapter.data.summary}</small>
               </span>
             </a>
+            {active && <ol class="chapter-section-list" data-active-section-list></ol>}
           </li>
         );
       })}
     </ol>
   </nav>
+
+  <div class="chapter-sidebar-footer">
+    <a href="/figures/fig-2-1/">Figures Index</a>
+    <p>© {year} ASM</p>
+  </div>
 </aside>

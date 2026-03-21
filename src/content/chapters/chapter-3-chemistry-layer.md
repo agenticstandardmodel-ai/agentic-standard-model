@@ -10,12 +10,18 @@ figure_ids:
 
 This chapter translates elements into molecule notation and compositional behavior.
 
-## Placeholder Scope
+## 3.1 Bond Language and Legend
 
-- Bond definitions and formulas will be inserted from source chapter files without paraphrasing.
-- Figure interactions are scaffolded for staged enhancement.
+Scaffolded prose coming. This section introduces six bond types and their structural meanings.
 
-## Figure Slots
+## 3.2 Five Stable Molecules
 
-- `fig-3-1`: bond type legend and quick reference.
-- `fig-3-2`: five stable agent molecules.
+Scaffolded prose coming. This section defines canonical stable molecules and load-bearing bond logic.
+
+## 3.3 Tool Molecule Completeness
+
+Scaffolded prose coming. This section presents the completeness claim and canonical molecule grid.
+
+## 3.4 Predicted Molecules
+
+Scaffolded prose coming. This section describes predicted molecules and confirmation criteria.

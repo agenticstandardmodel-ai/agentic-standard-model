@@ -17,9 +17,10 @@ The field currently treats this inventory as a catalogue. Practitioners learn by
 
 The Agentic Standard Model is a theory. Its central claim is that agentic systems are not arbitrary assemblies of components chosen by convention or accumulated by trial and error. They are structured compositions of irreducible building blocks that combine under strict rules derived from the dependency relations between them. The structure is not imposed on the field. It is discovered in it.
 
-### The Core Claim
-
-Any agent or agentic system that exists or could exist can be constructed from the 22 elements defined in this framework. Every tool reduces to a bond between an Action archetype and an Infrastructure substrate. No agent requires matter outside the element table.
+<div class="callout">
+  <p class="callout-title">The Core Claim</p>
+  <p class="callout-body">Any agent or agentic system that exists or could exist can be constructed from the 22 elements defined in this framework. Every tool reduces to a bond between an Action archetype and an Infrastructure substrate. No agent requires matter outside the element table.</p>
+</div>
 
 ## 1.2 The Historical Method: Taxonomy Before Theory
 

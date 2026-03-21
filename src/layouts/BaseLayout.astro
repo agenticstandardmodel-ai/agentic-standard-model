@@ -14,7 +14,6 @@ const {
 } = Astro.props;
 
 const canonicalUrl = new URL(canonicalPath, Astro.site);
-const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -25,7 +24,7 @@ const year = new Date().getFullYear();
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
@@ -56,33 +55,138 @@ const year = new Date().getFullYear();
     </script>
   </head>
   <body>
-    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Toggle theme</button>
-
     <slot />
-
-    <footer class="site-footer">
-      <p>Copyright © {year} Agentic Standard Model. All rights reserved.</p>
-      <p>
-        Primary publication: <a href="https://agenticstandardmodel.ai">agenticstandardmodel.ai</a>
-      </p>
-    </footer>
 
     <script is:inline>
       (() => {
-        const button = document.getElementById('theme-toggle');
-        if (!button) return;
-
+        const themeButton = document.querySelector('[data-theme-toggle]');
         const labelFor = (theme) => (theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-        const current = document.documentElement.getAttribute('data-theme') || 'light';
-        button.setAttribute('aria-label', labelFor(current));
 
-        button.addEventListener('click', () => {
-          const now = document.documentElement.getAttribute('data-theme') || 'light';
-          const next = now === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('asm-theme', next);
-          button.setAttribute('aria-label', labelFor(next));
+        if (themeButton) {
+          const current = document.documentElement.getAttribute('data-theme') || 'light';
+          themeButton.setAttribute('aria-label', labelFor(current));
+
+          themeButton.addEventListener('click', () => {
+            const now = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = now === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('asm-theme', next);
+            themeButton.setAttribute('aria-label', labelFor(next));
+          });
+        }
+
+        const appShell = document.querySelector('.app-shell');
+        const navToggle = document.querySelector('[data-nav-toggle]');
+        const navOverlay = document.querySelector('[data-nav-overlay]');
+
+        const closeNav = () => {
+          if (!appShell) return;
+          appShell.classList.remove('nav-open');
+        };
+
+        if (navToggle && appShell) {
+          navToggle.addEventListener('click', () => {
+            appShell.classList.toggle('nav-open');
+          });
+        }
+
+        if (navOverlay) {
+          navOverlay.addEventListener('click', closeNav);
+        }
+
+        const contentRoot = document.querySelector('[data-doc-content]');
+        const outlineList = document.querySelector('[data-outline-list]');
+        const activeSectionList = document.querySelector('[data-active-section-list]');
+
+        if (!contentRoot || (!outlineList && !activeSectionList)) return;
+
+        const headingNodes = [
+          ...contentRoot.querySelectorAll('h2, h3')
+        ].filter((heading) => heading.textContent && heading.textContent.trim().length > 0);
+
+        if (!headingNodes.length) return;
+
+        const slugify = (value) =>
+          value
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-');
+
+        const used = new Set();
+        headingNodes.forEach((heading) => {
+          if (!heading.id) {
+            const base = slugify(heading.textContent || 'section');
+            let candidate = base || 'section';
+            let count = 2;
+            while (used.has(candidate) || document.getElementById(candidate)) {
+              candidate = `${base}-${count}`;
+              count += 1;
+            }
+            heading.id = candidate;
+          }
+          used.add(heading.id);
         });
+
+        const createItem = (heading) => {
+          const li = document.createElement('li');
+          li.className = heading.tagName.toLowerCase() === 'h3' ? 'level-3' : 'level-2';
+
+          const link = document.createElement('a');
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent?.trim() || '';
+          li.appendChild(link);
+
+          return li;
+        };
+
+        const populate = (container) => {
+          if (!container) return;
+          container.innerHTML = '';
+          headingNodes.forEach((heading) => container.appendChild(createItem(heading)));
+        };
+
+        populate(outlineList);
+        populate(activeSectionList);
+
+        const allLinks = [
+          ...(outlineList ? [...outlineList.querySelectorAll('a')] : []),
+          ...(activeSectionList ? [...activeSectionList.querySelectorAll('a')] : [])
+        ];
+
+        const setActive = (id) => {
+          allLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+            if (visible.length > 0) {
+              setActive(visible[0].target.id);
+            }
+          },
+          {
+            root: null,
+            rootMargin: '-96px 0px -70% 0px',
+            threshold: [0, 1]
+          }
+        );
+
+        headingNodes.forEach((heading) => observer.observe(heading));
+
+        window.addEventListener('hashchange', () => {
+          const hash = window.location.hash.replace('#', '');
+          if (hash) setActive(hash);
+        });
+
+        const initial = window.location.hash.replace('#', '') || headingNodes[0].id;
+        setActive(initial);
       })();
     </script>
   </body>

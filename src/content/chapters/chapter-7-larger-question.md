@@ -9,10 +9,14 @@ figure_ids:
 
 This chapter defines ASM scope limits and its indirect contribution to broader AGI discussions.
 
-## Placeholder Scope
+## 7.1 What ASM Claims
 
-- Final argument language will be pulled from chapter source and reviewed for precision.
+Scaffolded prose coming. This section states precise claims and the boundaries of those claims.
 
-## Figure Slots
+## 7.2 What ASM Does Not Claim
 
-- `fig-7-1`: scope and boundary diagram.
+Scaffolded prose coming. This section excludes unsupported extrapolations and roadmap claims.
+
+## 7.3 Contribution to AGI Discourse
+
+Scaffolded prose coming. This section positions ASM as a precision layer that enables better questions upstream.

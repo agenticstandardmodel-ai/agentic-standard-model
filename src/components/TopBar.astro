@@ -1,0 +1,46 @@
+---
+type ChapterItem = {
+  slug: string;
+  data: {
+    chapter_number: number;
+    title: string;
+  };
+};
+
+type Props = {
+  chapters: ChapterItem[];
+  currentChapterNumber?: number;
+};
+
+const { chapters, currentChapterNumber } = Astro.props;
+---
+
+<header class="topbar" role="banner">
+  <div class="topbar-left">
+    <button type="button" class="nav-toggle" data-nav-toggle aria-label="Open chapter navigation">≡</button>
+    <a href="/" class="wordmark">Agentic Standard Model</a>
+  </div>
+
+  <nav class="chapter-pills" aria-label="Top chapter navigation">
+    {chapters.map((chapter) => {
+      const active = chapter.data.chapter_number === currentChapterNumber;
+      return (
+        <a
+          href={`/${chapter.slug}/`}
+          class={active ? 'active' : ''}
+          aria-current={active ? 'page' : undefined}
+        >
+          <span>{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
+          <span>{chapter.data.title.replace(`Chapter ${chapter.data.chapter_number}: `, '')}</span>
+        </a>
+      );
+    })}
+  </nav>
+
+  <div class="topbar-right">
+    <a href="https://github.com/agenticstandardmodel-ai/agentic-standard-model" target="_blank" rel="noreferrer">
+      GitHub ↗
+    </a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">Theme</button>
+  </div>
+</header>

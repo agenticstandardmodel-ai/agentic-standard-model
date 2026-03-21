@@ -10,12 +10,22 @@ figure_ids:
 
 This chapter centers the ASM Periodic Table as the primary teaching mechanism.
 
-## Placeholder Scope
+## 2.1 Period and Group Structure
 
-- The table interaction and element descriptions will be sourced directly from final author text.
-- Group, period, and dependency semantics remain locked to ASM definitions.
+Scaffolded prose coming. This section defines the six periods, seven groups, and how dependency depth determines period placement.
 
-## Figure Slots
+## 2.2 Element Detail Surface
 
-- `fig-2-1`: flagship periodic table interactive.
-- `fig-2-2`: dependency chain explorer.
+Scaffolded prose coming. This section specifies the element panel contract: description, dependency relations, and molecule references.
+
+## 2.3 Dependency Chain Explorer
+
+Scaffolded prose coming. This section formalizes upward/downward dependency traversal and pedagogical use cases.
+
+## 2.4 Bosons, Predicted Gaps, and Substrate
+
+Scaffolded prose coming. This section distinguishes boson placement, predicted gap notation, and sub-atomic substrate display rules.
+
+## 2.5 Mobile Legibility and Accessibility
+
+Scaffolded prose coming. This section defines mobile adaptation and non-color semantic labeling requirements.
