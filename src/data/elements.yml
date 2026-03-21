@@ -1,0 +1,17 @@
+- symbol: Lm
+  name: Language Model
+  group: Cognition
+  period: P4
+  description: Core inference substrate for semantic planning and generation.
+
+- symbol: Rm
+  name: Retrieval Memory
+  group: Retention
+  period: P3
+  description: Externalized memory retrieval channel used by agent molecules.
+
+- symbol: Mc
+  name: Message Channel
+  group: Exchange
+  period: P6
+  description: Communication surface for cross-boundary protocol interaction.

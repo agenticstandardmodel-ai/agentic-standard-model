@@ -1,0 +1,30 @@
+---
+import type { FigureMeta } from '../lib/data';
+
+type Props = {
+  figure: FigureMeta;
+};
+
+const { figure } = Astro.props;
+---
+
+<figure class="figure-embed" id={figure.id}>
+  <figcaption>
+    <p class="figure-kicker">{figure.id.toUpperCase()} · {figure.type}</p>
+    <h3>{figure.title}</h3>
+    <p>{figure.caption}</p>
+  </figcaption>
+
+  <div class="frame-wrap" role="group" aria-label={figure.title}>
+    <iframe
+      src={figure.source_path}
+      title={figure.title}
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+
+  <p class="a11y-note">Accessibility summary: {figure.accessibility_summary}</p>
+  <a class="figure-link" href={figure.source_path}>Open interactive figure directly</a>
+</figure>

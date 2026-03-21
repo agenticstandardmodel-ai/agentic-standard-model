@@ -1,0 +1,41 @@
+---
+type ChapterItem = {
+  slug: string;
+  data: {
+    title: string;
+    chapter_number: number;
+    summary: string;
+    status: 'placeholder' | 'draft' | 'published';
+  };
+};
+
+type Props = {
+  chapters: ChapterItem[];
+  currentSlug?: string;
+};
+
+const { chapters, currentSlug } = Astro.props;
+---
+
+<aside class="chapter-sidebar" aria-label="Chapters">
+  <p class="kicker">ASM Textbook</p>
+  <h2>Chapters</h2>
+  <nav>
+    <ol>
+      {chapters.map((chapter) => {
+        const active = chapter.slug === currentSlug;
+        return (
+          <li>
+            <a href={`/${chapter.slug}/`} aria-current={active ? 'page' : undefined} class={active ? 'active' : ''}>
+              <span class="chapter-num">{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
+              <span>
+                <strong>{chapter.data.title.replace('Chapter ' + chapter.data.chapter_number + ': ', '')}</strong>
+                <small>{chapter.data.summary}</small>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+</aside>

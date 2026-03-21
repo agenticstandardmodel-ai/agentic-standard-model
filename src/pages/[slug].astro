@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChapterSidebar from '../components/ChapterSidebar.astro';
+import FigureEmbed from '../components/FigureEmbed.astro';
+import { getCollection } from 'astro:content';
+import { getFigureMap } from '../lib/data';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+const figureMap = getFigureMap();
+
+export async function getStaticPaths() {
+  const chapters = await getCollection('chapters');
+  return chapters.map((chapter) => ({
+    params: { slug: chapter.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const chapter = chapters.find((item) => item.slug === slug);
+
+if (!chapter) {
+  throw new Error(`Unknown chapter slug: ${slug}`);
+}
+
+const { Content } = await chapter.render();
+const chapterFigures = chapter.data.figure_ids
+  .map((id) => figureMap.get(id))
+  .filter((figure) => figure !== undefined);
+
+const chapterTitle = chapter.data.title;
+const chapterDescription = chapter.data.summary;
+const canonicalPath = `/${chapter.slug}/`;
+---
+
+<BaseLayout title={`${chapterTitle} — ASM`} description={chapterDescription} canonicalPath={canonicalPath}>
+  <main class="site-grid">
+    <ChapterSidebar chapters={chapters} currentSlug={chapter.slug} />
+
+    <article class="content-shell chapter-page">
+      <p class="eyebrow">Chapter {chapter.data.chapter_number.toString().padStart(2, '0')}</p>
+      <h1>{chapter.data.title}</h1>
+      <p class="lead">{chapter.data.summary}</p>
+      <span class={`status ${chapter.data.status}`}>{chapter.data.status}</span>
+
+      <section class="panel prose-block">
+        <Content />
+      </section>
+
+      <section class="panel">
+        <h2>Figures in This Chapter</h2>
+        <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
+      </section>
+
+      {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+    </article>
+  </main>
+</BaseLayout>

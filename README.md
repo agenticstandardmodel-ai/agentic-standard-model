@@ -1,54 +1,87 @@
-# Interactive Textbook (GitHub Pages)
+# Agentic Standard Model Interactive Textbook
 
-This repo is a static interactive textbook site you can host on GitHub Pages with your custom domain.
+Astro-based interactive textbook scaffold for `agenticstandardmodel.ai`.
 
-## What it includes
+## Stack
 
-- Chapter navigation with search
-- Interactive chapter quizzes with instant feedback
-- Local progress tracking (completion + quiz score)
-- Chapter notes saved in browser local storage
-- Responsive layout for desktop and mobile
+- Astro (static output)
+- Markdown chapter content collections
+- YAML data contracts for figures/elements/molecules/bonds
+- Interactive figure embeds (phase 1 via iframe)
+- Cloudflare Pages target deployment
 
-## Run locally
-
-Open `index.html` directly in your browser, or run a local server:
+## Local development
 
 ```bash
-python3 -m http.server 8000
+npm install
+ASTRO_TELEMETRY_DISABLED=1 npm run dev
 ```
 
-Then visit `http://localhost:8000`.
+Build and validate:
 
-## Publish to GitHub Pages
-
-1. Push this repo to GitHub.
-2. In GitHub: `Settings -> Pages`.
-3. Set source to `Deploy from a branch`.
-4. Choose your default branch and root folder (`/`).
-5. Save.
-
-## Keep your custom domain
-
-Create a file named `CNAME` in the repo root with exactly one line:
-
-```text
-yourdomain.com
+```bash
+ASTRO_TELEMETRY_DISABLED=1 npm run check
+ASTRO_TELEMETRY_DISABLED=1 npm run build
 ```
 
-Then confirm DNS:
+## Content architecture
 
-- Apex/root domain (`yourdomain.com`) has A records pointed to GitHub Pages IPs.
-- `www` has a CNAME record pointed to `<your-github-username>.github.io`.
+### Chapters
 
-## Customize textbook content
+- Location: `src/content/chapters/`
+- Frontmatter fields:
+  - `title`
+  - `chapter_number`
+  - `summary`
+  - `status` (`placeholder`, `draft`, `published`)
+  - `figure_ids` (array)
 
-Edit the `textbook` object in `app.js`:
+Routes are generated from file slugs, e.g.:
+- `src/content/chapters/chapter-2-periodic-table.md` -> `/chapter-2-periodic-table/`
 
-- Site title/subtitle
-- Chapters
-- Sections
-- Activities
-- Quiz questions/options/answers
+### Structured data
 
-No build step needed.
+- `src/data/figures.yml`
+- `src/data/elements.yml`
+- `src/data/molecules.yml`
+- `src/data/bonds.yml`
+
+Figures have stable share routes at `/figures/<figure-id>/`.
+
+## Interactive assets
+
+- Existing standalone interactives live in `public/interactive/`
+- Current integrated asset:
+  - `public/interactive/asm_periodic_table.html`
+- Placeholder for pending figures:
+  - `public/interactive/placeholder-figure.html`
+
+## Domain and canonical settings
+
+- Canonical domain: `https://agenticstandardmodel.ai`
+- Configured in `astro.config.mjs` (`site` field)
+- `CNAME` is preserved for GitHub Pages compatibility
+- Root `index.html` is a redirect to `.ai` to keep `github.io` fallback behavior
+
+## Deployment (Cloudflare Pages)
+
+Recommended build settings:
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node version: `20+`
+
+Post-deploy checks:
+
+1. Confirm apex and `www` DNS records in Cloudflare.
+2. Redirect `www.agenticstandardmodel.ai` -> `agenticstandardmodel.ai`.
+3. Verify canonical tags and OG URLs point to `.ai`.
+4. Verify figure routes and chapter routes return 200.
+
+## Legacy static prototype
+
+The previous static prototype is archived at:
+
+- `prototype/legacy-static/index.html`
+- `prototype/legacy-static/styles.css`
+- `prototype/legacy-static/app.js`

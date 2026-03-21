@@ -1,0 +1,89 @@
+- id: fig-1-1
+  chapter: 1
+  title: Three Historical Precedents
+  caption: Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.
+  type: static
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-1-1/
+  accessibility_summary: Conceptual comparison chart showing the three foundational precedents.
+
+- id: fig-2-1
+  chapter: 2
+  title: ASM Periodic Table
+  caption: Flagship interactive periodic table with groups, periods, predicted gaps, and boson panel.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/asm_periodic_table.html
+  share_path: /figures/fig-2-1/
+  accessibility_summary: Interactive table for ASM elements organized by period and group with details panel.
+
+- id: fig-2-2
+  chapter: 2
+  title: Dependency Chain Explorer
+  caption: Select an element and inspect upward and downward dependency chain.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-2-2/
+  accessibility_summary: Visual dependency chain for selected ASM element.
+
+- id: fig-3-1
+  chapter: 3
+  title: Bond Type Legend
+  caption: Interactive legend for six bond types and their architectural meaning.
+  type: reference
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-3-1/
+  accessibility_summary: Bond notation reference with examples and structural definitions.
+
+- id: fig-3-2
+  chapter: 3
+  title: Five Stable Agent Molecules
+  caption: Tabbed molecular diagrams of five known stable molecules with node and bond interactions.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-3-2/
+  accessibility_summary: Interactive molecular diagrams demonstrating stable ASM molecule structures.
+
+- id: fig-4-1
+  chapter: 4
+  title: Force Channels Summary
+  caption: Visual summary of force channels, bosons, conserved quantities, and direction.
+  type: reference
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-4-1/
+  accessibility_summary: Reference matrix of ASM force laws and conserved channels.
+
+- id: fig-5-1
+  chapter: 5
+  title: Agentic Cell Model
+  caption: Interactive biological-cell analogy for orchestrator, membrane, and sub-agent organelles.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-5-1/
+  accessibility_summary: Cell diagram mapping agentic components to biological structures.
+
+- id: fig-6-1
+  chapter: 6
+  title: Open Questions Matrix
+  caption: Structured map of confirmed elements, predicted gaps, and falsifiability targets.
+  type: reference
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-6-1/
+  accessibility_summary: Matrix of open ASM questions and prediction status.
+
+- id: fig-7-1
+  chapter: 7
+  title: ASM Scope and AGI Boundary
+  caption: Boundary diagram positioning ASM precision and limits relative to AGI claims.
+  type: static
+  embed_mode: iframe
+  source_path: /interactive/placeholder-figure.html
+  share_path: /figures/fig-7-1/
+  accessibility_summary: Conceptual boundary map between ASM scope and broader AGI discourse.

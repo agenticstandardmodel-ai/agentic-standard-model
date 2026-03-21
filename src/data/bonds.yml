@@ -1,0 +1,23 @@
+- type: covalent
+  notation: solid double line
+  meaning: Load-bearing; removing it collapses molecule function.
+
+- type: ionic
+  notation: dotted line
+  meaning: Optional extension; system remains with reduced capability.
+
+- type: protocol
+  notation: labeled boundary bracket
+  meaning: External exchange surface (Mc/A2/A3).
+
+- type: double-bond
+  notation: emphasized ring or bold connector
+  meaning: Primary structural constraint defining molecule identity.
+
+- type: feedback-loop
+  notation: circular arrow
+  meaning: Adaptive reflexive cycle.
+
+- type: absent-by-design
+  notation: crossed node
+  meaning: Structural guarantee of intentional absence.

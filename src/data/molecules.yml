@@ -1,0 +1,11 @@
+- id: react-agent
+  name: ReAct Agent
+  status: confirmed
+  description: Alternating reasoning and acting loops with tool usage.
+  elements: [Lm, Rm]
+
+- id: orchestrator
+  name: Orchestrator Molecule
+  status: confirmed
+  description: Compositional coordinator for sub-agents and workflow state.
+  elements: [Lm, Mc]

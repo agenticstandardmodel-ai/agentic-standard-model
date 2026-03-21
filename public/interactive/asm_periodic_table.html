@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASM Periodic Table — v0.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cell-w: 88px; --cell-h: 76px; --gap: 7px; --radius: 6px;
+  --g-infra:#0f2236; --g-state:#1e1030; --g-retain:#0f2519; --g-cognit:#2e1008;
+  --g-action:#250e25; --g-pattern:#112410; --g-boson:#251800; --g-gap:#161616;
+  --border-infra:#378ADD; --border-state:#7F77DD; --border-retain:#1D9E75;
+  --border-cognit:#D85A30; --border-action:#D4537E; --border-pattern:#639922;
+  --border-boson:#EF9F27; --border-gap:#444;
+  --text-infra:#85B7EB; --text-state:#AFA9EC; --text-retain:#5DCAA5;
+  --text-cognit:#F0997B; --text-action:#ED93B1; --text-pattern:#97C459;
+  --text-boson:#FAC775; --text-gap:#666;
+  --bg:#0a0a0a; --surface:#111; --border-ui:rgba(255,255,255,0.08);
+  --text:#e8e6e0; --text-muted:#6b6960; --text-dim:#3a3935;
+}
+body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; padding:40px 32px 60px; }
+.outer { max-width:900px; margin:0 auto; }
+.header { margin-bottom:28px; padding-bottom:20px; border-bottom:0.5px solid var(--border-ui); }
+.header-top { display:flex; align-items:baseline; gap:14px; margin-bottom:6px; }
+.title-main { font-family:'DM Mono',monospace; font-size:18px; font-weight:500; color:var(--text); letter-spacing:.04em; }
+.title-version { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); letter-spacing:.06em; }
+.subtitle { font-size:13px; color:var(--text-muted); line-height:1.55; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-bottom:24px; padding:12px 16px; border:0.5px solid var(--border-ui); border-radius:8px; background:var(--surface); }
+.legend-item { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--text-muted); }
+.legend-swatch { width:11px; height:11px; border-radius:2px; border-width:1.5px; border-style:solid; flex-shrink:0; }
+.table-wrap { overflow-x:auto; padding-bottom:8px; }
+.col-header-row { display:grid; grid-template-columns:52px repeat(7,var(--cell-w)); gap:var(--gap); margin-bottom:6px; min-width:680px; }
+.col-hdr { text-align:center; font-size:10px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:4px 2px; border-radius:3px; }
+.period-grid { display:grid; grid-template-columns:52px repeat(7,var(--cell-w)); gap:var(--gap); min-width:680px; }
+.period-label { display:flex; flex-direction:column; justify-content:center; align-items:flex-end; padding-right:10px; }
+.p-num { font-family:'DM Mono',monospace; font-size:13px; font-weight:400; color:var(--text-muted); }
+.p-name { font-size:9px; color:var(--text-dim); text-align:right; line-height:1.25; margin-top:3px; }
+.period-spacer { height:12px; }
+.cell { width:var(--cell-w); height:var(--cell-h); border-radius:var(--radius); border-width:1px; border-style:solid; padding:6px 8px 5px; position:relative; cursor:pointer; transition:transform .13s ease,filter .13s ease; display:flex; flex-direction:column; }
+.cell:hover { transform:scale(1.08); filter:brightness(1.22); z-index:10; }
+.cell-num { font-family:'DM Mono',monospace; font-size:9px; font-weight:300; opacity:.55; line-height:1; }
+.cell-sym { font-family:'DM Mono',monospace; font-size:24px; font-weight:500; line-height:1; margin-top:2px; letter-spacing:-.02em; }
+.cell-name { font-size:8.5px; font-weight:400; line-height:1.2; margin-top:auto; opacity:.82; }
+.cell-empty { width:var(--cell-w); height:var(--cell-h); border-radius:var(--radius); background:var(--surface); opacity:.2; }
+.cell-gap { border-style:dashed; opacity:.65; }
+.cell-gap .cell-sym { font-size:18px; opacity:.35; }
+.boson-section { margin-top:20px; padding:14px 16px; border:0.5px solid var(--border-ui); border-radius:8px; background:var(--surface); }
+.boson-section-label { font-size:10px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px; }
+.boson-row { display:flex; gap:var(--gap); flex-wrap:wrap; }
+.boson-cell { width:200px; border-radius:var(--radius); border:1px solid var(--border-boson); background:var(--g-boson); padding:10px 12px; cursor:pointer; transition:transform .13s ease,filter .13s ease; }
+.boson-cell:hover { transform:scale(1.04); filter:brightness(1.2); }
+.boson-top { display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+.boson-sym { font-family:'DM Mono',monospace; font-size:20px; font-weight:500; color:var(--text-boson); }
+.boson-force { font-size:9px; color:var(--text-boson); opacity:.65; text-transform:uppercase; letter-spacing:.06em; }
+.boson-name { font-size:11px; color:var(--text-boson); opacity:.85; margin-bottom:4px; }
+.boson-desc { font-size:10px; color:var(--text-boson); opacity:.5; line-height:1.45; }
+.sub-atomic { margin-top:12px; padding:10px 16px; border:0.5px dashed var(--border-ui); border-radius:8px; opacity:.6; }
+.sub-label { font-size:9.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); margin-bottom:8px; }
+.sub-items { display:flex; gap:8px; flex-wrap:wrap; }
+.sub-item { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); padding:3px 10px; border:0.5px solid var(--border-ui); border-radius:3px; }
+.tooltip { position:fixed; background:#1a1a1a; border:0.5px solid rgba(255,255,255,0.15); border-radius:10px; padding:14px 18px; max-width:300px; pointer-events:none; z-index:9999; display:none; box-shadow:0 8px 32px rgba(0,0,0,.5); }
+.tooltip.visible { display:block; }
+.tt-header { display:flex; align-items:baseline; gap:10px; margin-bottom:8px; }
+.tt-sym-large { font-family:'DM Mono',monospace; font-size:26px; font-weight:500; }
+.tt-meta { font-size:11px; color:var(--text-muted); line-height:1.4; }
+.tt-name { font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px; }
+.tt-desc { font-size:12px; color:#9a9891; line-height:1.6; }
+.tt-tag { display:inline-block; font-size:10px; padding:3px 9px; border-radius:3px; margin-top:10px; font-weight:500; letter-spacing:.04em; }
+.footer { margin-top:36px; padding-top:20px; border-top:0.5px solid var(--border-ui); font-size:11px; color:var(--text-muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+</style>
+</head>
+<body>
+<div class="outer">
+<div class="header">
+  <div class="header-top">
+    <span class="title-main">Agentic Standard Model</span>
+    <span class="title-version">v0.3</span>
+  </div>
+  <div class="subtitle">Periodic Table of Agentic Elements &mdash; 22 confirmed elements &middot; 2 predicted gaps &middot; 3 boson-class protocols<br>Hover any element for full description, dependency layer, and group classification.</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-infra);border-color:var(--border-infra)"></div><span style="color:var(--text-infra)">Infrastructure</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-state);border-color:var(--border-state)"></div><span style="color:var(--text-state)">State</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-retain);border-color:var(--border-retain)"></div><span style="color:var(--text-retain)">Retention</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-cognit);border-color:var(--border-cognit)"></div><span style="color:var(--text-cognit)">Cognition</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-action);border-color:var(--border-action)"></div><span style="color:var(--text-action)">Action</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-pattern);border-color:var(--border-pattern)"></div><span style="color:var(--text-pattern)">Pattern</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-boson);border-color:var(--border-boson)"></div><span style="color:var(--text-boson)">Exchange (boson)</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--g-gap);border-color:var(--border-gap);border-style:dashed"></div><span style="color:var(--text-gap)">Predicted gap</span></div>
+</div>
+
+<div class="table-wrap">
+<!-- Column headers -->
+<div class="col-header-row">
+  <div></div>
+  <div class="col-hdr" style="color:var(--text-infra)">Infra</div>
+  <div class="col-hdr" style="color:var(--text-state)">State</div>
+  <div class="col-hdr" style="color:var(--text-retain)">Retention</div>
+  <div class="col-hdr" style="color:var(--text-cognit)">Cognition</div>
+  <div class="col-hdr" style="color:var(--text-action)">Action</div>
+  <div class="col-hdr" style="color:var(--text-pattern)">Pattern</div>
+  <div class="col-hdr" style="color:var(--text-boson)">Exchange</div>
+</div>
+
+<!-- P1 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P1</span><span class="p-name">Infrastructure</span></div>
+  <div class="cell" style="background:var(--g-infra);border-color:var(--border-infra)" data-id="Ce" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">01</span><span class="cell-sym" style="color:var(--text-infra)">Ce</span><span class="cell-name" style="color:var(--text-infra)">Code Execution Env.</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div>
+  <div class="cell" style="background:var(--g-infra);border-color:var(--border-infra)" data-id="Fs" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">02</span><span class="cell-sym" style="color:var(--text-infra)">Fs</span><span class="cell-name" style="color:var(--text-infra)">File System Env.</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div>
+  <div class="cell" style="background:var(--g-infra);border-color:var(--border-infra)" data-id="Db" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">03</span><span class="cell-sym" style="color:var(--text-infra)">Db</span><span class="cell-name" style="color:var(--text-infra)">Structured Data Store</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div>
+  <div class="cell" style="background:var(--g-infra);border-color:var(--border-infra)" data-id="Ex" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">04</span><span class="cell-sym" style="color:var(--text-infra)">Ex</span><span class="cell-name" style="color:var(--text-infra)">External System Interface</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+
+<div class="period-spacer"></div>
+
+<!-- P2 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P2</span><span class="p-name">Context</span></div>
+  <div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-state);border-color:var(--border-state)" data-id="Es" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">05</span><span class="cell-sym" style="color:var(--text-state)">Es</span><span class="cell-name" style="color:var(--text-state)">Execution State</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-state);border-color:var(--border-state)" data-id="Ws" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">06</span><span class="cell-sym" style="color:var(--text-state)">Ws</span><span class="cell-name" style="color:var(--text-state)">Workflow State</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-state);border-color:var(--border-state)" data-id="Cp" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">07</span><span class="cell-sym" style="color:var(--text-state)">Cp</span><span class="cell-name" style="color:var(--text-state)">Checkpoint State</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+
+<div class="period-spacer"></div>
+
+<!-- P3 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P3</span><span class="p-name">Short-Horizon Retention</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-retain);border-color:var(--border-retain)" data-id="Ss" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">08</span><span class="cell-sym" style="color:var(--text-retain)">Ss</span><span class="cell-name" style="color:var(--text-retain)">Session Memory</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-retain);border-color:var(--border-retain)" data-id="Wm" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">09</span><span class="cell-sym" style="color:var(--text-retain)">Wm</span><span class="cell-name" style="color:var(--text-retain)">Working Memory</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+
+<div class="period-spacer"></div>
+
+<!-- P4 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P4</span><span class="p-name">Semantic Processing</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-cognit);border-color:var(--border-cognit)" data-id="Lm" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">10</span><span class="cell-sym" style="color:var(--text-cognit)">Lm</span><span class="cell-name" style="color:var(--text-cognit)">Large Language Model</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-cognit);border-color:var(--border-cognit)" data-id="Ec" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">11</span><span class="cell-sym" style="color:var(--text-cognit)">Ec</span><span class="cell-name" style="color:var(--text-cognit)">Encoder / Embedding</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+
+<div class="period-spacer"></div>
+
+<!-- P5 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P5</span><span class="p-name">Long-Horizon Retention &amp; Action</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-retain);border-color:var(--border-retain)" data-id="Sm" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">12</span><span class="cell-sym" style="color:var(--text-retain)">Sm</span><span class="cell-name" style="color:var(--text-retain)">Semantic Memory</span></div>
+  <div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-action);border-color:var(--border-action)" data-id="Rt" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">15</span><span class="cell-sym" style="color:var(--text-action)">Rt</span><span class="cell-name" style="color:var(--text-action)">Read Tool</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-retain);border-color:var(--border-retain)" data-id="Pm" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">13</span><span class="cell-sym" style="color:var(--text-retain)">Pm</span><span class="cell-name" style="color:var(--text-retain)">Procedural Memory</span></div>
+  <div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-action);border-color:var(--border-action)" data-id="Wt" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">16</span><span class="cell-sym" style="color:var(--text-action)">Wt</span><span class="cell-name" style="color:var(--text-action)">Write Tool</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-retain);border-color:var(--border-retain)" data-id="Em" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">14</span><span class="cell-sym" style="color:var(--text-retain)">Em</span><span class="cell-name" style="color:var(--text-retain)">Episodic Memory</span></div>
+  <div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-action);border-color:var(--border-action)" data-id="Lt" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">17</span><span class="cell-sym" style="color:var(--text-action)">Lt</span><span class="cell-name" style="color:var(--text-action)">Logic Tool</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-action);border-color:var(--border-action)" data-id="Ct" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">18</span><span class="cell-sym" style="color:var(--text-action)">Ct</span><span class="cell-name" style="color:var(--text-action)">Communication Tool</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div>
+</div>
+
+<div class="period-spacer"></div>
+
+<!-- P6 -->
+<div class="period-grid">
+  <div class="period-label"><span class="p-num">P6</span><span class="p-name">Reasoning Patterns</span></div>
+  <div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-pattern);border-color:var(--border-pattern)" data-id="Is" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">19</span><span class="cell-sym" style="color:var(--text-pattern)">Is</span><span class="cell-name" style="color:var(--text-pattern)">Information Skill</span></div>
+  <div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-pattern);border-color:var(--border-pattern)" data-id="Ts" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">20</span><span class="cell-sym" style="color:var(--text-pattern)">Ts</span><span class="cell-name" style="color:var(--text-pattern)">Transformation Skill</span></div>
+  <div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-pattern);border-color:var(--border-pattern)" data-id="Gs" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">21</span><span class="cell-sym" style="color:var(--text-pattern)">Gs</span><span class="cell-name" style="color:var(--text-pattern)">Generation Skill</span></div>
+  <div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell" style="background:var(--g-pattern);border-color:var(--border-pattern)" data-id="Ds" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num">22</span><span class="cell-sym" style="color:var(--text-pattern)">Ds</span><span class="cell-name" style="color:var(--text-pattern)">Decision Skill</span></div>
+  <div class="cell-empty"></div>
+</div>
+<div class="period-grid" style="margin-top:var(--gap)">
+  <div class="period-label"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div><div class="cell-empty"></div>
+  <div class="cell cell-gap" style="background:var(--g-gap);border-color:var(--border-gap)" data-id="gap-Is" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"><span class="cell-num" style="opacity:.3">??</span><span class="cell-sym" style="color:#555">?s</span><span class="cell-name" style="color:#555">Interaction Skill</span></div>
+  <div class="cell-empty"></div>
+</div>
+
+</div><!-- /table-wrap -->
+
+<div class="boson-section">
+  <div class="boson-section-label">Exchange group &mdash; boson class &middot; topology-agnostic protocol surfaces &middot; exist in the exchange, not inside any component</div>
+  <div class="boson-row">
+    <div class="boson-cell" data-id="Mc" onmouseenter="showTip(event,this)" onmouseleave="hideTip()">
+      <div class="boson-top"><span class="boson-sym">Mc</span><span class="boson-force">Strong agentic</span></div>
+      <div class="boson-name">Tool Invocation Protocol</div>
+      <div class="boson-desc">Contract-declared discovery and invocation. Agent &rarr; tool boundary. Carries data and execution. Current instantiation: MCP.</div>
+    </div>
+    <div class="boson-cell" data-id="A2" onmouseenter="showTip(event,this)" onmouseleave="hideTip()">
+      <div class="boson-top"><span class="boson-sym">A2</span><span class="boson-force">Weak agentic</span></div>
+      <div class="boson-name">Governed Delegation Protocol</div>
+      <div class="boson-desc">Intent and authority-carrying delegation. Agent &rarr; agent boundary. Carries task, intent, authority. Current instantiation: A2A.</div>
+    </div>
+    <div class="boson-cell" data-id="A3" onmouseenter="showTip(event,this)" onmouseleave="hideTip()">
+      <div class="boson-top"><span class="boson-sym">A3</span><span class="boson-force">Human closure</span></div>
+      <div class="boson-name">Human Interface Protocol</div>
+      <div class="boson-desc">Closes the intent chain at the human boundary. The only boson that delivers legible output to the human. Current instantiation: A2UI.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sub-atomic">
+  <div class="sub-label">Layer 0 &mdash; sub-atomic substrate (beneath the table; not ASM elements)</div>
+  <div class="sub-items">
+    <span class="sub-item">CPU</span>
+    <span class="sub-item">GPU</span>
+    <span class="sub-item">RAM</span>
+    <span class="sub-item">Storage</span>
+    <span class="sub-item">Network</span>
+  </div>
+</div>
+
+<div class="footer">
+  <span>Agentic Standard Model &mdash; Chapter 2: The Agentic Periodic Table</span>
+  <span>Hover elements for full descriptions</span>
+</div>
+
+</div><!-- /outer -->
+
+<div class="tooltip" id="tooltip">
+  <div class="tt-header"><span class="tt-sym-large" id="tt-sym"></span><span class="tt-meta" id="tt-meta"></span></div>
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-desc" id="tt-desc"></div>
+  <span class="tt-tag" id="tt-tag"></span>
+</div>
+
+<script>
+const DATA = {
+  Ce:{num:'01',name:'Code Execution Environment',period:'P1',group:'Infrastructure',desc:'Raw sequential computation. CPU and RAM at the sub-atomic level. The substrate of all computation that happens inside an agent. Nothing in the ASM operates without an execution environment.',color:'var(--text-infra)'},
+  Fs:{num:'02',name:'File System Environment',period:'P1',group:'Infrastructure',desc:'Unstructured persistent storage. Bytes, files, and artifacts that survive process boundaries. Imposes no schema on what is stored. The substrate of document-level persistence.',color:'var(--text-infra)'},
+  Db:{num:'03',name:'Structured Data Store',period:'P1',group:'Infrastructure',desc:'Schema-governed, queryable, transactional storage. New in v0.3. Distinct from Fs in that it imposes structure enabling precise retrieval, joins, and transactional integrity.',color:'var(--text-infra)'},
+  Ex:{num:'04',name:'External System Interface',period:'P1',group:'Infrastructure',desc:'Network connectivity to APIs, queues, webhooks, and external systems. The boundary between the agent\'s internal computation and the world outside it. Every tool that touches an external system depends on Ex.',color:'var(--text-infra)'},
+  Es:{num:'05',name:'Execution State',period:'P2',group:'State',desc:'Transient data generated during active processing: intermediate outputs, current tool results, active reasoning context. Exists within a single execution step. Does not survive process boundaries without serialisation.',color:'var(--text-state)'},
+  Ws:{num:'06',name:'Workflow State',period:'P2',group:'State',desc:'Position and control flow across multi-step processes: current step, completed steps, pending dependencies, routing metadata. Carries a double bond (=) in plan-and-execute compositions — removing it transforms the agent into a fundamentally different kind.',color:'var(--text-state)'},
+  Cp:{num:'07',name:'Checkpoint State',period:'P2',group:'State',desc:'Serialised snapshots of execution enabling pause, resume, replay, and recovery. Load-bearing in any agent whose execution spans more than a single process lifetime. Works in tight coupling with Ws: Cp survives restarts, Ws remembers position after restart.',color:'var(--text-state)'},
+  Ss:{num:'08',name:'Session Memory',period:'P3',group:'Retention',desc:'The accumulated context of an active interaction: dialogue history, recent exchanges, active preferences. Scoped to the session boundary. When the session ends, Session Memory ends unless its contents are explicitly transferred to a long-horizon retention element.',color:'var(--text-retain)'},
+  Wm:{num:'09',name:'Working Memory',period:'P3',group:'Retention',desc:'Temporary task-specific artifacts during active execution: scratch space for intermediate results, partial plans, draft outputs. Task-scoped rather than session-scoped. Allows an agent to hold multiple things in mind simultaneously.',color:'var(--text-retain)'},
+  Lm:{num:'10',name:'Large Language Model',period:'P4',group:'Cognition',desc:'Generates and interprets meaning. The cognitive substrate of every agent. The only element that reasons. Every agent requires at least one Lm instance. Quantum numbers: \u03bb (scale), \u03c1 (reasoning mode), \u03c4 (modality), \u03ba (context window), \u03c6 (provider).',color:'var(--text-cognit)',tag:'Quantum numbers: \u03bb \u03c1 \u03c4 \u03ba \u03c6'},
+  Ec:{num:'11',name:'Encoder / Embedding Model',period:'P4',group:'Cognition',desc:'Encodes content into dense vector representations capturing semantic relationships. Does not reason — it represents. New in v0.3. Load-bearing in all agents using semantic memory retrieval. Sm without Ec is unstructured storage.',color:'var(--text-cognit)'},
+  Sm:{num:'12',name:'Semantic Memory',period:'P5',group:'Retention',desc:'Durable world knowledge stored as semantic vectors. Requires Ec to populate and Lm to query meaningfully. The substrate of RAG pipelines. Persists across sessions and deployments.',color:'var(--text-retain)'},
+  Pm:{num:'13',name:'Procedural Memory',period:'P5',group:'Retention',desc:'Durable knowledge of how work should be performed: playbooks, rulebooks, standard operating procedures. Encodes process rather than fact. Gives agents persistent behavioural guidance that shapes how they approach tasks.',color:'var(--text-retain)'},
+  Em:{num:'14',name:'Episodic Memory',period:'P5',group:'Retention',desc:'Records of prior executions, feedback signals, and corrections. Cannot be manually populated — generated by the collision of execution traces with correction signals. The substrate of adaptation. Forms the feedback loop with Ds in the Reflexive Agent.',color:'var(--text-retain)'},
+  Rt:{num:'15',name:'Read Tool',period:'P5',group:'Action',desc:'Observational access to external state. Retrieves information without mutating it. The execution boundary for all read operations: file reads, API calls, database queries, web scrapes. Distinction from Lt: Rt retrieves, Lt transforms.',color:'var(--text-action)'},
+  Wt:{num:'16',name:'Write Tool',period:'P5',group:'Action',desc:'Mutational access to external state. Performs actions that change something in the world outside the agent: writing files, sending messages, updating databases, calling APIs with side effects. Distinct from Ct: Wt mutates storage; Ct is directed at an interpreter.',color:'var(--text-action)'},
+  Lt:{num:'17',name:'Logic Tool',period:'P5',group:'Action',desc:'Deterministic computation and transformation. Executes code, performs mathematical operations, parses structured formats, transforms data. Same input always produces same output. Distinct from Lm in that it is deterministic — does not reason or generate.',color:'var(--text-action)'},
+  Ct:{num:'18',name:'Communication Tool',period:'P5',group:'Action',desc:'Emits information outward to humans or systems in a form intended to be received and acted upon. Distinct from Wt: directed at an interpreter rather than a storage target. Makes an agent\'s outputs visible to the humans or systems it is working with.',color:'var(--text-action)'},
+  Is:{num:'19',name:'Information Skill',period:'P6',group:'Pattern',desc:'Extracting, identifying, labelling, and classifying. The cognitive pattern that structures Lm\'s output when the task is to identify what something is or where it belongs. Used in entity extraction, document classification, structured data extraction.',color:'var(--text-pattern)'},
+  Ts:{num:'20',name:'Transformation Skill',period:'P6',group:'Pattern',desc:'Condensing, reorganising, and normalising content. Structures Lm\'s output when the task is to change the form of existing content without changing its substance. Used in summarisation, translation, reformatting.',color:'var(--text-pattern)'},
+  Gs:{num:'21',name:'Generation Skill',period:'P6',group:'Pattern',desc:'Producing new artifacts, language, and code. Structures Lm\'s output when the task is to create something that did not previously exist. The pattern most directly associated with Lm\'s native capability. Used in drafting, coding, synthesis.',color:'var(--text-pattern)'},
+  Ds:{num:'22',name:'Decision Skill',period:'P6',group:'Pattern',desc:'Routing, evaluating, and prioritising among alternatives. Structures Lm\'s output when the task is to choose between options or assign relative value. Used in orchestration routing, quality evaluation, priority ranking, and condition-based branching.',color:'var(--text-pattern)'},
+  'gap-Is':{num:'??',name:'Interaction Skill',period:'P6 (predicted)',group:'Pattern — predicted gap',desc:'Predicted gap. Real-time engagement with a human or system that adapts dynamically to the other party\'s responses. Distinct from Generation Skill in that it requires responsive adaptation within a live exchange, not one-shot production.',color:'#666',tag:'Predicted — not yet confirmed'},
+  Mc:{num:'—',name:'Tool Invocation Protocol',period:'Boson',group:'Exchange \u00b7 Strong agentic force',desc:'Logical protocol surface through which a cognitive element discovers and invokes tool molecules. Contract-declared discovery and execution. Topology-agnostic. Carries data and execution — not intent or authority. Current dominant instantiation: Model Context Protocol.',color:'var(--text-boson)',tag:'Conserves interface contract'},
+  A2:{num:'—',name:'Governed Delegation Protocol',period:'Boson',group:'Exchange \u00b7 Weak agentic force',desc:'Logical protocol surface through which a registered cognitive molecule delegates work to another registered cognitive molecule, transferring intent and authority. Carries task, intent, and authority — all three must be present. Current instantiation: A2A. Every valid A2 interaction extends an intent chain.',color:'var(--text-boson)',tag:'Conserves authority scope integrity'},
+  A3:{num:'—',name:'Human Interface Protocol',period:'Boson',group:'Exchange \u00b7 Human closure force',desc:'Delivers legible output from an agentic system to the human whose intent initiated the execution. The only boson that closes an intent chain. Carries both a content signal and a legibility signal. Transport-agnostic. Current instantiation: A2UI.',color:'var(--text-boson)',tag:'Conserves legibility of intent'},
+};
+
+const tip=document.getElementById('tooltip');
+let ht=null;
+
+function showTip(e,el){
+  clearTimeout(ht);
+  const d=DATA[el.dataset.id]; if(!d)return;
+  const sym=el.dataset.id.replace('gap-','');
+  document.getElementById('tt-sym').textContent=sym;
+  document.getElementById('tt-sym').style.color=d.color;
+  document.getElementById('tt-meta').textContent=d.period+' \u00b7 '+d.group;
+  document.getElementById('tt-name').textContent=d.name;
+  document.getElementById('tt-desc').textContent=d.desc;
+  const tag=document.getElementById('tt-tag');
+  if(d.tag){tag.textContent=d.tag;tag.style.background='rgba(255,255,255,0.06)';tag.style.color=d.color;tag.style.display='inline-block';}
+  else{tag.style.display='none';}
+  tip.classList.add('visible'); positionTip(e);
+}
+
+function positionTip(e){
+  const tw=300,th=220,m=14;
+  let x=e.clientX+m,y=e.clientY+m;
+  if(x+tw>window.innerWidth-8)x=e.clientX-tw-m;
+  if(y+th>window.innerHeight-8)y=e.clientY-th-m;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+
+function hideTip(){ht=setTimeout(()=>tip.classList.remove('visible'),100);}
+document.addEventListener('mousemove',e=>{if(tip.classList.contains('visible'))positionTip(e);});
+</script>
+</body>
+</html>

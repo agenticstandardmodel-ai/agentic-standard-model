@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FigureEmbed from '../../components/FigureEmbed.astro';
+import { getFigures } from '../../lib/data';
+
+const chapterSlugs = {
+  1: 'chapter-1-foundations',
+  2: 'chapter-2-periodic-table',
+  3: 'chapter-3-chemistry-layer',
+  4: 'chapter-4-force-laws',
+  5: 'chapter-5-cell-model',
+  6: 'chapter-6-open-problems',
+  7: 'chapter-7-larger-question'
+};
+
+export function getStaticPaths() {
+  const figures = getFigures();
+  return figures.map((figure) => ({
+    params: { id: figure.id },
+    props: { figure }
+  }));
+}
+
+const { figure } = Astro.props;
+const canonicalPath = `/figures/${figure.id}/`;
+const chapterHref = `/${chapterSlugs[figure.chapter as keyof typeof chapterSlugs]}/`;
+---
+
+<BaseLayout title={`${figure.title} — ASM Figure`} description={figure.caption} canonicalPath={canonicalPath}>
+  <main class="figure-page">
+    <header>
+      <p class="eyebrow">Figure Reference</p>
+      <h1>{figure.title}</h1>
+      <p class="lead">Chapter {figure.chapter}</p>
+      <p><a href={chapterHref}>Go to chapter context</a></p>
+    </header>
+
+    <FigureEmbed figure={figure} />
+  </main>
+</BaseLayout>
