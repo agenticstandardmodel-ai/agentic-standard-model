@@ -7,6 +7,7 @@ export type FigureMeta = {
   chapter: number;
   title: string;
   caption: string;
+  legend?: string;
   type: 'interactive' | 'static' | 'reference';
   embed_mode: 'iframe' | 'native';
   source_path: string;

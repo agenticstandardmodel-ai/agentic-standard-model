@@ -9,6 +9,27 @@ import { statusLabels } from '../lib/chapters';
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
 );
+
+const tools = [
+  {
+    id: 'asm-periodic-table',
+    label: 'ASM Periodic Table',
+    desc: 'Interactive table of all 22 ASM elements organized by period, group, and dependency depth.',
+    href: '/figures/fig-2-1/',
+  },
+  {
+    id: 'dependency-explorer',
+    label: 'Dependency Chain Explorer',
+    desc: 'Select any element and trace its full upstream dependency chain and downstream dependents.',
+    href: '/figures/fig-2-2/',
+  },
+  {
+    id: 'three-precedents',
+    label: 'Three Precedents',
+    desc: 'Side-by-side comparison of Mendeleev, the Standard Model, and OSI as structural sources for ASM.',
+    href: '/figures/fig-1-1/',
+  },
+];
 ---
 
 <BaseLayout
@@ -27,7 +48,7 @@ const chapters = (await getCollection('chapters')).sort(
     <section class="content-pane">
       <article class="doc-content home-page" data-doc-content>
         <p class="chapter-index">Interactive Textbook</p>
-        <h1>Agentic Standard Model</h1>
+        <h1>The Agentic Standard Model</h1>
         <p class="chapter-meta">
           A structural theory for agentic systems: what must exist, how components compose, and which conservation
           constraints govern valid architectures.
@@ -51,6 +72,19 @@ const chapters = (await getCollection('chapters')).sort(
           <p>
             Flagship visual: <a href="/figures/fig-2-1/">Figure 2.1 — ASM Periodic Table</a>.
           </p>
+        </section>
+
+        <section class="panel">
+          <h2>Interactive Tools</h2>
+          <p>Standalone references — open in any context without the surrounding chapter text.</p>
+          <div class="tools-grid">
+            {tools.map((tool) => (
+              <a class="tool-card" href={tool.href}>
+                <strong>{tool.label}</strong>
+                <span>{tool.desc}</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         <section class="panel chapter-cards">

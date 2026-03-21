@@ -1,6 +1,32 @@
+---
+import type { FigureMeta } from '../lib/data';
+
+type Props = {
+  figures?: FigureMeta[];
+};
+
+const { figures = [] } = Astro.props;
+---
+
 <aside class="outline-sidebar" aria-label="In-page outline">
   <p class="outline-kicker">On this page</p>
   <nav>
     <ol data-outline-list></ol>
   </nav>
+
+  {figures.length > 0 && (
+    <div class="outline-figures">
+      <p class="outline-kicker">Figures</p>
+      <ul class="outline-figure-list">
+        {figures.map((figure) => (
+          <li>
+            <a href={`#${figure.id}`}>
+              <span class="outline-figure-id">{figure.id.toUpperCase()}</span>
+              {figure.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
 </aside>

@@ -2,6 +2,14 @@
   chapter: 1
   title: Three Historical Precedents
   caption: Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.
+  legend: >
+    Three columns compare the structural contributions of each historical precedent to the ASM method.
+    Left column — Mendeleev's Periodic Table (1869): establishes taxonomy-as-prediction, where gaps in
+    the arrangement are treated as predictions rather than failures. Centre column — The Standard Model
+    of Particle Physics: introduces the matter/force distinction, separating fermion-class substance
+    elements from boson-class interaction carriers. Right column — The OSI Reference Model (1984):
+    shows how layer boundaries are derived from dependency relations, not convention. Shaded cells
+    highlight the specific principle each precedent contributes to the ASM.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/three-precedents.html
@@ -12,6 +20,14 @@
   chapter: 2
   title: ASM Periodic Table
   caption: Flagship interactive periodic table with groups, periods, predicted gaps, and boson panel.
+  legend: >
+    Elements are arranged by period (row) and functional group (column). Period indicates dependency
+    depth: a Period 1 element operates independently; a Period 3 element requires Period 1 and Period 2
+    elements to be present. Colour encodes functional group — blue tiles are infrastructure substrates,
+    orange are action archetypes, purple are coordination elements, and grey are force bosons in the
+    separate boson panel at right. Solid borders indicate confirmed elements; dashed borders indicate
+    predicted but not yet formalised entries. Click any tile to open the details panel showing the
+    element's full name, symbol, period, group, dependency list, and compatible force channels.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/asm_periodic_table.html
@@ -22,6 +38,14 @@
   chapter: 2
   title: Dependency Chain Explorer
   caption: Select an element and inspect upward and downward dependency chain.
+  legend: >
+    Select an element from the left panel to render its complete dependency chain as a directed graph.
+    Nodes above the selected element are upstream dependencies — elements that must be present and
+    functioning for the selected element to operate. Nodes below are downstream dependents — elements
+    whose own operation requires the selected element. Arrow direction follows the dependency direction
+    (dependency points toward the element that is required). Node colour encodes period depth using the
+    same colour scale as Figure 2.1. Solid edges denote hard dependencies (structurally required);
+    dashed edges denote optional bonding paths that enhance but do not gate function.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/dependency-chain-explorer.html
@@ -32,6 +56,12 @@
   chapter: 3
   title: Bond Type Legend
   caption: Interactive legend for six bond types and their architectural meaning.
+  legend: >
+    Six bond types are displayed with their notation, directionality, and structural role.
+    Each row shows the bond symbol, a plain-language definition, and an example molecule pair
+    where that bond appears. Bond weight encodes strength of coupling: thick bonds indicate
+    hard architectural constraints, thin bonds indicate soft or configurable relationships.
+    Colour encodes the force channel the bond belongs to. Coming in a future release.
   type: reference
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
@@ -42,6 +72,13 @@
   chapter: 3
   title: Five Stable Agent Molecules
   caption: Tabbed molecular diagrams of five known stable molecules with node and bond interactions.
+  legend: >
+    Five tabs each show a stable agent molecule: a named combination of ASM elements that forms a
+    coherent, reusable architecture. Each diagram renders elements as nodes and bonds as edges.
+    Node size encodes the element's period depth. Hovering a node shows its element card; hovering
+    an edge shows the bond type and force channel. The five stable molecules covered are the
+    ReAct Agent, RAG Pipeline, Orchestrator-Subagent Cell, Tool-Augmented Planner, and
+    Reflexion Loop. Coming in a future release.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
@@ -52,6 +89,13 @@
   chapter: 4
   title: Force Channels Summary
   caption: Visual summary of force channels, bosons, conserved quantities, and direction.
+  legend: >
+    A reference matrix with one row per force channel. Columns show: the channel name, its
+    associated boson element, the conserved quantity it governs, the direction of flow
+    (unidirectional or bidirectional), and example molecules where that channel is active.
+    Highlighted rows indicate channels with confirmed conservation proofs; grey rows indicate
+    channels whose conservation properties are predicted but not yet formally derived.
+    Coming in a future release.
   type: reference
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
@@ -62,6 +106,13 @@
   chapter: 5
   title: Agentic Cell Model
   caption: Interactive biological-cell analogy for orchestrator, membrane, and sub-agent organelles.
+  legend: >
+    An agentic system is rendered as a biological cell. The orchestrator maps to the nucleus —
+    the governing logic that directs the cell's behaviour. Sub-agents map to organelles, each
+    performing a specialised function. The context window maps to the cytoplasm — the medium
+    through which signals and resources flow. The membrane represents the permission and trust
+    boundary that governs what enters and exits the cell. Click any region to see its ASM element
+    mapping, force channel connections, and dependency requirements. Coming in a future release.
   type: interactive
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
@@ -72,6 +123,13 @@
   chapter: 6
   title: Open Questions Matrix
   caption: Structured map of confirmed elements, predicted gaps, and falsifiability targets.
+  legend: >
+    A two-axis matrix. The horizontal axis runs from Confirmed to Predicted. The vertical axis
+    runs from Falsifiable to Unfalsifiable. Each cell contains one or more open questions or
+    element predictions. Colour encodes the chapter that introduced the question. Questions in
+    the top-left quadrant (confirmed and falsifiable) represent the most testable claims of the
+    ASM. Questions in the bottom-right (predicted and unfalsifiable as currently framed) flag
+    areas where the theory needs tightening. Coming in a future release.
   type: reference
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
@@ -82,6 +140,14 @@
   chapter: 7
   title: ASM Scope and AGI Boundary
   caption: Boundary diagram positioning ASM precision and limits relative to AGI claims.
+  legend: >
+    A conceptual boundary diagram with two nested regions. The inner region, labelled ASM Scope,
+    contains the claims the framework makes with precision: element classification, dependency
+    derivation, force channel conservation, and molecular stability conditions. The outer region
+    contains claims that lie outside ASM scope, including consciousness, general intelligence,
+    alignment guarantees, and emergence above the molecular layer. The boundary is not a
+    limitation but a precision instrument — the ASM makes fewer claims than AGI discourse and
+    makes them more falsifiably. Coming in a future release.
   type: static
   embed_mode: iframe
   source_path: /interactive/placeholder-figure.html
