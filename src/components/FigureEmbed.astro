@@ -25,6 +25,13 @@ const { figure } = Astro.props;
     ></iframe>
   </div>
 
+  {figure.legend && (
+    <div class="figure-legend">
+      <p class="figure-legend-label">Legend</p>
+      <p class="figure-legend-text">{figure.legend}</p>
+    </div>
+  )}
+
   <p class="a11y-note">Accessibility summary: {figure.accessibility_summary}</p>
-  <a class="figure-link" href={figure.source_path}>Open interactive figure directly</a>
+  <a class="figure-link" href={figure.share_path}>Open figure in full page ↗</a>
 </figure>

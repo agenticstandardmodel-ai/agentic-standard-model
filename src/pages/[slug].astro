@@ -6,7 +6,7 @@ import TopBar from '../components/TopBar.astro';
 import OutlineSidebar from '../components/OutlineSidebar.astro';
 import { getCollection } from 'astro:content';
 import { getFigureMap } from '../lib/data';
-import { chapterAccents, statusLabels } from '../lib/chapters';
+import { chapterAccents, chapterLabel, statusLabels } from '../lib/chapters';
 
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
@@ -53,7 +53,7 @@ const isScaffolded = chapter.data.status === 'placeholder';
       <article class="doc-content chapter-page" data-doc-content>
         <header class="chapter-header">
           <p class="chapter-index">Chapter {chapterNumber.toString().padStart(2, '0')}</p>
-          <h1>{chapter.data.title.replace(`Chapter ${chapterNumber}: `, '')}</h1>
+          <h1>{chapterLabel(chapter.data.title, chapterNumber)}</h1>
           <p class="chapter-meta">{chapter.data.summary}</p>
           <div class="chapter-divider"></div>
           <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
@@ -74,17 +74,21 @@ const isScaffolded = chapter.data.status === 'placeholder';
           <Content />
         </section>
 
-        <section class="panel">
-          <h2>Figures in This Chapter</h2>
-          <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
-        </section>
+        {chapterFigures.length > 0 && (
+          <>
+            <section class="panel">
+              <h2>Figures in This Chapter</h2>
+              <p>Each figure has a stable share URL and chapter-level cross-linking support.</p>
+            </section>
 
-        {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+            {chapterFigures.map((figure) => <FigureEmbed figure={figure} />)}
+          </>
+        )}
       </article>
     </section>
 
     <aside class="outline-pane">
-      <OutlineSidebar />
+      <OutlineSidebar figures={chapterFigures} />
     </aside>
   </div>
 </BaseLayout>

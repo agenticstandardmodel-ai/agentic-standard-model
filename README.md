@@ -78,6 +78,29 @@ Post-deploy checks:
 3. Verify canonical tags and OG URLs point to `.ai`.
 4. Verify figure routes and chapter routes return 200.
 
+## Planned interactive tools
+
+### Interactive Molecule Builder (future)
+
+A standalone tool allowing readers to compose ASM molecules from element tiles — analogous to
+chemical structure editors like RCSB but scoped to known agent patterns.
+
+Design goals:
+- Drag elements from a palette (same data as `elements.yml`) onto a canvas
+- Draw bonds between elements and validate against bond type rules in `bonds.yml`
+- Detect and label known stable molecules from `molecules.yml`
+- Export molecule as a named YAML entry and/or shareable URL
+- Flag invalid compositions (dependency violations, missing required elements)
+
+Reference inspiration: [RCSB Chemical Search](https://www.rcsb.org/search/chemical) — modern,
+filterable, detail-rich. Molecule builder should feel similarly precise but domain-specific to
+agentic patterns (ReAct agent, RAG pipeline, Orchestrator-Subagent cell, etc.).
+
+Implementation path: self-contained HTML/JS in `public/interactive/molecule-builder.html`,
+then integrated as a figure embed at `/figures/fig-molecule-builder/`.
+
+---
+
 ## Legacy static prototype
 
 The previous static prototype is archived at:
