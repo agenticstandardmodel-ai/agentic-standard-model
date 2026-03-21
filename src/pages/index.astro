@@ -6,11 +6,17 @@ import { getCollection } from 'astro:content';
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
 );
+
+const statusLabels: Record<string, string> = {
+  placeholder: 'Scaffolded',
+  draft: 'In Development',
+  published: 'Published'
+};
 ---
 
 <BaseLayout
   title="Agentic Standard Model — Interactive Textbook"
-  description="Interactive educational textbook for the Agentic Standard Model with chapter navigation and shareable figures."
+  description="The Agentic Standard Model is a theory for classifying and composing agentic systems from irreducible elements with explicit dependency and force structure."
   canonicalPath="/"
 >
   <main class="site-grid">
@@ -20,36 +26,50 @@ const chapters = (await getCollection('chapters')).sort(
       <p class="eyebrow">Interactive Textbook</p>
       <h1>Agentic Standard Model</h1>
       <p class="lead">
-        A modern educational site for exploring ASM elements, molecules, force laws, and system boundaries.
+        The Agentic Standard Model (ASM) is a theory of agentic AI systems: what they are made of, how they bond,
+        and which structural constraints govern valid compositions.
       </p>
 
       <section class="panel">
-        <h2>Build Status</h2>
+        <h2>Read This First</h2>
         <p>
-          This release is a structural launch: chapter routes, figure URLs, canonical metadata, and interactive
-          embeds are live. Final chapter prose will be inserted from canonical source documents.
+          Start with <a href="/chapter-1-foundations/">Chapter 1</a> for the problem framing and historical method,
+          then move to <a href="/chapter-2-periodic-table/">Chapter 2</a> for the core taxonomy and dependency map.
+        </p>
+        <p>
+          The most shared visual is <a href="/figures/fig-2-1/">Figure 2.1 — ASM Periodic Table</a>, which anchors
+          all group colors, element-cell notation, and cross-chapter references.
         </p>
       </section>
 
+      <section class="panel">
+        <h2>Why This Matters</h2>
+        <ul>
+          <li>Moves from a catalog of examples to a structural theory.</li>
+          <li>Defines dependency-derived layers rather than convention-based architecture.</li>
+          <li>Supports falsifiable predictions about missing elements and molecules.</li>
+        </ul>
+      </section>
+
       <section class="panel chapter-cards">
-        <h2>Chapters</h2>
+        <h2>Table of Contents</h2>
         <div class="cards">
           {chapters.map((chapter) => (
             <article class="card">
               <p class="card-num">Chapter {chapter.data.chapter_number}</p>
               <h3><a href={`/${chapter.slug}/`}>{chapter.data.title}</a></h3>
               <p>{chapter.data.summary}</p>
-              <span class={`status ${chapter.data.status}`}>{chapter.data.status}</span>
+              <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
             </article>
           ))}
         </div>
       </section>
 
       <section class="panel">
-        <h2>Flagship Figure</h2>
+        <h2>Current Priority</h2>
         <p>
-          Start with <a href="/figures/fig-2-1/">Figure 2.1 — ASM Periodic Table</a>. This is the visual system
-          anchor for all remaining interactive work.
+          Chapter 1 now contains live prose sections from the source manuscript. Next high-impact additions are
+          the Chapter 1 precedents figure and deeper dependency explorer interactions in Chapter 2.
         </p>
       </section>
     </section>

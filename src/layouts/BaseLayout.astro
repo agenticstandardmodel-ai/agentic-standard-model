@@ -14,6 +14,7 @@ const {
 } = Astro.props;
 
 const canonicalUrl = new URL(canonicalPath, Astro.site);
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -40,8 +41,49 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('asm-theme');
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored || (systemPrefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
   </head>
   <body>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Toggle theme</button>
+
     <slot />
+
+    <footer class="site-footer">
+      <p>Copyright © {year} Agentic Standard Model. All rights reserved.</p>
+      <p>
+        Primary publication: <a href="https://agenticstandardmodel.ai">agenticstandardmodel.ai</a>
+      </p>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const button = document.getElementById('theme-toggle');
+        if (!button) return;
+
+        const labelFor = (theme) => (theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        button.setAttribute('aria-label', labelFor(current));
+
+        button.addEventListener('click', () => {
+          const now = document.documentElement.getAttribute('data-theme') || 'light';
+          const next = now === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('asm-theme', next);
+          button.setAttribute('aria-label', labelFor(next));
+        });
+      })();
+    </script>
   </body>
 </html>

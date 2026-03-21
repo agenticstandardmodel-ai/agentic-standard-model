@@ -10,6 +10,12 @@ const chapters = (await getCollection('chapters')).sort(
 );
 const figureMap = getFigureMap();
 
+const statusLabels: Record<string, string> = {
+  placeholder: 'Scaffolded',
+  draft: 'In Development',
+  published: 'Published'
+};
+
 export async function getStaticPaths() {
   const chapters = await getCollection('chapters');
   return chapters.map((chapter) => ({
@@ -42,7 +48,7 @@ const canonicalPath = `/${chapter.slug}/`;
       <p class="eyebrow">Chapter {chapter.data.chapter_number.toString().padStart(2, '0')}</p>
       <h1>{chapter.data.title}</h1>
       <p class="lead">{chapter.data.summary}</p>
-      <span class={`status ${chapter.data.status}`}>{chapter.data.status}</span>
+      <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
 
       <section class="panel prose-block">
         <Content />

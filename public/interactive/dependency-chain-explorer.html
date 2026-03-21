@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dependency Chain Explorer</title>
+    <style>
+      :root {
+        --bg: #f5efe6;
+        --surface: #ffffff;
+        --line: #d8ccba;
+        --ink: #1e1a16;
+        --muted: #635d54;
+        --up: #1a3a5c;
+        --down: #1f6f46;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #10151b;
+          --surface: #18212b;
+          --line: #2f3f50;
+          --ink: #e7edf4;
+          --muted: #b7c2cf;
+          --up: #8bc0f4;
+          --down: #88d4a7;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 1rem;
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(900px 500px at 0 0, rgba(255,255,255,0.4), transparent 60%), var(--bg);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        padding: 1rem;
+      }
+      h1 { margin: 0; font-family: "IBM Plex Serif", Georgia, serif; }
+      p { color: var(--muted); line-height: 1.65; }
+      label { font-weight: 600; }
+      select {
+        margin-top: 0.35rem;
+        width: min(360px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0.45rem 0.6rem;
+        font: inherit;
+        color: inherit;
+        background: var(--surface);
+      }
+      .cols {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.8rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.8rem;
+      }
+      .card h2 {
+        margin: 0;
+        font-family: "IBM Plex Serif", Georgia, serif;
+        font-size: 1.15rem;
+      }
+      .up h2 { color: var(--up); }
+      .down h2 { color: var(--down); }
+      .chips {
+        margin-top: 0.6rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.2rem 0.55rem;
+        font: 500 0.82rem "IBM Plex Mono", monospace;
+      }
+      .note {
+        margin-top: 0.9rem;
+        border-left: 3px solid var(--up);
+        padding-left: 0.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Dependency Chain Explorer</h1>
+      <p>
+        Select an element to inspect the dependency chain below it and the downstream elements it enables.
+      </p>
+
+      <label for="element-select">Element</label>
+      <br />
+      <select id="element-select">
+        <option value="Lm">Lm — Language Model</option>
+        <option value="Sm">Sm — Semantic Memory</option>
+        <option value="Ds">Ds — Decision Skill</option>
+      </select>
+
+      <section class="cols">
+        <article class="card up">
+          <h2>Depends On</h2>
+          <p>Required elements at lower dependency depth.</p>
+          <div class="chips" id="depends"></div>
+        </article>
+
+        <article class="card down">
+          <h2>Enables</h2>
+          <p>Elements and patterns that become available upstream.</p>
+          <div class="chips" id="enables"></div>
+        </article>
+      </section>
+
+      <p class="note" id="note"></p>
+    </main>
+
+    <script>
+      const chains = {
+        Lm: {
+          dependsOn: ['Ce', 'Fs', 'Wm', 'Ss'],
+          enables: ['Sm', 'Pm', 'Em', 'Rt', 'Wt', 'Lt', 'Ct', 'Is', 'Ts', 'Gs', 'Ds'],
+          note: 'Lm is a pivotal bridge: it depends on infrastructure/state/retention and enables memory/action/skill layers.'
+        },
+        Sm: {
+          dependsOn: ['Lm', 'Ec', 'Db'],
+          enables: ['Is', 'Ts', 'Gs', 'Ds'],
+          note: 'Semantic Memory requires cognition and encoding to store retrievable meaning structures.'
+        },
+        Ds: {
+          dependsOn: ['Lm', 'Sm', 'Pm', 'Ws'],
+          enables: ['Agent molecule control', 'Orchestrator policy routing'],
+          note: 'Decision Skill sits near the top of dependency depth and governs downstream behavioral branching.'
+        }
+      };
+
+      const select = document.getElementById('element-select');
+      const depends = document.getElementById('depends');
+      const enables = document.getElementById('enables');
+      const note = document.getElementById('note');
+
+      function chip(text) {
+        const span = document.createElement('span');
+        span.className = 'chip';
+        span.textContent = text;
+        return span;
+      }
+
+      function render(key) {
+        const data = chains[key];
+        depends.innerHTML = '';
+        enables.innerHTML = '';
+        data.dependsOn.forEach((item) => depends.appendChild(chip(item)));
+        data.enables.forEach((item) => enables.appendChild(chip(item)));
+        note.textContent = data.note;
+      }
+
+      select.addEventListener('change', () => render(select.value));
+      render('Lm');
+    </script>
+  </body>
+</html>

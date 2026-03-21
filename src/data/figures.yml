@@ -2,9 +2,9 @@
   chapter: 1
   title: Three Historical Precedents
   caption: Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.
-  type: static
+  type: interactive
   embed_mode: iframe
-  source_path: /interactive/placeholder-figure.html
+  source_path: /interactive/three-precedents.html
   share_path: /figures/fig-1-1/
   accessibility_summary: Conceptual comparison chart showing the three foundational precedents.
 
@@ -24,7 +24,7 @@
   caption: Select an element and inspect upward and downward dependency chain.
   type: interactive
   embed_mode: iframe
-  source_path: /interactive/placeholder-figure.html
+  source_path: /interactive/dependency-chain-explorer.html
   share_path: /figures/fig-2-2/
   accessibility_summary: Visual dependency chain for selected ASM element.
 

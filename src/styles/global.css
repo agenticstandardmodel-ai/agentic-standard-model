@@ -1,5 +1,7 @@
 :root {
   --bg: #f5f2eb;
+  --bg-accent-a: #fffaf0;
+  --bg-accent-b: #e8f0fa;
   --surface: #ffffff;
   --surface-soft: #f1ece3;
   --line: #d4ccc0;
@@ -19,6 +21,28 @@
   --shadow: 0 16px 40px rgba(25, 33, 50, 0.08);
 }
 
+html[data-theme='dark'] {
+  --bg: #10151a;
+  --bg-accent-a: #112230;
+  --bg-accent-b: #1a202b;
+  --surface: #172029;
+  --surface-soft: #1f2a35;
+  --line: #314355;
+  --text: #e7ebf1;
+  --text-soft: #b7c1ce;
+
+  --infra: #79abdc;
+  --state: #b798ff;
+  --retention: #6fcb9a;
+  --cognition: #f0a86f;
+  --action: #f08ab0;
+  --pattern: #b7d367;
+  --exchange: #f3c86c;
+  --predicted: #a7afbb;
+
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -28,8 +52,8 @@ body {
   min-height: 100vh;
   font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
   background:
-    radial-gradient(1200px 500px at 0% 0%, #fffaf0 0, transparent 65%),
-    radial-gradient(900px 500px at 100% 0%, #e8f0fa 0, transparent 60%),
+    radial-gradient(1200px 500px at 0% 0%, var(--bg-accent-a) 0, transparent 65%),
+    radial-gradient(900px 500px at 100% 0%, var(--bg-accent-b) 0, transparent 60%),
     var(--bg);
   color: var(--text);
 }
@@ -40,6 +64,24 @@ a {
 
 a:hover {
   opacity: 0.85;
+}
+
+.theme-toggle {
+  position: fixed;
+  right: 1rem;
+  top: 0.8rem;
+  z-index: 20;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text);
+  padding: 0.4rem 0.75rem;
+  font: 500 0.8rem 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: color-mix(in srgb, var(--infra) 14%, var(--surface));
 }
 
 .site-grid {
@@ -157,6 +199,16 @@ h1 {
   padding: 1rem;
 }
 
+.panel ul {
+  margin: 0.7rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.panel li {
+  margin: 0.45rem 0;
+  color: var(--text-soft);
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -257,6 +309,19 @@ h1 {
   margin: 1rem auto 2rem;
 }
 
+.site-footer {
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto 1.4rem;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0.2rem 0;
+}
+
 @media (max-width: 980px) {
   .site-grid {
     grid-template-columns: 1fr;
@@ -269,5 +334,10 @@ h1 {
 
   .frame-wrap iframe {
     min-height: 420px;
+  }
+
+  .theme-toggle {
+    position: static;
+    margin: 0.9rem 1rem 0;
   }
 }

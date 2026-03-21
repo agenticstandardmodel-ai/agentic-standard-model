@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Three Historical Precedents</title>
+    <style>
+      :root {
+        --bg: #f4efe6;
+        --surface: #ffffff;
+        --line: #d7cec0;
+        --ink: #1d1a16;
+        --muted: #625d54;
+        --accent: #1a3a5c;
+        --accent2: #8b3a1a;
+        --accent3: #1a5c3a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #11161c;
+          --surface: #18202a;
+          --line: #2f4153;
+          --ink: #e8edf4;
+          --muted: #b8c3d1;
+          --accent: #8cc1f4;
+          --accent2: #f0a577;
+          --accent3: #89d7af;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(900px 500px at 0 0, rgba(255,255,255,0.45), transparent 60%), var(--bg);
+        padding: 1rem;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        padding: 1rem;
+      }
+      h1 {
+        margin: 0;
+        font-family: "IBM Plex Serif", Georgia, serif;
+      }
+      p { color: var(--muted); line-height: 1.65; }
+      .grid {
+        margin-top: 0.9rem;
+        display: grid;
+        gap: 0.7rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      button.card {
+        text-align: left;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: transparent;
+        padding: 0.75rem;
+        cursor: pointer;
+        color: inherit;
+      }
+      button.card:hover,
+      button.card.active {
+        border-color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 11%, transparent);
+      }
+      .label {
+        margin: 0;
+        font: 500 0.76rem "IBM Plex Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      h2 {
+        margin: 0.25rem 0 0;
+        font-size: 1.1rem;
+        font-family: "IBM Plex Serif", Georgia, serif;
+      }
+      #detail {
+        margin-top: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.9rem;
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+      }
+      .contrib {
+        margin-top: 0.6rem;
+        display: grid;
+        gap: 0.45rem;
+      }
+      .contrib div {
+        border-left: 3px solid var(--accent2);
+        padding-left: 0.6rem;
+      }
+      .contrib strong { color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Three Historical Precedents</h1>
+      <p>
+        ASM draws from a sequence: taxonomy, governing rules, and layer boundaries derived from dependencies.
+      </p>
+
+      <section class="grid" aria-label="Precedent selector">
+        <button class="card active" data-key="mendeleev" type="button">
+          <p class="label" style="color: var(--accent)">1869</p>
+          <h2>Mendeleev</h2>
+          <p>Periodic organization with predictive gaps.</p>
+        </button>
+        <button class="card" data-key="standard-model" type="button">
+          <p class="label" style="color: var(--accent2)">20th Century</p>
+          <h2>Standard Model</h2>
+          <p>Matter vs force distinction with structural consequences.</p>
+        </button>
+        <button class="card" data-key="osi" type="button">
+          <p class="label" style="color: var(--accent3)">1984</p>
+          <h2>OSI Model</h2>
+          <p>Layer boundaries based on functional dependency.</p>
+        </button>
+      </section>
+
+      <section id="detail" aria-live="polite"></section>
+    </main>
+
+    <script>
+      const details = {
+        mendeleev: {
+          title: "Mendeleev contributes method",
+          points: [
+            "Organize the inventory by observed structure.",
+            "Treat gaps as predictions, not defects.",
+            "Use position in the table to infer missing properties."
+          ]
+        },
+        "standard-model": {
+          title: "The Standard Model contributes class distinction",
+          points: [
+            "Fermions: substance that composes into stable structures.",
+            "Bosons: carriers that exist in interactions between components.",
+            "ASM maps this to component matter vs protocol force channels."
+          ]
+        },
+        osi: {
+          title: "OSI contributes dependency-derived layering",
+          points: [
+            "Layer boundaries are structural, not stylistic.",
+            "Higher layers require lower layers to function first.",
+            "ASM period placement is derived from dependencies, not preference."
+          ]
+        }
+      };
+
+      const cards = [...document.querySelectorAll('.card')];
+      const detail = document.getElementById('detail');
+
+      function render(key) {
+        const item = details[key];
+        detail.innerHTML = `
+          <h2>${item.title}</h2>
+          <div class="contrib">
+            ${item.points.map((point) => `<div><strong>Contribution:</strong> ${point}</div>`).join('')}
+          </div>
+        `;
+      }
+
+      cards.forEach((button) => {
+        button.addEventListener('click', () => {
+          cards.forEach((c) => c.classList.remove('active'));
+          button.classList.add('active');
+          render(button.dataset.key);
+        });
+      });
+
+      render('mendeleev');
+    </script>
+  </body>
+</html>
