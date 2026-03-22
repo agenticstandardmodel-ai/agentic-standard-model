@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1.7 — The Agent as Cell</title>
+<style>
+  body { margin: 0; padding: 24px; font-family: Arial, sans-serif; background: #f5f7fa; }
+  svg { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+  .th { font: 500 14px Arial, sans-serif; }
+  .ts { font: 400 12px Arial, sans-serif; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text class="th" x="340" y="18" text-anchor="middle" fill="#1a1a2e">The agent as cell: first configuration exhibiting bounded autonomy</text>
+
+<!-- Left: individual elements label -->
+<text class="ts" x="96" y="42" text-anchor="middle" fill="#555" font-style="italic">Individual elements</text>
+<text class="ts" x="96" y="56" text-anchor="middle" fill="#555" font-style="italic">(necessary, not sufficient)</text>
+
+<!-- Element boxes -->
+<rect x="20" y="66" width="72" height="36" rx="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text class="th" x="56" y="80" text-anchor="middle" fill="#042C53" dominant-baseline="central">Lm</text>
+<text class="ts" x="56" y="94" text-anchor="middle" fill="#042C53">LLM</text>
+
+<rect x="106" y="66" width="72" height="36" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text class="th" x="142" y="80" text-anchor="middle" fill="#04342C" dominant-baseline="central">Sm</text>
+<text class="ts" x="142" y="94" text-anchor="middle" fill="#04342C">Sem mem</text>
+
+<rect x="20" y="116" width="72" height="36" rx="5" fill="#FBEAF0" stroke="#993556" stroke-width="1.5"/>
+<text class="th" x="56" y="130" text-anchor="middle" fill="#4B1528" dominant-baseline="central">Rt / Wt</text>
+<text class="ts" x="56" y="144" text-anchor="middle" fill="#4B1528">Tools</text>
+
+<rect x="106" y="116" width="72" height="36" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text class="th" x="142" y="130" text-anchor="middle" fill="#26215C" dominant-baseline="central">Es / Ws</text>
+<text class="ts" x="142" y="144" text-anchor="middle" fill="#26215C">State</text>
+
+<rect x="62" y="166" width="96" height="36" rx="5" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text class="th" x="110" y="180" text-anchor="middle" fill="#412402" dominant-baseline="central">Is / Ds</text>
+<text class="ts" x="110" y="194" text-anchor="middle" fill="#412402">Skills</text>
+
+<text class="ts" x="56" y="222" text-anchor="middle" fill="#888">not autonomous</text>
+<text class="ts" x="56" y="236" text-anchor="middle" fill="#888">alone</text>
+<text class="ts" x="142" y="222" text-anchor="middle" fill="#888">not autonomous</text>
+<text class="ts" x="142" y="236" text-anchor="middle" fill="#888">alone</text>
+
+<!-- Arrow: bond + register -->
+<line x1="200" y1="150" x2="232" y2="150" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text class="ts" x="216" y="140" text-anchor="middle" fill="#555">bond +</text>
+<text class="ts" x="216" y="164" text-anchor="middle" fill="#555">register</text>
+
+<!-- Center: governance boundary (dashed ellipse) -->
+<ellipse cx="340" cy="162" rx="98" ry="112" fill="#fffdf0" stroke="#BA7517" stroke-width="2" stroke-dasharray="7,4"/>
+<text class="ts" x="340" y="58" text-anchor="middle" fill="#BA7517">governance boundary (membrane)</text>
+
+<!-- Nucleus: Orchestrator -->
+<ellipse cx="340" cy="138" rx="44" ry="30" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/>
+<text class="th" x="340" y="133" text-anchor="middle" fill="#412402" dominant-baseline="central">Orchestrator</text>
+<text class="ts" x="340" y="151" text-anchor="middle" fill="#633806">(nucleus)</text>
+
+<!-- Organelles -->
+<ellipse cx="280" cy="186" rx="24" ry="17" fill="#B5D4F4" stroke="#185FA5" stroke-width="1.5"/>
+<text class="ts" x="280" y="190" text-anchor="middle" fill="#042C53">Lm</text>
+
+<ellipse cx="398" cy="186" rx="24" ry="17" fill="#C0DD97" stroke="#3B6D11" stroke-width="1.5"/>
+<text class="ts" x="398" y="190" text-anchor="middle" fill="#173404">Sm</text>
+
+<ellipse cx="306" cy="230" rx="24" ry="17" fill="#F4C0D1" stroke="#993556" stroke-width="1.5"/>
+<text class="ts" x="306" y="234" text-anchor="middle" fill="#4B1528">Tools</text>
+
+<ellipse cx="374" cy="230" rx="24" ry="17" fill="#CECBF6" stroke="#534AB7" stroke-width="1.5"/>
+<text class="ts" x="374" y="234" text-anchor="middle" fill="#26215C">State</text>
+
+<text class="ts" x="340" y="265" text-anchor="middle" fill="#888">(organelles)</text>
+
+<!-- Arrow to emergence -->
+<line x1="442" y1="150" x2="472" y2="150" stroke="#D4537E" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- RIGHT: Emergence box -->
+<rect x="476" y="86" width="180" height="164" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="1.5"/>
+<rect x="476" y="86" width="180" height="36" rx="8" fill="#993556"/>
+<rect x="476" y="110" width="180" height="12" fill="#993556"/>
+<text class="th" x="566" y="106" text-anchor="middle" fill="#FBEAF0" dominant-baseline="central">Emergence</text>
+
+<text class="th" x="566" y="146" text-anchor="middle" fill="#71243E" dominant-baseline="central">Bounded</text>
+<text class="th" x="566" y="166" text-anchor="middle" fill="#71243E" dominant-baseline="central">autonomous</text>
+<text class="th" x="566" y="186" text-anchor="middle" fill="#71243E" dominant-baseline="central">behavior</text>
+<text class="ts" x="566" y="210" text-anchor="middle" fill="#993556">The agent does something</text>
+<text class="ts" x="566" y="226" text-anchor="middle" fill="#993556">no individual part could</text>
+<text class="ts" x="566" y="242" text-anchor="middle" fill="#993556">do on its own</text>
+
+<text class="ts" x="340" y="292" text-anchor="middle" fill="#888" font-style="italic">An agent is not found in the world. It is constituted through deliberate assembly and registration.</text>
+</svg>
+</body>
+</html>

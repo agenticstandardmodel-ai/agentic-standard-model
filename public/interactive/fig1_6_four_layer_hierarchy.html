@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1.6 — The Four-Layer Hierarchy</title>
+<style>
+  body { margin: 0; padding: 24px; font-family: Arial, sans-serif; background: #f5f7fa; }
+  svg { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+  .th { font: 500 14px Arial, sans-serif; }
+  .ts { font: 400 12px Arial, sans-serif; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text class="th" x="340" y="18" text-anchor="middle" fill="#1a1a2e">The four-layer hierarchy</text>
+
+<!-- Layer 4: Context (widest, top) -->
+<rect x="20" y="28" width="640" height="58" rx="8" fill="#3C3489"/>
+<text class="th" x="110" y="52" text-anchor="middle" fill="#EEEDFE" dominant-baseline="central">Context</text>
+<text class="th" x="370" y="46" text-anchor="middle" fill="#CECBF6" dominant-baseline="central">Registry  |  Governance  |  Evaluation cycle</text>
+<text class="ts" x="370" y="70" text-anchor="middle" fill="#AFA9EC">Operational environment where systems are deployed, discovered, and governed</text>
+<text class="ts" x="638" y="57" text-anchor="end" fill="#7F77DD">Layer 4</text>
+
+<!-- Layer 3: Biology -->
+<rect x="50" y="96" width="580" height="52" rx="8" fill="#085041"/>
+<text class="th" x="136" y="118" text-anchor="middle" fill="#E1F5EE" dominant-baseline="central">Biology</text>
+<text class="th" x="370" y="112" text-anchor="middle" fill="#9FE1CB" dominant-baseline="central">Agentic system as cell  |  Membrane  |  Nucleus  |  Organelles</text>
+<text class="ts" x="370" y="134" text-anchor="middle" fill="#5DCAA5">Bounded, self-regulating systems with lifecycle properties</text>
+<text class="ts" x="608" y="122" text-anchor="end" fill="#1D9E75">Layer 3</text>
+
+<!-- Layer 2: Chemistry -->
+<rect x="80" y="158" width="520" height="52" rx="8" fill="#185FA5"/>
+<text class="th" x="170" y="180" text-anchor="middle" fill="#E6F1FB" dominant-baseline="central">Chemistry</text>
+<text class="th" x="370" y="174" text-anchor="middle" fill="#85B7EB" dominant-baseline="central">Tool molecules  |  Agent molecules  |  Orchestrators</text>
+<text class="ts" x="370" y="196" text-anchor="middle" fill="#378ADD">Bonding rules governing valid compositions. First emergence.</text>
+<text class="ts" x="578" y="184" text-anchor="end" fill="#378ADD">Layer 2</text>
+
+<!-- Layer 1: Physics (narrowest, bottom) -->
+<rect x="110" y="220" width="460" height="58" rx="8" fill="#0C447C"/>
+<text class="th" x="196" y="244" text-anchor="middle" fill="#E6F1FB" dominant-baseline="central">Physics</text>
+<text class="th" x="370" y="238" text-anchor="middle" fill="#B5D4F4" dominant-baseline="central">22 elements (P1–P6)  +  3 bosons  +  2 predicted gaps</text>
+<text class="ts" x="370" y="262" text-anchor="middle" fill="#85B7EB">Irreducible building blocks. The periodic table.</text>
+<text class="ts" x="548" y="249" text-anchor="end" fill="#378ADD">Layer 1</text>
+
+<!-- Upward arrow left side -->
+<line x1="26" y1="250" x2="26" y2="46" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text class="ts" x="22" y="160" text-anchor="middle" fill="#888" transform="rotate(-90 22 160)">depends upward</text>
+
+<!-- Sub-atomic note -->
+<text class="ts" x="340" y="300" text-anchor="middle" fill="#888" font-style="italic">Layer 0: sub-atomic substrate (CPU, GPU, RAM, Storage, Network) — beneath the table</text>
+</svg>
+</body>
+</html>

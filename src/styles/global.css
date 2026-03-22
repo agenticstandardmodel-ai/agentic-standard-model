@@ -760,25 +760,13 @@ figure code {
 }
 
 .figure-legend {
-  display: grid;
-  gap: 0.7rem;
   margin-top: 0.95rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--line);
 }
 
-.figure-legend section {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.78rem 0.88rem;
-  background: color-mix(in srgb, var(--surface2) 62%, transparent);
-}
-
-.figure-legend p,
-.figure-legend ul {
+.figure-legend p {
   margin: 0;
-}
-
-.figure-legend ul {
-  padding-left: 1.1rem;
 }
 
 .figure-actions {

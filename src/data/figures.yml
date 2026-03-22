@@ -1,20 +1,128 @@
 - id: fig-1-1
   chapter: 1
   label: Figure 1.1
-  title: Three Historical Precedents
-  caption: Side-by-side anchor visual of Mendeleev, Standard Model, and OSI influence on ASM.
+  title: Catalogue vs Theory
+  caption: A catalog names what exists. A theory predicts what must exist, explains what cannot, and provides a shared vocabulary for failure.
   type: interactive
   embed_mode: iframe
-  source_path: /interactive/three-precedents.html
+  source_path: /interactive/fig1_1_catalogue_vs_theory.html
   share_path: /figures/fig-1-1/
-  accessibility_summary: Conceptual comparison chart showing the three foundational precedents.
-  legend_overview: This figure places the three intellectual precedents of ASM in one visual frame so the reader can see that the framework inherits method, ontology, and dependency logic from distinct traditions.
-  legend_how_to_read: Read left to right. Mendeleev contributes structural taxonomy and prediction through gaps, the Standard Model contributes the distinction between matter and force carriers, and OSI contributes dependency-ordered layering.
-  legend_why_it_matters: Chapter 1 argues that ASM is not an arbitrary analogy. This figure makes the derivation visible by showing which part of the framework comes from which precedent.
+  accessibility_summary: Two-panel conceptual comparison between a scattered catalogue of agentic patterns and a structured theory view.
+  legend_overview: This figure contrasts a loose inventory of agentic patterns with a dependency-ordered theory that explains what kinds of structures must exist and how they relate.
+  legend_how_to_read: Read left to right. The catalogue side lists familiar pattern names without structural rules, while the theory side shows a compact table-like organization that supports explanation, prediction, and shared failure analysis.
+  legend_why_it_matters: Chapter 1 begins by arguing that the field has examples but not a theory. This figure makes that gap concrete before the chapter introduces ASM as the proposed theoretical structure.
+  legend_callouts:
+    - A catalogue names examples but does not constrain structure.
+    - A theory predicts what should exist and what cannot.
+    - Shared failure vocabulary depends on structural explanation, not example accumulation.
+
+- id: fig-1-2
+  chapter: 1
+  label: Figure 1.2
+  title: Three Historical Precedents
+  caption: The three historical precedents and their distinct contributions to the ASM method.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_2_three_precedents.html
+  share_path: /figures/fig-1-2/
+  accessibility_summary: Three-column comparison chart covering Mendeleev, the Standard Model, and OSI with their problems and contributions.
+  legend_overview: This figure places Mendeleev, the Standard Model, and OSI side by side so the reader can see the three distinct intellectual moves ASM inherits from them.
+  legend_how_to_read: Read each column as a problem-and-contribution pair. Mendeleev contributes predictive taxonomy, the Standard Model contributes matter-versus-force ontology, and OSI contributes dependency-derived layering.
+  legend_why_it_matters: The framework is not borrowing prestige by analogy. This figure shows that ASM combines three specific methods that solve different parts of the same structural problem.
   legend_callouts:
     - Mendeleev supplies the predictive table method.
     - The Standard Model supplies the matter-versus-force distinction.
     - OSI supplies dependency-derived layering and interface discipline.
+
+- id: fig-1-3
+  chapter: 1
+  label: Figure 1.3
+  title: Period Structure Derivation
+  caption: The period structure derived from dependency. Each layer can only exist if all layers beneath it are present and functioning.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_3_period_structure_derivation.html
+  share_path: /figures/fig-1-3/
+  accessibility_summary: Layered dependency diagram showing ASM periods from P1 through P6 over a sub-atomic base.
+  legend_overview: This figure stacks the ASM periods from the sub-atomic substrate through the reasoning-pattern layer to show that each period is determined by prerequisite structure below it.
+  legend_how_to_read: Read from bottom to top. The lower bands provide the infrastructure and state needed for retention, cognition, tools, and reasoning patterns to function at all.
+  legend_why_it_matters: This is the chapter's core derivation. The figure turns the dependency rule into a visible argument that period placement is deduced from prerequisites rather than assigned by taste.
+  legend_callouts:
+    - Period placement is a consequence of dependency depth.
+    - Cognition appears only after infrastructure, state, and short-horizon retention exist.
+    - Reasoning patterns sit above tools because they direct rather than perform action.
+
+- id: fig-1-4
+  chapter: 1
+  label: Figure 1.4
+  title: The Sub-atomic Layer
+  caption: Every ASM element reduces to a configuration of five sub-atomic primitives. Functional identity lives at the element level; physical instantiation lives at the sub-atomic level.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_4_subatomic_layer.html
+  share_path: /figures/fig-1-4/
+  accessibility_summary: Diagram connecting representative ASM elements to five underlying compute primitives in the sub-atomic layer.
+  legend_overview: "This figure maps representative ASM elements onto the five physical primitives that make them operable: CPU, GPU, RAM, Storage, and Network."
+  legend_how_to_read: Read the top element examples as functional identities, then read downward into the Layer 0 substrate to see which primitives carry the physical load for those identities.
+  legend_why_it_matters: The framework separates element identity from implementation substrate. This figure shows why two systems can realize the same element while differing materially in latency, cost, and failure behavior.
+  legend_callouts:
+    - Layer 0 supports the table without becoming part of it.
+    - Physical resource profiles are architectural properties, not incidental details.
+    - Functional identity and physical instantiation must be kept distinct for substitution to make sense.
+
+- id: fig-1-5
+  chapter: 1
+  label: Figure 1.5
+  title: Fermions vs Bosons
+  caption: Fermion-class elements exist inside compositions and can be versioned and governed. Boson-class protocols exist in the space between components and cannot be governed from inside either party.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_5_fermions_vs_bosons.html
+  share_path: /figures/fig-1-5/
+  accessibility_summary: Side-by-side comparison of component-like fermions and exchange-like bosons with an interaction channel between two agents.
+  legend_overview: This figure contrasts ASM matter-like elements that instantiate inside compositions with protocol bosons that exist only in the exchange between parties.
+  legend_how_to_read: Compare the left panel's versionable component examples with the right panel's interaction channel. The key distinction is not capability but where the thing exists structurally.
+  legend_why_it_matters: Chapter 1 uses this distinction to explain why protocols cannot be governed or registered the same way components can. The ontology determines the governance model.
+  legend_callouts:
+    - Fermion-class elements live inside compositions and can be substituted.
+    - Boson-class protocols live between components and mediate exchange.
+    - Where a thing exists determines how it can be versioned and governed.
+
+- id: fig-1-6
+  chapter: 1
+  label: Figure 1.6
+  title: The Four-Layer Hierarchy
+  caption: The four-layer hierarchy. Each layer is defined by what it contains and by its interface to adjacent layers. Layer boundaries derive from dependency relations.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_6_four_layer_hierarchy.html
+  share_path: /figures/fig-1-6/
+  accessibility_summary: Four stacked layers labeled Physics, Chemistry, Biology, and Context above a Layer 0 substrate note.
+  legend_overview: "This figure compresses the framework into four stacked layers: physics, chemistry, biology, and context, with the sub-atomic substrate explicitly shown beneath the table."
+  legend_how_to_read: Read from bottom to top as successive organization levels. Each layer inherits constraints from the one below while adding a new kind of structure and interface surface.
+  legend_why_it_matters: The chapter needs a stable hierarchy before later chapters can discuss molecules, cells, and governance without collapsing them into one undifferentiated system diagram.
+  legend_callouts:
+    - Physics defines irreducible matter and force carriers.
+    - Chemistry is where valid compositions and first emergence appear.
+    - Context formalizes registry, governance, and evaluation outside the biology metaphor.
+
+- id: fig-1-7
+  chapter: 1
+  label: Figure 1.7
+  title: The Agent as Cell
+  caption: The Cell Principle. Individual elements are necessary but not sufficient for autonomy. Assembly, bonding, and registration under a governance boundary yield the first emergent autonomous behavior.
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig1_7_agent_as_cell.html
+  share_path: /figures/fig-1-7/
+  accessibility_summary: Diagram showing isolated elements transforming through bonding and registration into a bounded cell-like agent structure.
+  legend_overview: This figure shows individual ASM elements on one side and a bounded agentic cell on the other to mark the first point where autonomous behavior emerges from composition.
+  legend_how_to_read: Follow the bond-and-register step into the governance boundary. The nucleus and organelles indicate how orchestration, memory, tools, and state become a cell-like agentic unit only when composed together.
+  legend_why_it_matters: Chapter 1 needs to make clear that an agent is not an irreducible element. This figure gives a structural reason for moving agents out of the table and into the biology layer.
+  legend_callouts:
+    - Individual elements are necessary but not sufficient for autonomy.
+    - Registration and governance boundaries are part of what makes an agent a stable unit.
+    - The first true emergence in ASM is the cell-like agent configuration.
 
 - id: fig-2-1
   chapter: 2

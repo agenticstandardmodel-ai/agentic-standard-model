@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1.1 — Catalogue vs Theory</title>
+<style>
+  body { margin: 0; padding: 24px; font-family: Arial, sans-serif; background: #f5f7fa; }
+  svg { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+  .th { font: 500 14px Arial, sans-serif; }
+  .ts { font: 400 12px Arial, sans-serif; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<!-- LEFT panel: Catalogue -->
+<rect x="16" y="30" width="290" height="255" rx="10" fill="#FCEBEB" stroke="#E24B4A" stroke-width="0.5"/>
+<rect x="16" y="30" width="290" height="38" rx="10" fill="#A32D2D"/>
+<rect x="16" y="54" width="290" height="14" fill="#A32D2D"/>
+<text class="th" x="161" y="50" text-anchor="middle" fill="#FCEBEB" dominant-baseline="central">Catalogue</text>
+
+<!-- Scattered component cards -->
+<rect x="32" y="78" width="120" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="92" y="92" text-anchor="middle" fill="#501313" dominant-baseline="central">ReAct agent</text>
+
+<rect x="164" y="78" width="128" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="228" y="92" text-anchor="middle" fill="#501313" dominant-baseline="central">RAG pipeline</text>
+
+<rect x="32" y="118" width="120" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="92" y="132" text-anchor="middle" fill="#501313" dominant-baseline="central">Orchestrator</text>
+
+<rect x="164" y="118" width="128" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="228" y="132" text-anchor="middle" fill="#501313" dominant-baseline="central">Embedding model</text>
+
+<rect x="32" y="158" width="120" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="92" y="172" text-anchor="middle" fill="#501313" dominant-baseline="central">Tool interface</text>
+
+<rect x="164" y="158" width="128" height="28" rx="5" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>
+<text class="ts" x="228" y="172" text-anchor="middle" fill="#501313" dominant-baseline="central">Memory store</text>
+
+<text class="th" x="161" y="210" text-anchor="middle" fill="#A32D2D">Tells you what exists</text>
+<text class="ts" x="161" y="228" text-anchor="middle" fill="#555">No shared vocabulary. No prediction.</text>
+<text class="ts" x="161" y="244" text-anchor="middle" fill="#555">Every failure needs a new heuristic.</text>
+<text class="ts" x="161" y="260" text-anchor="middle" fill="#555">Every decision re-learned from scratch.</text>
+
+<!-- Arrow -->
+<line x1="320" y1="147" x2="352" y2="147" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- RIGHT panel: Theory -->
+<rect x="368" y="30" width="296" height="255" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<rect x="368" y="30" width="296" height="38" rx="10" fill="#27500A"/>
+<rect x="368" y="54" width="296" height="14" fill="#27500A"/>
+<text class="th" x="516" y="50" text-anchor="middle" fill="#EAF3DE" dominant-baseline="central">Theory</text>
+
+<!-- Structured grid of elements -->
+<rect x="384" y="72" width="72" height="26" rx="4" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="ts" x="420" y="85" text-anchor="middle" fill="#173404" dominant-baseline="central">Ce  P1</text>
+
+<rect x="464" y="72" width="72" height="26" rx="4" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="ts" x="500" y="85" text-anchor="middle" fill="#173404" dominant-baseline="central">Fs  P1</text>
+
+<rect x="544" y="72" width="106" height="26" rx="4" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="ts" x="597" y="85" text-anchor="middle" fill="#173404" dominant-baseline="central">Db  P1</text>
+
+<rect x="384" y="108" width="72" height="26" rx="4" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text class="ts" x="420" y="121" text-anchor="middle" fill="#042C53" dominant-baseline="central">Es  P2</text>
+
+<rect x="464" y="108" width="72" height="26" rx="4" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text class="ts" x="500" y="121" text-anchor="middle" fill="#042C53" dominant-baseline="central">Ws  P2</text>
+
+<rect x="544" y="108" width="106" height="26" rx="4" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text class="ts" x="597" y="121" text-anchor="middle" fill="#042C53" dominant-baseline="central">Cp  P2</text>
+
+<rect x="384" y="144" width="72" height="26" rx="4" fill="#CECBF6" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="420" y="157" text-anchor="middle" fill="#26215C" dominant-baseline="central">Sm  P3</text>
+
+<rect x="464" y="144" width="72" height="26" rx="4" fill="#CECBF6" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="500" y="157" text-anchor="middle" fill="#26215C" dominant-baseline="central">Wm  P3</text>
+
+<rect x="424" y="180" width="72" height="26" rx="4" fill="#F5C4B3" stroke="#993C1D" stroke-width="0.5"/>
+<text class="ts" x="460" y="193" text-anchor="middle" fill="#4A1B0C" dominant-baseline="central">Lm  P4</text>
+
+<rect x="504" y="180" width="86" height="26" rx="4" fill="#F5C4B3" stroke="#993C1D" stroke-width="0.5"/>
+<text class="ts" x="547" y="193" text-anchor="middle" fill="#4A1B0C" dominant-baseline="central">Ec  P4</text>
+
+<text class="th" x="516" y="228" text-anchor="middle" fill="#27500A">Tells you what must exist</text>
+<text class="ts" x="516" y="246" text-anchor="middle" fill="#555">Shared vocabulary. Gaps are predictions.</text>
+<text class="ts" x="516" y="262" text-anchor="middle" fill="#555">Every failure derives from principle.</text>
+</svg>
+</body>
+</html>

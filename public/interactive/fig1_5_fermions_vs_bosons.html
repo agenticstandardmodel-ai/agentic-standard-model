@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1.5 — Fermions vs Bosons</title>
+<style>
+  body { margin: 0; padding: 24px; font-family: Arial, sans-serif; background: #f5f7fa; }
+  svg { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+  .th { font: 500 14px Arial, sans-serif; }
+  .ts { font: 400 12px Arial, sans-serif; }
+  .t  { font: 400 14px Arial, sans-serif; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 680 310" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text class="th" x="340" y="18" text-anchor="middle" fill="#1a1a2e">Fermions (matter) vs bosons (force carriers)</text>
+
+<!-- LEFT panel: Fermions -->
+<rect x="16" y="30" width="296" height="260" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<rect x="16" y="30" width="296" height="36" rx="10" fill="#0C447C"/>
+<rect x="16" y="54" width="296" height="12" fill="#0C447C"/>
+<text class="th" x="164" y="50" text-anchor="middle" fill="#E6F1FB" dominant-baseline="central">Fermions  (P1–P6 elements)</text>
+
+<text class="ts" x="164" y="86" text-anchor="middle" fill="#333">Instantiate as components</text>
+<text class="ts" x="164" y="102" text-anchor="middle" fill="#333">Hold state, execute, reason</text>
+<text class="ts" x="164" y="118" text-anchor="middle" fill="#333">Exist inside compositions</text>
+
+<circle cx="88" cy="178" r="30" fill="#B5D4F4" stroke="#185FA5" stroke-width="1.5"/>
+<text class="th" x="88" y="173" text-anchor="middle" fill="#042C53" dominant-baseline="central">Lm</text>
+<text class="ts" x="88" y="191" text-anchor="middle" fill="#042C53">LLM</text>
+
+<circle cx="164" cy="178" r="30" fill="#C0DD97" stroke="#3B6D11" stroke-width="1.5"/>
+<text class="th" x="164" y="173" text-anchor="middle" fill="#173404" dominant-baseline="central">Sm</text>
+<text class="ts" x="164" y="191" text-anchor="middle" fill="#173404">Sem mem</text>
+
+<circle cx="240" cy="178" r="30" fill="#F4C0D1" stroke="#993556" stroke-width="1.5"/>
+<text class="th" x="240" y="173" text-anchor="middle" fill="#4B1528" dominant-baseline="central">Rt</text>
+<text class="ts" x="240" y="191" text-anchor="middle" fill="#4B1528">Read tool</text>
+
+<rect x="28" y="222" width="272" height="56" rx="6" fill="rgba(0,0,0,0.04)" stroke="#ccc" stroke-width="0.5"/>
+<text class="ts" x="164" y="239" text-anchor="middle" fill="#333">Can be: versioned, registered,</text>
+<text class="ts" x="164" y="255" text-anchor="middle" fill="#333">governed, substituted</text>
+<text class="ts" x="164" y="271" text-anchor="middle" fill="#333">Governed from inside a composition</text>
+
+<!-- VS -->
+<text class="th" x="340" y="170" text-anchor="middle" fill="#888">vs</text>
+
+<!-- RIGHT panel: Bosons -->
+<rect x="368" y="30" width="296" height="260" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<rect x="368" y="30" width="296" height="36" rx="10" fill="#854F0B"/>
+<rect x="368" y="54" width="296" height="12" fill="#854F0B"/>
+<text class="th" x="516" y="50" text-anchor="middle" fill="#FAEEDA" dominant-baseline="central">Bosons  (protocol elements)</text>
+
+<text class="ts" x="516" y="86" text-anchor="middle" fill="#333">Exist in the exchange itself</text>
+<text class="ts" x="516" y="102" text-anchor="middle" fill="#333">Mediate interactions</text>
+<text class="ts" x="516" y="118" text-anchor="middle" fill="#333">Exist between components</text>
+
+<circle cx="420" cy="178" r="28" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/>
+<text class="th" x="420" y="174" text-anchor="middle" fill="#412402" dominant-baseline="central">Agent</text>
+<text class="ts" x="420" y="191" text-anchor="middle" fill="#412402">A</text>
+
+<circle cx="612" cy="178" r="28" fill="#FAC775" stroke="#BA7517" stroke-width="1.5"/>
+<text class="th" x="612" y="174" text-anchor="middle" fill="#412402" dominant-baseline="central">Agent</text>
+<text class="ts" x="612" y="191" text-anchor="middle" fill="#412402">B</text>
+
+<path d="M448 178 Q462 162 476 178 Q490 194 504 178 Q518 162 532 178 Q546 194 560 178 Q574 162 584 178" fill="none" stroke="#BA7517" stroke-width="2.5"/>
+<text class="th" x="516" y="164" text-anchor="middle" fill="#633806">A2</text>
+
+<rect x="380" y="222" width="272" height="56" rx="6" fill="rgba(0,0,0,0.04)" stroke="#ccc" stroke-width="0.5"/>
+<text class="ts" x="516" y="239" text-anchor="middle" fill="#333">Cannot be versioned like a component</text>
+<text class="ts" x="516" y="255" text-anchor="middle" fill="#333">Cannot be governed from inside one component</text>
+<text class="ts" x="516" y="271" text-anchor="middle" fill="#333">Lives in the space between components</text>
+</svg>
+</body>
+</html>

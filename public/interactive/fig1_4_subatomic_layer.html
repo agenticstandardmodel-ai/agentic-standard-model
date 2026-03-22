@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1.4 — The Sub-atomic Layer</title>
+<style>
+  body { margin: 0; padding: 24px; font-family: Arial, sans-serif; background: #f5f7fa; }
+  svg { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+  .th { font: 500 14px Arial, sans-serif; }
+  .ts { font: 400 12px Arial, sans-serif; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 680 290" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<text class="th" x="340" y="18" text-anchor="middle" fill="#1a1a2e">Every element reduces to physical substrate</text>
+
+<!-- Five ASM elements at top -->
+<rect x="24" y="32" width="104" height="48" rx="6" fill="#FBEAF0" stroke="#993556" stroke-width="1.5"/>
+<text class="th" x="76" y="52" text-anchor="middle" fill="#4B1528" dominant-baseline="central">Lm</text>
+<text class="ts" x="76" y="68" text-anchor="middle" fill="#4B1528">Language model</text>
+
+<rect x="144" y="32" width="104" height="48" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text class="th" x="196" y="52" text-anchor="middle" fill="#04342C" dominant-baseline="central">Sm</text>
+<text class="ts" x="196" y="68" text-anchor="middle" fill="#04342C">Semantic mem</text>
+
+<rect x="264" y="32" width="104" height="48" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text class="th" x="316" y="52" text-anchor="middle" fill="#042C53" dominant-baseline="central">Fs</text>
+<text class="ts" x="316" y="68" text-anchor="middle" fill="#042C53">File system</text>
+
+<rect x="384" y="32" width="104" height="48" rx="6" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.5"/>
+<text class="th" x="436" y="52" text-anchor="middle" fill="#412402" dominant-baseline="central">Ex</text>
+<text class="ts" x="436" y="68" text-anchor="middle" fill="#412402">Ext interface</text>
+
+<rect x="504" y="32" width="152" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text class="th" x="580" y="52" text-anchor="middle" fill="#26215C" dominant-baseline="central">Es</text>
+<text class="ts" x="580" y="68" text-anchor="middle" fill="#26215C">Exec state</text>
+
+<!-- Dashed lines down with load labels -->
+<line x1="76" y1="80" x2="76" y2="126" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<line x1="196" y1="80" x2="196" y2="126" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<line x1="316" y1="80" x2="316" y2="126" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<line x1="436" y1="80" x2="436" y2="126" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<line x1="580" y1="80" x2="580" y2="126" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+<text class="ts" x="76" y="108" text-anchor="middle" fill="#993556">GPU + RAM</text>
+<text class="ts" x="196" y="105" text-anchor="middle" fill="#085041">Storage</text>
+<text class="ts" x="196" y="120" text-anchor="middle" fill="#085041">+ GPU</text>
+<text class="ts" x="316" y="108" text-anchor="middle" fill="#0C447C">Storage</text>
+<text class="ts" x="436" y="108" text-anchor="middle" fill="#633806">Network</text>
+<text class="ts" x="580" y="105" text-anchor="middle" fill="#3C3489">CPU</text>
+<text class="ts" x="580" y="120" text-anchor="middle" fill="#3C3489">+ RAM</text>
+
+<!-- Sub-atomic bar background -->
+<rect x="20" y="134" width="640" height="106" rx="8" fill="#f0f0f0" stroke="#ccc" stroke-width="0.5"/>
+<text class="th" x="340" y="154" text-anchor="middle" fill="#1a1a2e">Sub-atomic layer (Layer 0)</text>
+
+<!-- 5 primitive boxes -->
+<rect x="30" y="164" width="114" height="64" rx="6" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="87" y="189" text-anchor="middle" fill="#2C2C2A" dominant-baseline="central">CPU</text>
+<text class="ts" x="87" y="210" text-anchor="middle" fill="#444441" dominant-baseline="central">Sequential / logic</text>
+
+<rect x="154" y="164" width="114" height="64" rx="6" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="211" y="189" text-anchor="middle" fill="#2C2C2A" dominant-baseline="central">GPU</text>
+<text class="ts" x="211" y="210" text-anchor="middle" fill="#444441" dominant-baseline="central">Parallel / matrix</text>
+
+<rect x="278" y="164" width="114" height="64" rx="6" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="335" y="189" text-anchor="middle" fill="#2C2C2A" dominant-baseline="central">RAM</text>
+<text class="ts" x="335" y="210" text-anchor="middle" fill="#444441" dominant-baseline="central">Fast volatile</text>
+
+<rect x="402" y="164" width="114" height="64" rx="6" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="459" y="189" text-anchor="middle" fill="#2C2C2A" dominant-baseline="central">Storage</text>
+<text class="ts" x="459" y="210" text-anchor="middle" fill="#444441" dominant-baseline="central">Persistent</text>
+
+<rect x="526" y="164" width="124" height="64" rx="6" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text class="th" x="588" y="189" text-anchor="middle" fill="#2C2C2A" dominant-baseline="central">Network</text>
+<text class="ts" x="588" y="210" text-anchor="middle" fill="#444441" dominant-baseline="central">Connectivity / I/O</text>
+
+<text class="ts" x="340" y="262" text-anchor="middle" fill="#888" font-style="italic">Functional identity lives at the element level. Physical instantiation lives at the sub-atomic level.</text>
+</svg>
+</body>
+</html>

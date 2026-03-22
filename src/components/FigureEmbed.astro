@@ -9,12 +9,6 @@ const { figure } = Astro.props;
 ---
 
 <figure class="figure-embed" id={figure.id}>
-  <figcaption>
-    <p class="figure-kicker">{figure.label} · {figure.type}</p>
-    <h3>{figure.title}</h3>
-    <p>{figure.caption}</p>
-  </figcaption>
-
   <div class="frame-wrap" role="group" aria-label={figure.title}>
     <iframe
       src={figure.source_path}
@@ -26,27 +20,9 @@ const { figure } = Astro.props;
   </div>
 
   <div class="figure-legend">
-    <section>
-      <h4>What It Shows</h4>
-      <p>{figure.legend_overview}</p>
-    </section>
-
-    <section>
-      <h4>How to Read It</h4>
-      <p>{figure.legend_how_to_read}</p>
-    </section>
-
-    <section>
-      <h4>Why It Matters</h4>
-      <p>{figure.legend_why_it_matters}</p>
-    </section>
-
-    <section>
-      <h4>Key Callouts</h4>
-      <ul>
-        {figure.legend_callouts.map((callout) => <li>{callout}</li>)}
-      </ul>
-    </section>
+    <p>
+      <strong>{figure.label}.</strong> {figure.title}. {figure.caption}
+    </p>
   </div>
 
   <p class="a11y-note">Accessibility summary: {figure.accessibility_summary}</p>
