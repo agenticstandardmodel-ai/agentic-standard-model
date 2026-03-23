@@ -35,7 +35,7 @@ const { chapters, currentNav } = Astro.props;
       {chapters.map((chapter) => (
         <li>
           <a href={`/${chapter.slug}/`} class={currentNav === 'chapters' ? 'chapter-link' : undefined}>
-            <span>{chapter.data.chapter_number.toString().padStart(2, '0')}</span>
+            <span>{chapter.data.chapter_number === 0 ? 'PF' : chapter.data.chapter_number.toString().padStart(2, '0')}</span>
             <span>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</span>
             {chapter.data.status && (
               <small>{statusLabels[chapter.data.status] || chapter.data.status}</small>

@@ -93,7 +93,7 @@ a:hover {
     'topbar topbar topbar'
     'sidenav content outline';
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .app-shell.no-outline {
@@ -341,7 +341,7 @@ a:hover {
 .content-pane {
   grid-area: content;
   min-height: 0;
-  overflow-y: auto;
+  overflow: visible;
   padding: 1.8rem 40px 3rem;
 }
 
@@ -954,6 +954,8 @@ figure code {
 .landing-page {
   display: grid;
   gap: 2rem;
+  position: relative;
+  isolation: isolate;
 }
 
 .landing-hero {
@@ -967,6 +969,36 @@ figure code {
 .landing-page {
   display: grid;
   gap: 2.3rem;
+}
+
+.landing-page::before {
+  content: '';
+  position: absolute;
+  inset: -1.5rem -1.25rem;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 28px;
+  background:
+    radial-gradient(92% 12% at 50% 10%, color-mix(in srgb, var(--chapter-accent) 9%, transparent), transparent 72%),
+    radial-gradient(88% 14% at 50% 28%, color-mix(in srgb, var(--surface2) 12%, transparent), transparent 74%),
+    radial-gradient(94% 16% at 50% 49%, color-mix(in srgb, var(--chapter-accent) 11%, transparent), transparent 74%),
+    radial-gradient(86% 14% at 50% 68%, color-mix(in srgb, var(--surface2) 12%, transparent), transparent 76%),
+    radial-gradient(90% 12% at 50% 87%, color-mix(in srgb, var(--chapter-accent) 10%, transparent), transparent 74%),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--surface2) 5%, transparent) 14%,
+      transparent 22%,
+      color-mix(in srgb, var(--surface2) 7%, transparent) 33%,
+      transparent 41%,
+      color-mix(in srgb, var(--surface2) 8%, transparent) 56%,
+      transparent 64%,
+      color-mix(in srgb, var(--surface2) 7%, transparent) 79%,
+      transparent 87%,
+      color-mix(in srgb, var(--surface2) 5%, transparent) 100%
+    );
+  mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.96) 8%, rgba(0, 0, 0, 0.96) 92%, transparent 100%);
+  opacity: 0.82;
 }
 
 .landing-hero {

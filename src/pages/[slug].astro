@@ -6,7 +6,7 @@ import TopBar from '../components/TopBar.astro';
 import OutlineSidebar from '../components/OutlineSidebar.astro';
 import { getCollection } from 'astro:content';
 import { getFigureMap } from '../lib/data';
-import { chapterAccents, statusLabels } from '../lib/chapters';
+import { chapterAccents, chapterEyebrow, chapterNavLabel, chapterLabel, statusLabels } from '../lib/chapters';
 
 const chapters = (await getCollection('chapters')).sort(
   (a, b) => a.data.chapter_number - b.data.chapter_number
@@ -61,8 +61,8 @@ const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex +
     <section class="content-pane">
       <article class="doc-content chapter-page" data-doc-content>
         <header class="chapter-header">
-          <p class="chapter-index">Chapter {chapterNumber.toString().padStart(2, '0')}</p>
-          <h1>{chapter.data.title.replace(`Chapter ${chapterNumber}: `, '')}</h1>
+          <p class="chapter-index">{chapterEyebrow(chapterNumber)}</p>
+          <h1>{chapterLabel(chapter.data.title, chapterNumber)}</h1>
           <p class="chapter-meta">{chapter.data.summary}</p>
           <div class="chapter-divider"></div>
           <span class={`status ${chapter.data.status}`}>{statusLabels[chapter.data.status] || chapter.data.status}</span>
@@ -70,10 +70,9 @@ const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex +
 
         {isScaffolded && (
           <section class="panel scaffold-callout">
-            <p class="callout-title">Scaffolded — Prose Coming</p>
+            <p class="callout-title">Coming Soon</p>
             <p>
-              This chapter's structure is defined. Figure slots and section headings are stable. Full prose will be
-              published in sequential order from Chapter 1.
+              This chapter is in preparation. The final prose and supporting material will be published in a later update.
             </p>
             <p><a href="/chapter-1-foundations/">Read Chapter 1 (live)</a></p>
           </section>
@@ -94,10 +93,7 @@ const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex +
             {previousChapter ? (
               <a class="chapter-pagination-link previous" href={`/${previousChapter.slug}/`}>
                 <span class="card-num">Previous</span>
-                <strong>
-                  Chapter {previousChapter.data.chapter_number.toString().padStart(2, '0')} ·{' '}
-                  {previousChapter.data.title.replace(`Chapter ${previousChapter.data.chapter_number}: `, '')}
-                </strong>
+                <strong>{chapterNavLabel(previousChapter.data.title, previousChapter.data.chapter_number)}</strong>
               </a>
             ) : (
               <span></span>
@@ -106,10 +102,7 @@ const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex +
             {nextChapter ? (
               <a class="chapter-pagination-link next" href={`/${nextChapter.slug}/`}>
                 <span class="card-num">Next</span>
-                <strong>
-                  Chapter {nextChapter.data.chapter_number.toString().padStart(2, '0')} ·{' '}
-                  {nextChapter.data.title.replace(`Chapter ${nextChapter.data.chapter_number}: `, '')}
-                </strong>
+                <strong>{chapterNavLabel(nextChapter.data.title, nextChapter.data.chapter_number)}</strong>
               </a>
             ) : (
               <span></span>

@@ -28,8 +28,9 @@ const chapters = (await getCollection('chapters')).sort(
         <section class="landing-hero">
           <h1>The Agentic Standard Model</h1>
           <p class="chapter-meta landing-hero-meta">
-            A structural framework for agentic systems. It defines the irreducible elements of agentic AI, the lawful
-            ways they compose, and the interaction channels that constrain what a valid system can be.
+            The failures you keep seeing in agentic systems are not random. They are structural. The Agentic Standard
+            Model is a theory of that structure: the irreducible elements of agentic AI, the rules that govern how
+            they compose, and the interaction channels that constrain what a valid system can and cannot be.
           </p>
           <p>
             It was developed to replace ad hoc descriptions of agents with a shared reference model that researchers,
@@ -37,7 +38,7 @@ const chapters = (await getCollection('chapters')).sort(
           </p>
           <p class="hero-actions">
             <a class="cta-primary" href="/table/">View the full table</a>
-            <a class="cta-secondary" href="/chapter-1-foundations/">Read the foundations</a>
+            <a class="cta-secondary" href="/preface/">Read the preface</a>
           </p>
         </section>
 
@@ -58,8 +59,10 @@ const chapters = (await getCollection('chapters')).sort(
           <article>
             <p class="card-num">Who It Is For</p>
             <p>
-              AI researchers, system architects, engineers, and students who need a durable model rather than a moving
-              collection of implementation patterns.
+              For anyone who has watched an agentic system fail in a way they could not fully explain, and suspected
+              the problem was architectural rather than incidental. Researchers, architects, engineers, and
+              practitioners who want a principled vocabulary for design decisions rather than a moving collection of
+              vendor patterns.
             </p>
           </article>
         </section>
@@ -74,6 +77,11 @@ const chapters = (await getCollection('chapters')).sort(
             </p>
           </div>
           <div class="start-here-grid">
+            <a class="start-step" href="/preface/">
+              <span class="start-step-num">00</span>
+              <strong>Preface</strong>
+              <span>Why this framework exists, what kind of theory it is, and how to read the book productively.</span>
+            </a>
             <a class="start-step" href="/chapter-1-foundations/">
               <span class="start-step-num">01</span>
               <strong>Foundations</strong>
@@ -149,6 +157,22 @@ const chapters = (await getCollection('chapters')).sort(
               <p>The three force channels that govern valid interaction, the conserved quantities they protect, and the forbidden patterns they exclude.</p>
               <p>Example: invoking a sub-agent through Mc instead of A2 is a structural error, not a stylistic choice.</p>
             </article>
+          </div>
+        </section>
+
+        <section class="landing-section">
+          <div class="landing-section-head">
+            <p class="chapter-index">About the Framework</p>
+            <h2>About the Framework</h2>
+            <p class="section-copy">
+              The Agentic Standard Model was developed by Andrew Hinton, a Principal Data Scientist and Agentic
+              Systems Architect building enterprise agentic systems. It grew out of a recurring observation: that the
+              field had accumulated a rich catalog of patterns but lacked a structural theory to explain why those
+              patterns take the forms they do, why certain combinations fail, and what must exist that has not yet
+              been built. The ASM is an attempt to build that theory from first principles, with the same generative
+              discipline that made the periodic table useful before anyone understood why it had to have the structure
+              it did.
+            </p>
           </div>
         </section>
 

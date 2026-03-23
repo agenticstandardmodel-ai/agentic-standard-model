@@ -8,20 +8,4 @@ figure_ids:
   - fig-3-2
 ---
 
-This chapter translates elements into molecule notation and compositional behavior.
-
-## 3.1 Bond Language and Legend
-
-Scaffolded prose coming. This section introduces six bond types and their structural meanings.
-
-## 3.2 Five Stable Molecules
-
-Scaffolded prose coming. This section defines canonical stable molecules and load-bearing bond logic.
-
-## 3.3 Tool Molecule Completeness
-
-Scaffolded prose coming. This section presents the completeness claim and canonical molecule grid.
-
-## 3.4 Predicted Molecules
-
-Scaffolded prose coming. This section describes predicted molecules and confirmation criteria.
+Coming soon. This chapter will define the bond language, stable molecules, tool composition rules, and the predicted structures that extend the chemistry layer.

@@ -13,7 +13,7 @@ figure_ids:
   - fig-1-7
 ---
 
-This chapter establishes why the Agentic Standard Model is structured the way it is. It does not begin with a list of components. It begins with a problem, works through the historical methods that solved analogous problems in other fields, and derives the architecture of the framework from first principles. A reader who finishes this chapter should not merely know what the ASM contains. They should understand why it could not have been structured any other way.
+This chapter establishes why the Agentic Standard Model is structured the way it is. It does not begin with a list of components. It begins with a problem, works through the historical methods that solved analogous problems in other fields, and derives the architecture of the framework from first principles. The ASM is a proto-theory: a structured, falsifiable conjecture about the building blocks of agentic systems, not a closed or proven system. A reader who finishes this chapter should not merely know what the ASM contains. They should understand why it is structured the way it is, what it would take to falsify it, and why that structure could not have been arbitrary.
 
 ## 1.1 The Problem: An Inventory Without a Theory
 
@@ -44,11 +44,11 @@ The field currently treats this inventory as a catalog. Practitioners learn by a
   </div>
 </figure>
 
-The Agentic Standard Model is a theory. Its central claim is that agentic systems are not arbitrary assemblies of components chosen by convention or accumulated by trial and error. They are structured compositions of irreducible building blocks that combine under strict rules derived from the dependency relations between them. The structure is not imposed on the field. It is discovered in it.
+The Agentic Standard Model is a proto-theory: a structured, falsifiable framework for reasoning about agentic systems from first principles. Its central conjecture is that agentic systems are not arbitrary assemblies of components chosen by convention or accumulated by trial and error. They are structured compositions of irreducible building blocks that combine under rules derived from the dependency relations between them. The structure is not imposed on the field. It is proposed as a description of it, with an explicit falsification condition: a single useful composition that cannot be reduced to the elements defined here would require revision.
 
 <div class="callout">
-  <p class="callout-title">The Core Claim</p>
-  <p class="callout-body">Any agent or agentic system that exists or could exist can be constructed from the 22 elements defined in this framework. Every tool reduces to a bond between an Action archetype and an Infrastructure substrate. No agent requires matter outside the element table.</p>
+  <p class="callout-title">The Core Conjecture</p>
+  <p class="callout-body">This is a proto-theory: a structured, falsifiable framework rather than a proven system. The conjecture is that any agent or agentic system documented in the literature or implemented in major frameworks at the time of writing can be constructed from the 22 elements defined here. Tool molecules were stress-tested against the documented range of tool types and held in each case. A single useful composition that cannot be reduced to existing elements would require revision. The framework invites that test.</p>
 </div>
 
 ## 1.2 The Historical Method: Taxonomy Before Theory
@@ -259,7 +259,7 @@ The ASM organizes agentic systems into four layers. Each layer has a precise def
 | Biology (Cell) | Agentic systems | Bounded, self-regulating systems with lifecycle properties. |
 | Context | Operational environment | Registry, governance, and evaluation cycle. |
 
-The Physics layer contains the elements. These are the irreducible building blocks of agentic cognition. No element in the table can be decomposed into other ASM elements. Each one is primitive at the level of functional abstraction the framework operates at. The completeness claim of the table is that any agentic system that exists or could exist can be constructed entirely from these elements. No new matter is required.
+The Physics layer contains the elements. These are the proposed irreducible building blocks of agentic cognition. No element in the table can be decomposed into other ASM elements. Each one is primitive at the level of functional abstraction the framework operates at. The completeness conjecture of the table is that any agent pattern documented in the literature or instantiated in major frameworks at the time of writing can be constructed from these elements. This is a falsifiable claim, not a proven one. A single pattern that requires additional matter would require the table to be revised.
 
 The Chemistry layer contains molecules. Molecules are stable compositions of elements governed by bonding rules. They are not elements. An agent is not a new kind of matter. It is a specific organization of existing matter that, when assembled correctly and registered as a stable bound state, exhibits a property none of its constituent elements possess: bounded autonomous behavior. The Chemistry layer is where the first emergence occurs.
 
@@ -320,7 +320,7 @@ This textbook follows the same sequence as the historical method it draws on. Ta
 
 Chapter 2 presents the Agentic Periodic Table in full: all 22 confirmed elements, 2 predicted gaps, and 3 boson-class protocols, organized across the 6 dependency-layer periods and 7 functional-character groups. It also presents the quantum number system for specifying the configuration of Language Model elements. A reader who finishes Chapter 2 should be able to identify any agentic component they encounter in practice, assign it its correct period and group, and understand its dependency relationships.
 
-Chapter 3 presents the Chemistry Layer: bond types, tool molecules, known stable agent molecules, and predicted novel configurations. It includes the completeness proof for tool molecules: every tool that exists or could exist is a bond between an Action archetype and an Infrastructure substrate. A reader who finishes Chapter 3 should be able to write the molecular formula of any agent they encounter or design, identify which bonds are load-bearing, and predict what happens when specific bonds are removed.
+Chapter 3 presents the Chemistry Layer: bond types, tool molecules, known stable agent molecules, and predicted novel configurations. It includes the tool molecule completeness argument: tool molecules were stress-tested against the documented range of tool types and the bond between an Action archetype and an Infrastructure substrate held in each case. A reader who finishes Chapter 3 should be able to write the molecular formula of any agent they encounter or design, identify which bonds are load-bearing, and predict what happens when specific bonds are removed.
 
 Chapter 4 presents the Force Laws: the three force channels that govern all interactions in a valid agentic system, the conservation laws each channel enforces, and the forbidden patterns that result from conservation violation. It also derives the Symmetry Principle as a theorem from the three force laws rather than as a separate postulate. A reader who finishes Chapter 4 should be able to identify structural violations in any agentic system design and reason about what the violation implies for governance and auditability.
 
@@ -330,20 +330,3 @@ Chapter 5 presents the Biology Layer at the cell level: the agentic system as a 
   <p class="callout-title">A Note on Incompleteness</p>
   <p class="callout-body">Mendeleev's original table had gaps. The Standard Model predicted particles decades before they were confirmed. This framework is explicitly designed to have gaps. Predicted but uninstantiated elements and molecules are marked throughout. The gap for the Interaction Skill in Period 6 is not a failure of the inventory. It is the framework predicting that a real-time engagement pattern element must exist and has not yet been formally defined. The A2T termination boson is not a missing feature. It is a structural prediction about what the weak agentic force family requires. Incompleteness handled this way is the framework working correctly, not failing.</p>
 </div>
-
-## 1.9 A Note on Mathematical Formalism
-
-Readers with backgrounds in physics or mathematics will notice that this framework borrows heavily from domains where formal mathematics is not optional. It is load-bearing. The Standard Model is expressed in gauge field theory. Quantum numbers correspond to conserved quantities derivable from symmetry operators. The periodic structure of elements is a consequence of the Pauli exclusion principle, itself a statement about the antisymmetry of fermionic wavefunctions. These are not decorative formalisms. They are the mechanism by which the physics does its explanatory work.
-
-The Agentic Standard Model uses the structural vocabulary of physics as a generative framework, not as a claim of formal isomorphism. The periodic table organization, the quantum number notation, the force law language: these are chosen because they capture real structural relationships among agentic components, not because the framework is reducible to the underlying physics. A reader looking for Lagrangians, group-theoretic derivations, or proof-theoretic foundations will not find them here. That is not an oversight. It is a deliberate position about what stage of theoretical development the framework is at.
-
-This is consistent with how classificatory theories have historically developed. Mendeleev's periodic table organized the elements with extraordinary predictive power decades before quantum mechanics explained why the structure worked. It predicted gallium, scandium, and germanium from structural position alone, without any mathematical theory of electron shells. The OSI model defined a compositional architecture for networked systems without a proof-theoretic foundation, and it remains the organizing framework for how practitioners reason about networks today. Both frameworks were precise enough to generate testable predictions and productive enough to guide decades of engineering, despite having no rigorous mathematical underpinning at their inception.
-
-The ASM is at this stage a structural and classificatory theory. Where mathematics illuminates the structure, it is included: the quantum number formalism in Chapter 2 uses notation borrowed from atomic physics because it captures the relevant degrees of freedom precisely. The force law analysis in Chapter 4 uses the language of conservation and invariance because those concepts apply structurally, even without a proof that they hold as formal symmetries in a mathematical sense. Where formalization would require machinery that does not yet exist, the framework makes its claims in structural terms and marks them as candidates for eventual formalization.
-
-<div class="callout">
-  <p class="callout-title">On Formalism</p>
-  <p class="callout-body">The ASM makes structural claims, not mathematical ones. Where the framework uses notation borrowed from physics, the notation earns its place by capturing real distinctions precisely. Where it makes claims about conservation or invariance, those claims are structural rather than proof-theoretic. Mathematical formalization of the framework is a natural next step that the framework is designed to invite. It is not a prerequisite for the framework to be useful, predictive, or principled.</p>
-</div>
-
-The goal at this stage is to give practitioners a generative grammar for reasoning about agentic systems: one that is precise enough to be useful, principled enough to generate testable predictions, and structured in a way that makes eventual mathematical formalization a tractable problem rather than a retrofit. Readers who find the structural claims compelling and want to develop their formal mathematical treatment are engaging with the framework exactly as intended.
