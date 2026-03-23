@@ -1,5 +1,5 @@
 ---
-import { chapterEyebrow, chapterLabel, statusLabels } from '../lib/chapters';
+import { chapterBadge, chapterLabel, statusLabels } from '../lib/chapters';
 import { siteNavItems } from '../lib/site-nav';
 import type { SiteNavId } from '../lib/site-nav';
 import AsmLogo from './AsmLogo.astro';
@@ -44,7 +44,7 @@ const { chapters, currentChapterNumber, currentNav } = Astro.props;
           const active = chapter.data.chapter_number === currentChapterNumber;
           return (
             <a href={`/${chapter.slug}/`} class={`site-nav-chapter-link ${active ? 'active' : ''}`}>
-              <span class="site-nav-chapter-num">{chapter.data.chapter_number === 0 ? 'PF' : chapterEyebrow(chapter.data.chapter_number).replace('Chapter ', '')}</span>
+              <span class="site-nav-chapter-num">{chapterBadge(chapter.data.chapter_number, chapter.data.title)}</span>
               <span class="site-nav-chapter-copy">
                 <strong>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</strong>
                 {chapter.data.status && <small>{statusLabels[chapter.data.status] || chapter.data.status}</small>}

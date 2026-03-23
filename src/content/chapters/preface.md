@@ -1,7 +1,7 @@
 ---
 title: "Preface"
 chapter_number: 0
-summary: "Why the framework exists, how to read it, and what kind of theory it is."
+summary: "What kind of thing this is, the terminology note, theory status, and how to engage with it."
 status: draft
 figure_ids: []
 ---

@@ -28,8 +28,8 @@ const chapters = (await getCollection('chapters')).sort(
         <p class="chapter-index">Reading Path</p>
         <h1>Chapters</h1>
         <p class="chapter-meta">
-          Read the framework in sequence if you are new: preface first, then foundations, then the table, then
-          molecules, then force laws. Later chapters widen the scope into cell models, open problems, and boundary questions.
+          Read the framework in sequence if you are new: preface, foundations, the table, chemistry, force laws, the
+          biology layer, structural proofs, practical usage, the larger question, then the back matter.
         </p>
 
         <section class="chapters-hero">
@@ -50,7 +50,7 @@ const chapters = (await getCollection('chapters')).sort(
         <section class="chapter-index-grid">
           {chapters.map((chapter) => (
             <article class="tool-card chapter-index-card">
-              <p class="card-num">{chapterEyebrow(chapter.data.chapter_number)}</p>
+              <p class="card-num">{chapterEyebrow(chapter.data.chapter_number, chapter.data.title)}</p>
               <h2><a href={`/${chapter.slug}/`}>{chapterLabel(chapter.data.title, chapter.data.chapter_number)}</a></h2>
               <p>{chapter.data.summary}</p>
               <p class="chapter-index-status">{statusLabels[chapter.data.status] || chapter.data.status}</p>

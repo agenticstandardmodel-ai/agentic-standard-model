@@ -1,7 +1,7 @@
 ---
 title: "Chapter 1: Foundations"
 chapter_number: 1
-summary: "Problem framing, historical precedents, and core ASM distinctions."
+summary: "The epistemic gap, historical method, four-layer hierarchy, and the book's organizing logic."
 status: draft
 figure_ids:
   - fig-1-1

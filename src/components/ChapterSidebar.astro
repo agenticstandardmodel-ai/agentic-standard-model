@@ -1,5 +1,5 @@
 ---
-import { chapterAccents, chapterLabel, statusLabels } from '../lib/chapters';
+import { chapterAccents, chapterBadge, chapterLabel, statusLabels } from '../lib/chapters';
 import { siteNavItems } from '../lib/site-nav';
 
 type ChapterItem = {
@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
         return (
           <li class={`chapter-item ${active ? 'active' : ''}`} data-chapter-item data-chapter={chapterNum}>
             <a href={`/${chapter.slug}/`} aria-current={active ? 'page' : undefined}>
-              <span class="chapter-num" style={`color:${accent}`}>{chapterNum === 0 ? 'PF' : chapterNum.toString().padStart(2, '0')}</span>
+              <span class="chapter-num" style={`color:${accent}`}>{chapterBadge(chapterNum, chapter.data.title)}</span>
               <span class="chapter-main">
                 <span class="chapter-title-row">
                   <strong>{chapterLabel(chapter.data.title, chapterNum)}</strong>

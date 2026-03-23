@@ -24,6 +24,24 @@ ASTRO_TELEMETRY_DISABLED=1 npm run check
 ASTRO_TELEMETRY_DISABLED=1 npm run build
 ```
 
+## Contribution form configuration
+
+The `/contribute/` page posts to `/api/contributions`, which sends structured email notifications through a provider-compatible HTTP API.
+
+Default recipient:
+
+- `contribute@agenticstandardmodel.ai`
+
+Required environment variables:
+
+- `EMAIL_API_KEY`
+- `EMAIL_FROM`
+
+Optional:
+
+- `EMAIL_API_URL`
+  - Defaults to `https://api.resend.com/emails`
+
 ## Content architecture
 
 ### Chapters

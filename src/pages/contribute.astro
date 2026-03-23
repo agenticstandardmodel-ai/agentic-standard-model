@@ -1,0 +1,540 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopBar from '../components/TopBar.astro';
+import SiteDrawerNav from '../components/SiteDrawerNav.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('chapters')).sort(
+  (a, b) => a.data.chapter_number - b.data.chapter_number
+);
+---
+
+<BaseLayout
+  title="Contribute — The Agentic Standard Model"
+  description="Contribute structural challenges, molecule submissions, and force-law violations to the Agentic Standard Model."
+  canonicalPath="/contribute/"
+>
+  <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
+    <TopBar chapters={chapters} currentNav="contribute" />
+    <div class="mobile-nav-overlay" data-nav-overlay></div>
+
+    <aside class="sidenav site-drawer" data-sidenav>
+      <SiteDrawerNav chapters={chapters} currentNav="contribute" />
+    </aside>
+
+    <section class="content-pane">
+      <article class="doc-content page-content contribute-page" data-doc-content>
+        <p class="chapter-index">Peer Review of a Live Theory</p>
+
+        <section class="contribute-hero">
+          <div class="contribute-hero-copy">
+            <h1>Engage With the Framework</h1>
+            <p class="about-lead contribute-lead">
+              Science advances through productive challenge, not consensus. The ASM makes specific, testable
+              predictions about which elements must exist, which compositions are structurally valid, and which
+              interaction patterns will fail and why.
+            </p>
+            <p>
+              The most valuable contribution is not agreement. It is a well-formed challenge that either reveals a
+              genuine gap in the theory or strengthens confidence that the existing structure is complete.
+            </p>
+            <p>
+              Finding an edge case does not invalidate the framework. It is how the framework matures. If a composition
+              strains the current theory, that is exactly what the theory needs to know about.
+            </p>
+            <div class="contribute-version-note" aria-label="Framework status">
+              <span class="contribute-version-dot" aria-hidden="true"></span>
+              <span>Framework v0.3</span>
+              <span aria-hidden="true">·</span>
+              <span>Active development</span>
+              <span aria-hidden="true">·</span>
+              <span>All structural challenges reviewed</span>
+            </div>
+          </div>
+
+          <div class="contribute-hero-panel">
+            <p class="card-num">Contribution Surface</p>
+            <h2>Three contribution types, one review path</h2>
+            <p>
+              The page accepts missing-element challenges, molecule submissions, and force-law violations as structured
+              evidence. Each submission is normalized before review so the theory can be refined against comparable
+              inputs rather than ad hoc messages.
+            </p>
+            <p class="hero-actions">
+              <a
+                class="cta-secondary"
+                href="https://github.com/agenticstandardmodel-ai/agentic-standard-model"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View GitHub repository
+              </a>
+              <a class="cta-secondary" href="https://www.linkedin.com/in/andrewhinton" target="_blank" rel="noreferrer">
+                Follow on LinkedIn
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <section class="contribute-section-block">
+          <div class="landing-section-head">
+            <p class="chapter-index">Contribution Types</p>
+            <h2>Three Types of Contribution</h2>
+            <p>
+              Each path corresponds to a different kind of pressure on the framework: a missing primitive, a valid
+              composition, or a failed interaction that should have been excluded by the force laws.
+            </p>
+          </div>
+
+          <div class="contribute-type-grid" data-contribution-cards>
+            <button type="button" class="contribute-type-card stress" data-contribution-card data-type="stress">
+              <span class="contribute-type-tag">Stress-Test</span>
+              <strong>Missing Element Challenge</strong>
+              <span>
+                A composition that appears to require matter outside the existing table. Reduction failures are as
+                important as successful reductions.
+              </span>
+            </button>
+
+            <button type="button" class="contribute-type-card molecule" data-contribution-card data-type="molecule">
+              <span class="contribute-type-tag">Molecule</span>
+              <strong>Molecule Submission</strong>
+              <span>
+                A real system expressed in ASM molecular notation, including bond decisions that confirm or challenge
+                known compositions.
+              </span>
+            </button>
+
+            <button type="button" class="contribute-type-card violation" data-contribution-card data-type="violation">
+              <span class="contribute-type-tag">Force-Law</span>
+              <strong>Force-Law Violation</strong>
+              <span>
+                A production failure that maps to a forbidden structural interaction and tests whether the framework
+                predicted the failure mode correctly.
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <section class="contribute-section-block contribute-form-block" id="contribution-form">
+          <div class="landing-section-head">
+            <p class="chapter-index">Structured Submission</p>
+            <h2>Submit a Contribution</h2>
+            <p>
+              Select a contribution type above or from the dropdown. Every submission is reviewed as part of the live
+              theory maintenance process.
+            </p>
+          </div>
+
+          <div class="contribute-feedback" data-form-feedback data-state="idle" hidden aria-live="polite"></div>
+          <div class="contribute-success" data-form-success hidden aria-live="polite">
+            <p class="card-num">Contribution received</p>
+            <p>
+              Thank you for engaging with the framework. Your submission has been delivered for review and will be
+              assessed against the current theory.
+            </p>
+          </div>
+
+          <form class="contribute-form" method="post" action="/api/contributions" data-contribute-form>
+            <input type="hidden" name="page_url" value="/contribute/" data-page-url />
+            <input type="hidden" name="form_loaded_at" value="" data-loaded-at />
+            <div class="contribute-honeypot" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" type="text" name="company" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="contribute-form-grid">
+              <label class="contribute-field">
+                <span>Your name <em>*</em></span>
+                <input type="text" name="name" placeholder="Andrew Hinton" maxlength="120" required />
+              </label>
+
+              <label class="contribute-field">
+                <span>Email address <em>*</em></span>
+                <input type="email" name="email" placeholder="you@example.com" maxlength="160" required />
+                <small>Used for response only. Not published.</small>
+              </label>
+            </div>
+
+            <label class="contribute-field">
+              <span>Contribution type <em>*</em></span>
+              <select name="type" required data-contribution-select>
+                <option value="">Select a type</option>
+                <option value="stress">Stress-Test: Missing Element Challenge</option>
+                <option value="molecule">Molecule Submission</option>
+                <option value="violation">Force-Law Violation</option>
+              </select>
+            </label>
+
+            <label class="contribute-field">
+              <span>Contribution title <em>*</em></span>
+              <input
+                type="text"
+                name="title"
+                placeholder="e.g. Multi-modal synthesis requires a new structural primitive"
+                maxlength="160"
+                required
+              />
+              <small>A short descriptive name for the submission.</small>
+            </label>
+
+            <fieldset class="contribute-type-fields" data-type-fields="stress" hidden disabled>
+              <legend>Missing element challenge details</legend>
+
+              <label class="contribute-field">
+                <span>System or pattern description <em>*</em></span>
+                <textarea
+                  name="stress_system"
+                  placeholder="Describe the system or composition pattern. What does it do, and what elements were used to build it?"
+                  rows="5"
+                  maxlength="4000"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="contribute-field">
+                <span>Reduction attempt <em>*</em></span>
+                <textarea
+                  name="stress_reduction"
+                  placeholder="Walk through the reduction attempt. Where did the mapping to existing elements fail?"
+                  rows="6"
+                  maxlength="4000"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="contribute-field">
+                <span>Candidate new element</span>
+                <input
+                  type="text"
+                  name="stress_candidate"
+                  placeholder="Optional: proposed name, period, or group placement"
+                  maxlength="220"
+                />
+              </label>
+            </fieldset>
+
+            <fieldset class="contribute-type-fields" data-type-fields="molecule" hidden disabled>
+              <legend>Molecule submission details</legend>
+
+              <label class="contribute-field">
+                <span>System description <em>*</em></span>
+                <textarea
+                  name="mol_system"
+                  placeholder="Describe the real system this molecule represents and the problem it solves."
+                  rows="5"
+                  maxlength="4000"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="contribute-field">
+                <span>Molecular formula <em>*</em></span>
+                <textarea
+                  name="mol_formula"
+                  placeholder="Use ASM level-2 notation with the bond manifest."
+                  rows="7"
+                  maxlength="5000"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="contribute-field">
+                <span>Structural notes</span>
+                <textarea
+                  name="mol_notes"
+                  placeholder="Optional notes on surprising bonds, substitutions, or load-bearing decisions."
+                  rows="4"
+                  maxlength="3000"
+                ></textarea>
+              </label>
+            </fieldset>
+
+            <fieldset class="contribute-type-fields" data-type-fields="violation" hidden disabled>
+              <legend>Force-law violation details</legend>
+
+              <label class="contribute-field">
+                <span>Failure description <em>*</em></span>
+                <textarea
+                  name="viol_failure"
+                  placeholder="Describe the production failure, affected system, and observable symptoms."
+                  rows="5"
+                  maxlength="4000"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="contribute-field">
+                <span>Interaction channel used <em>*</em></span>
+                <select name="viol_channel" required>
+                  <option value="">Select the violated channel</option>
+                  <option value="mc-wrong">Mc used where A2 delegation was required</option>
+                  <option value="a2-wrong">A2 used where Mc tool invocation was required</option>
+                  <option value="a3-missing">A3 human closure absent or incomplete</option>
+                  <option value="intent-chain">Intent chain broken across delegation boundary</option>
+                  <option value="authority-scope">Authority scope not conserved across delegation</option>
+                  <option value="other">Other structural interaction error</option>
+                </select>
+              </label>
+
+              <label class="contribute-field">
+                <span>Framework prediction vs. observed failure <em>*</em></span>
+                <textarea
+                  name="viol_prediction"
+                  placeholder="What does the framework predict for this violation, and how closely did the observed failure match?"
+                  rows="6"
+                  maxlength="4000"
+                  required
+                ></textarea>
+              </label>
+            </fieldset>
+
+            <label class="contribute-field">
+              <span>Additional context</span>
+              <textarea
+                name="context"
+                placeholder="Links, references, system diagrams, code, or anything else that clarifies the submission."
+                rows="4"
+                maxlength="3000"
+              ></textarea>
+            </label>
+
+            <label class="contribute-field">
+              <span>Affiliation or role</span>
+              <input
+                type="text"
+                name="affiliation"
+                placeholder="Optional: Principal Engineer, PhD student, independent researcher"
+                maxlength="220"
+              />
+            </label>
+
+            <div class="callout">
+              <p class="callout-title">Review model</p>
+              <div class="callout-body">
+                All submissions are reviewed directly. Challenges that reveal genuine gaps become inputs to the next
+                framework revision. Challenges that reduce successfully become evidence that the current structure is
+                more complete than it first appears.
+              </div>
+            </div>
+
+            <button type="submit" class="cta-primary contribute-submit" data-submit-button>
+              <span data-submit-label>Submit Contribution</span>
+            </button>
+          </form>
+        </section>
+
+        <section class="contribute-section-block">
+          <div class="landing-section-head">
+            <p class="chapter-index">Review Process</p>
+            <h2>How Contributions Are Handled</h2>
+            <p>
+              This is not a feature-request inbox. It is a peer-review surface for a versioned theory under active
+              development.
+            </p>
+          </div>
+
+          <div class="contribute-process-list">
+            <article class="contribute-process-step">
+              <p class="card-num">01</p>
+              <h3>Submission received</h3>
+              <p>
+                Each submission is normalized and delivered for review with the contribution type, contributor identity,
+                and structural evidence intact.
+              </p>
+            </article>
+
+            <article class="contribute-process-step">
+              <p class="card-num">02</p>
+              <h3>Structural assessment</h3>
+              <p>
+                Missing-element challenges go through reduction testing. Molecule submissions are checked against bond
+                logic. Force-law violations are mapped to the relevant exchange surface.
+              </p>
+            </article>
+
+            <article class="contribute-process-step">
+              <p class="card-num">03</p>
+              <h3>Outcome recorded</h3>
+              <p>
+                Confirmed gaps inform the next version. Successful reductions and validated molecules become evidence
+                that strengthens the theory.
+              </p>
+            </article>
+
+            <article class="contribute-process-step">
+              <p class="card-num">04</p>
+              <h3>Public development continues</h3>
+              <p>
+                Important revisions, clarifications, and future references continue to surface through the public site
+                and repository.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="contribute-section-block contribute-follow-block">
+          <div class="landing-section-head">
+            <p class="chapter-index">Follow Development</p>
+            <h2>Track the framework as it evolves</h2>
+            <p>
+              The public site is the reference surface. GitHub and LinkedIn remain the best places to follow updates,
+              references, and discussion around new structural challenges.
+            </p>
+          </div>
+
+          <div class="contribute-link-grid">
+            <a
+              class="contribute-link-card"
+              href="https://github.com/agenticstandardmodel-ai/agentic-standard-model"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="card-num">Repository</span>
+              <strong>GitHub</strong>
+              <span>Track site updates, references, and the implementation surface for the framework.</span>
+            </a>
+
+            <a class="contribute-link-card" href="https://www.linkedin.com/in/andrewhinton" target="_blank" rel="noreferrer">
+              <span class="card-num">Author</span>
+              <strong>LinkedIn</strong>
+              <span>Follow Andrew Hinton for version notes, arguments, and broader context around the ASM.</span>
+            </a>
+
+            <a
+              class="contribute-link-card"
+              href="https://bsky.app/profile/andrewhinton.bsky.social"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="card-num">Social</span>
+              <strong>Bluesky</strong>
+              <span>Short-form updates and lightweight signals around emerging questions and framework activity.</span>
+            </a>
+          </div>
+        </section>
+      </article>
+    </section>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const form = document.querySelector('[data-contribute-form]');
+      if (!form) return;
+
+      const select = form.querySelector('[data-contribution-select]');
+      const cards = Array.from(document.querySelectorAll('[data-contribution-card]'));
+      const groups = Array.from(form.querySelectorAll('[data-type-fields]'));
+      const feedback = document.querySelector('[data-form-feedback]');
+      const success = document.querySelector('[data-form-success]');
+      const submitButton = form.querySelector('[data-submit-button]');
+      const submitLabel = form.querySelector('[data-submit-label]');
+      const loadedAtField = form.querySelector('[data-loaded-at]');
+      const pageUrlField = form.querySelector('[data-page-url]');
+
+      const setFeedback = (message, state = 'error') => {
+        if (!feedback) return;
+        feedback.hidden = !message;
+        feedback.dataset.state = state;
+        feedback.textContent = message;
+      };
+
+      const setType = (type) => {
+        if (select) {
+          select.value = type || '';
+        }
+
+        cards.forEach((card) => {
+          card.classList.toggle('active', card.dataset.type === type);
+          card.setAttribute('aria-pressed', card.dataset.type === type ? 'true' : 'false');
+        });
+
+        groups.forEach((group) => {
+          const isActive = group.dataset.typeFields === type;
+          group.hidden = !isActive;
+          group.disabled = !isActive;
+
+          group.querySelectorAll('input, textarea, select').forEach((control) => {
+            control.disabled = !isActive;
+          });
+        });
+      };
+
+      if (loadedAtField) {
+        loadedAtField.value = String(Date.now());
+      }
+
+      if (pageUrlField) {
+        pageUrlField.value = window.location.href;
+      }
+
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const { type } = card.dataset;
+          setType(type || '');
+        });
+      });
+
+      if (select) {
+        select.addEventListener('change', (event) => {
+          setType(event.currentTarget.value);
+        });
+        setType(select.value);
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        if (success) {
+          success.hidden = true;
+        }
+        setFeedback('', 'idle');
+
+        const originalLabel = submitLabel ? submitLabel.textContent : '';
+        if (submitButton) submitButton.disabled = true;
+        if (submitLabel) submitLabel.textContent = 'Submitting...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              Accept: 'application/json'
+            }
+          });
+
+          const payload = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(payload.error || 'Submission failed. Please review your input and try again.');
+          }
+
+          form.reset();
+          setType('');
+
+          if (loadedAtField) {
+            loadedAtField.value = String(Date.now());
+          }
+
+          if (pageUrlField) {
+            pageUrlField.value = window.location.href;
+          }
+
+          if (success) {
+            success.hidden = false;
+          }
+        } catch (error) {
+          const message = error instanceof Error
+            ? error.message
+            : 'Submission failed. Please try again in a few minutes.';
+          setFeedback(message, 'error');
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+          if (submitLabel) submitLabel.textContent = originalLabel || 'Submit Contribution';
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

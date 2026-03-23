@@ -61,7 +61,7 @@ const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex +
     <section class="content-pane">
       <article class="doc-content chapter-page" data-doc-content>
         <header class="chapter-header">
-          <p class="chapter-index">{chapterEyebrow(chapterNumber)}</p>
+          <p class="chapter-index">{chapterEyebrow(chapterNumber, chapterTitle)}</p>
           <h1>{chapterLabel(chapter.data.title, chapterNumber)}</h1>
           <p class="chapter-meta">{chapter.data.summary}</p>
           <div class="chapter-divider"></div>

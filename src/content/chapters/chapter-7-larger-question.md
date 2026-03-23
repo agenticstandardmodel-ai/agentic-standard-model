@@ -1,10 +1,10 @@
 ---
-title: "Chapter 7: The Larger Question"
+title: "Chapter 7: Using the Framework"
 chapter_number: 7
-summary: "Scope boundaries, AGI implications, and argument framing."
+summary: "How to design, diagnose, and evaluate real systems using ASM in practice."
 status: placeholder
 figure_ids:
   - fig-7-1
 ---
 
-Coming soon. This chapter will clarify the scope of ASM, what it does and does not claim, and how it contributes to broader AGI and agentic-systems discourse.
+Coming soon. This chapter will serve as the practitioner's reference: how to write a molecular formula for a real system, identify structural violations in a deployed architecture, and use the force laws to diagnose production failures.
