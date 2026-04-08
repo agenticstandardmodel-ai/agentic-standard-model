@@ -130,14 +130,14 @@ canvas{display:block;width:100%;height:100%;}
     </div>
     <span class="subtitle">
       <strong>The Agentic Periodic Table</strong> —
-      22 confirmed elements · 2 predicted gaps · 3 boson-class exchange protocols ·
-      Hover any crystal for full description, dependency layer, and group classification.
+      22 confirmed elements · 2 predicted gaps · 3 confirmed exchange protocols ·
+      Hover any crystal for full description, structural placement, and group classification.
     </span>
   </div>
   <div class="hint">
     <span>Drag to rotate · Shift + scroll to zoom</span>
     <span>Hover any crystal to inspect</span>
-    <span style="color:#1e1e1e">← Groups (functional character) · Periods → depth (dependency layer) ↓</span>
+    <span style="color:#1e1e1e">← Groups (functional character) · Periods → depth (dependency layer) ↓ · Exchange lane has no period assignment</span>
   </div>
 </div>
 <div class="legend-bar" id="legend"></div>
@@ -235,13 +235,15 @@ const EL=[
   {id:'gapIs',num:'??',sym:'?s',name:'Interaction Skill',row:5,col:5,slot:4,group:'gap',
    desc:'Predicted gap. Real-time engagement adapting dynamically within a live exchange. Distinct from Generation Skill.'},
 
-  // Bosons — col 6, rendered as energy arcs not prisms
-  {id:'Mc',num:'Mc',sym:'Mc',name:'Tool Invocation Protocol',    row:1,col:6,slot:0,group:'boson',
-   desc:'Logical protocol surface for tool discovery and invocation. Carries data and execution — not intent or authority. Current instantiation: MCP.'},
-  {id:'A2',num:'A2',sym:'A2',name:'Governed Delegation Protocol',row:3,col:6,slot:0,group:'boson',
-   desc:'Logical protocol surface for inter-agent delegation. Carries task, intent, and authority — all three must be present. Current instantiation: A2A.'},
-  {id:'A3',num:'A3',sym:'A3',name:'Human Interface Protocol',    row:5,col:6,slot:0,group:'boson',
-   desc:'Closes the intent chain. Delivers legible output to the human whose intent initiated execution. The only boson that closes an intent chain.'},
+  // Exchange-family entries — rendered in a separate lane outside period assignment
+  {id:'Mc',num:'Mc',sym:'Mc',name:'Tool Invocation Protocol',    row:1,col:6,slot:0,group:'boson',exchange:true,exchangeIndex:0,
+   desc:'Mediates contract-declared discovery and invocation between cognitive elements and tool molecules. Carries data and execution, not intent or authority. Current instantiation: MCP.'},
+  {id:'A2',num:'A2',sym:'A2',name:'Governed Delegation Protocol',row:3,col:6,slot:0,group:'boson',exchange:true,exchangeIndex:1,
+   desc:'Mediates intent-and-authority-carrying delegation between registered cognitive molecules. Agent-to-tool interaction is Mc, not A2. Current instantiation: A2A.'},
+  {id:'A3',num:'A3',sym:'A3',name:'Human Interface Protocol',    row:5,col:6,slot:0,group:'boson',exchange:true,exchangeIndex:2,
+   desc:'Mediates delivery of legible output to the human whose intent initiated execution. The only boson that closes an intent chain.'},
+  {id:'A2T',num:'A2T',sym:'A2T',name:'Termination Boson',        row:5,col:6,slot:0,group:'gap',exchange:true,exchangeIndex:3,
+   desc:'Predicted exchange-family gap in the weak agentic force family, structurally implied as a termination counterpart to governed delegation.'},
 ];
 
 const EDATA={};
@@ -322,6 +324,7 @@ const towerSlots={};
 
 function buildTowerBases(){
   EL.forEach(el=>{
+    if(el.exchange) return;
     const key=`${el.col}_${el.row}`;
     if(!towerSlots[key]) towerSlots[key]=[];
     towerSlots[key].push(el);
@@ -343,6 +346,22 @@ function hexWorldPos(col,row,slot){
   const key=`${col}_${row}`;
   const wy=(TOWER_BASE[key]&&TOWER_BASE[key][slot]!==undefined)?TOWER_BASE[key][slot]:0;
   return{wx,wz,wy};
+}
+
+function exchangeWorldPos(exchangeIndex){
+  const wx=6*COL_X_SPACING-3*COL_X_SPACING;
+  const zOffsets=[-2.25,-0.75,0.75,2.25];
+  const wz=(zOffsets[exchangeIndex] ?? 0) * ROW_Z_SPACING;
+  const wy=10 + exchangeIndex * 6;
+  return{wx,wz,wy};
+}
+
+function worldPos(el){
+  return el.exchange ? exchangeWorldPos(el.exchangeIndex) : hexWorldPos(el.col,el.row,el.slot);
+}
+
+function getElementHeight(el){
+  return el.exchange ? 28 : PERIOD_H[el.row];
 }
 
 // ══════════════════════════════════════════════════════
@@ -368,7 +387,8 @@ const RISE_STAGGER=4;   // frames between each element rising
 
 // Each element gets a stagger index based on row+slot for wave effect
 EL.forEach((el,i)=>{
-  el._riseDelay = (el.row*4 + el.slot) * RISE_STAGGER;
+  const depthIndex=el.exchange ? (el.exchangeIndex + 1) * 5 : (el.row*4 + el.slot);
+  el._riseDelay = depthIndex * RISE_STAGGER;
 });
 
 function getRiseProgress(el){
@@ -695,7 +715,7 @@ function drawHexPrism(wx,wy,wz,ph,color,alpha,isGap,hovered,rise){
 // LABELS ON CRYSTAL
 // ══════════════════════════════════════════════════════
 function drawHexLabel(el,wx,wy,wz,ph,hovered,rise){
-  if(el.group==='boson') return;
+  if(el.exchange) return;
   const isGap=el.group==='gap';
   const wyAnim=wy-(1-rise)*120;
   const cp=proj(wx,wyAnim+ph+2,wz);
@@ -739,13 +759,14 @@ function drawFloatLabel(el,wx,wy,wz,hovered,rise){
 // ══════════════════════════════════════════════════════
 function drawBoson(el,t,hovered){
   const rgb=hexToRgb(GC.boson);
-  const {wx,wz,wy}=hexWorldPos(el.col,el.row,el.slot);
-  const ph=PERIOD_H[el.row];
+  const {wx,wz,wy}=worldPos(el);
+  const ph=getElementHeight(el);
   const rise=getRiseProgress(el);
   const wyAnim=wy-(1-rise)*120;
   const cp=proj(wx,wyAnim+ph*0.5,wz);
 
-  const pulse=0.5+0.5*Math.sin(t*0.025+el.row*1.3);
+  const phaseBase=el.exchangeIndex ?? el.row ?? 0;
+  const pulse=0.5+0.5*Math.sin(t*0.025+phaseBase*1.3);
   const outerR=R*zoom*(1.5+0.35*pulse);
 
   // Outer glow ring
@@ -759,7 +780,7 @@ function drawBoson(el,t,hovered){
 
   // Orbiting arc — a partial ring that rotates
   ctx.globalAlpha=(0.55+0.2*pulse)*rise;
-  const arcAngle=t*0.018+el.row*0.8;
+  const arcAngle=t*0.018+phaseBase*0.8;
   ctx.beginPath();
   ctx.arc(cp.sx,cp.sy,outerR*0.72,arcAngle,arcAngle+Math.PI*1.4);
   ctx.strokeStyle=rgbStr(rgb,1.3,1);
@@ -790,7 +811,9 @@ function drawBoson(el,t,hovered){
   top.forEach((p,i)=>i===0?ctx.moveTo(p.sx,p.sy):ctx.lineTo(p.sx,p.sy));
   ctx.closePath();
   ctx.strokeStyle=rgbStr(rgb,1.4,1);
+  if(el.group==='gap') ctx.setLineDash([6,4]);
   ctx.lineWidth=hovered?2.5:1.4; ctx.stroke();
+  ctx.setLineDash([]);
 
   // Symbol
   const cpTop=proj(wx,wyAnim+ph+2,wz);
@@ -798,11 +821,13 @@ function drawBoson(el,t,hovered){
   ctx.save();
   ctx.translate(cpTop.sx,cpTop.sy);
   ctx.transform(1,-rotX*0.28,0,1,0,0);
-  const bsz=Math.max(9,Math.min(22,ph*zoom*0.55));
-  ctx.font=`500 ${(hovered?bsz*1.18:bsz).toFixed(1)}px 'DM Mono',monospace`;
-  ctx.fillStyle=rgbStr(rgb,1.9,1);
+  const baseBsz=Math.max(9,Math.min(22,ph*zoom*0.55));
+  const symbolScale=el.sym.length >= 3 ? 0.82 : el.sym.length === 2 ? 0.92 : 1;
+  const bsz=(hovered?baseBsz*1.18:baseBsz)*symbolScale;
+  ctx.font=`500 ${bsz.toFixed(1)}px 'DM Mono',monospace`;
+  ctx.fillStyle=rgbStr(rgb,el.group==='gap'?1.45:1.9,1);
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.fillText(el.sym,0,2);
+  ctx.fillText(el.sym,0,1.5);
   ctx.restore();
 
   // Hover name label
@@ -862,8 +887,8 @@ function draw(){
   drawFloor();
 
   const items=EL.map(el=>{
-    const{wx,wz,wy}=hexWorldPos(el.col,el.row,el.slot);
-    const ph=PERIOD_H[el.row];
+    const{wx,wz,wy}=worldPos(el);
+    const ph=getElementHeight(el);
     return{el,wx,wy,wz,ph};
   });
 
@@ -874,9 +899,9 @@ function draw(){
     const{el,wx,wy,wz,ph}=item;
     const hovered=el.id===hoverId;
     const rise=getRiseProgress(el);
-    const alpha=hoverId&&!hovered&&el.group!=='boson'?0.35:1;
+    const alpha=hoverId&&!hovered&&!el.exchange?0.35:1;
 
-    if(el.group==='boson'){
+    if(el.exchange){
       drawBoson(el,animT,hovered);
     } else {
       drawHexPrism(wx,wy,wz,ph,GC[el.group],alpha,el.group==='gap',hovered,rise);
@@ -970,16 +995,20 @@ wrap.addEventListener('mousemove',e=>{
     document.getElementById('ts').textContent=el.sym;
     document.getElementById('ts').style.color=color;
     const grpLabel=GROUPS.find(g=>g.id===el.group);
-    document.getElementById('tm').innerHTML=
-      `<span style="color:${color}">${grpLabel?.label||''}</span> · ${PERIODS[el.row]?.id||''}`;
+    document.getElementById('tm').innerHTML=el.exchange
+      ? `<span style="color:${GC.boson}">Exchange</span> · no period assignment`
+      : `<span style="color:${color}">${grpLabel?.label||''}</span> · ${PERIODS[el.row]?.id||''}`;
     document.getElementById('tn').textContent=el.name;
     document.getElementById('td').textContent=el.desc;
     const tb=document.getElementById('tb');
-    if(el.group==='gap'){
+    if(el.exchange&&el.group==='gap'){
+      tb.textContent='Predicted exchange gap — not yet confirmed';
+      tb.style.cssText='background:#1a1200;color:#d7a045;border:.5px dashed #6a4000;';
+    } else if(el.group==='gap'){
       tb.textContent='Predicted gap — not yet confirmed';
       tb.style.cssText='background:#1a1a22;color:#555;border:.5px solid #333;';
-    } else if(el.group==='boson'){
-      tb.textContent='Boson class — exists in the exchange, not inside any element';
+    } else if(el.exchange){
+      tb.textContent='Exchange protocol — exists in the exchange, not inside any element';
       tb.style.cssText='background:#1a1200;color:#e09a24;border:.5px solid #6a4000;';
     } else {tb.textContent='';tb.style.cssText='';}
     tip.classList.add('on');

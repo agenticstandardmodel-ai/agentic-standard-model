@@ -96,6 +96,38 @@ Post-deploy checks:
 3. Verify canonical tags and OG URLs point to `.ai`.
 4. Verify figure routes and chapter routes return 200.
 
+## Release tags
+
+GitHub Actions includes a release workflow at `.github/workflows/create-release-tag.yml`.
+
+Automatic behavior:
+
+- every push to `main` checks `package.json`
+- if `package.json.version` resolves to a tag that does not already exist, the workflow creates that annotated tag
+- the workflow pushes the tag to `origin`
+- the workflow publishes a GitHub release with generated notes
+
+This makes releases trunk-based and version-driven. To cut a new automatic release, bump `package.json.version` before merging or pushing to `main`.
+
+Manual behavior:
+
+You can also run it from the Actions tab to:
+
+- create an annotated git tag
+- push the tag to `origin`
+- publish a GitHub release with generated notes
+
+Inputs:
+
+- `tag`
+  - Example: `v0.1.0`
+- `target`
+  - Branch name or commit SHA to tag, defaults to `main`
+- `release_name`
+  - Optional title for the GitHub release
+- `prerelease`
+  - Marks the release as a prerelease when needed
+
 ## Legacy static prototype
 
 The previous static prototype is archived at:

@@ -40,7 +40,7 @@ const groupNotes: Record<string, string> = {
 
 <BaseLayout
   title="The Agentic Periodic Table — The Agentic Standard Model"
-  description="Standalone reference page for the ASM periodic table, dependency-derived periods, functional groups, and boson-class protocols."
+  description="Standalone 3D reference page for the ASM periodic table, dependency-derived periods, functional groups, predicted gaps, and exchange protocols."
   canonicalPath="/table/"
 >
   <div class="app-shell no-outline site-page-shell" style="--chapter-accent:#378ADD">
@@ -56,19 +56,20 @@ const groupNotes: Record<string, string> = {
         <p class="chapter-index">Flagship Reference</p>
         <h1>The Agentic Periodic Table</h1>
         <p class="chapter-meta">
-          The central artifact of the framework: a dependency-derived taxonomy of confirmed elements, predicted gaps,
-          and boson-class interaction protocols.
+          The interactive 3D reference surface for the framework: a dependency-derived taxonomy of confirmed elements,
+          predicted gaps, and exchange protocols.
         </p>
 
         <section class="table-page-intro">
           <h2>What This Page Is For</h2>
           <p>
-            The table is the fastest path into the framework. It shows what must exist, what remains predicted, and
-            how periods and groups emerge from structural dependencies rather than naming preference.
+            The table is the fastest path into the framework. It shows what must exist, what remains predicted, how
+            periods and groups emerge from structural dependencies rather than naming preference, and how the exchange
+            family sits outside period assignment.
           </p>
           <p>
             Use it as the reference surface for chapter reading, molecule interpretation, and discussions of predicted
-            gaps.
+            gaps. The flat manuscript figure remains available separately as Chapter 2 Figure 2.5.
           </p>
         </section>
 
@@ -76,7 +77,7 @@ const groupNotes: Record<string, string> = {
           <div class="frame-wrap standalone-frame" role="group" aria-label="The Agentic periodic table">
             <iframe
               src="/interactive/asm_periodic_table.html"
-              title="The Agentic Periodic Table"
+              title="The Agentic Periodic Table 3D reference"
               loading="lazy"
               allowfullscreen
               referrerpolicy="strict-origin-when-cross-origin"
@@ -84,7 +85,7 @@ const groupNotes: Record<string, string> = {
           </div>
           <p class="table-links">
             <a href="/chapter-2-periodic-table/">Read the table chapter</a>
-            <a href="/figures/fig-2-1/">Open the shareable figure page</a>
+            <a href="/figures/fig-2-5/">Open the flat chapter figure</a>
           </p>
         </section>
 
@@ -121,7 +122,7 @@ const groupNotes: Record<string, string> = {
                   element.symbol,
                   String(element.number),
                   element.group,
-                  element.period,
+                  element.period ?? '',
                   element.kind,
                   element.description,
                   element.current_instantiation ?? '',
@@ -149,7 +150,15 @@ const groupNotes: Record<string, string> = {
                         <div class="element-row-copy">
                           <p>{element.description}</p>
                           <p class="element-row-context">
-                            <strong>{element.period}</strong> {periodLabels[element.period] ?? element.period}.{' '}
+                            {element.period ? (
+                              <>
+                                <strong>{element.period}</strong> {periodLabels[element.period] ?? element.period}.{' '}
+                              </>
+                            ) : (
+                              <>
+                                <strong>No period assignment.</strong>{' '}
+                              </>
+                            )}
                             {groupNotes[element.group] ?? ''}
                           </p>
                         </div>
@@ -162,7 +171,7 @@ const groupNotes: Record<string, string> = {
                         </div>
                         <div>
                           <dt>Period</dt>
-                          <dd>{element.period}</dd>
+                          <dd>{element.period ?? 'No period assignment'}</dd>
                         </div>
                         <div>
                           <dt>Type</dt>

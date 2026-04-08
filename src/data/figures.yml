@@ -127,38 +127,128 @@
 - id: fig-2-1
   chapter: 2
   label: Figure 2.1
-  title: The Agentic Periodic Table
-  caption: Flagship interactive periodic table with groups, periods, predicted gaps, and boson panel.
+  title: "The Two Axes: From Descriptive Assignment to Structural Derivation"
+  caption: "Left panel shows the failed cognitive-distance axis; right panel shows the resolved table structure with dependency-derived periods and function-derived groups."
   type: interactive
   embed_mode: iframe
-  source_path: /interactive/asm_periodic_table.html
+  source_path: /interactive/fig2_1_two_axes.html
   share_path: /figures/fig-2-1/
-  accessibility_summary: Interactive table for ASM elements organized by period and group with details panel.
-  legend_overview: The periodic table is the primary artifact of the framework, organizing confirmed elements, predicted gaps, and boson-class protocols into a dependency-derived taxonomy.
-  legend_how_to_read: Read periods as dependency depth and groups as functional families. Gaps indicate predicted but unconfirmed structure, while the boson panel separates interaction protocols from matter-like components.
-  legend_why_it_matters: This figure is the foundation for the rest of the site because every molecule, force law, and contribution model refers back to this taxonomy.
+  accessibility_summary: "Two-panel comparison between the failed cognitive-distance axis and the resolved two-axis derivation using dependency layers and functional groups."
+  legend_overview: "This figure shows the methodological shift that makes the ASM table derivable rather than designer-assigned."
+  legend_how_to_read: "Compare the left panel's anomalous single-axis arrangement with the right panel's resolved grid. The resolved structure derives period from dependency depth and group from functional character."
+  legend_why_it_matters: "Chapter 2 argues that the table is not a classification chosen by taste. This figure makes that argument visual before the inventory is presented in full."
   legend_callouts:
-    - Period placement is derived from dependency, not importance.
-    - Bosons exist in exchange, not inside a component.
-    - Predicted gaps are claims the framework is willing to defend publicly.
+    - Cognitive distance failed because placement required designer judgment.
+    - Dependency and functional character are both derived from element properties.
+    - Once the axes are derivable, positions and gaps become structural claims.
 
 - id: fig-2-2
   chapter: 2
   label: Figure 2.2
-  title: Dependency Chain Explorer
-  caption: Select an element and inspect upward and downward dependency chain.
+  title: "State vs. Retention: A Temporal Distinction"
+  caption: "Timeline schematic showing the lifespan of Period 2 State elements versus Period 3 Retention elements within and beyond an active execution boundary."
   type: interactive
   embed_mode: iframe
-  source_path: /interactive/dependency-chain-explorer.html
+  source_path: /interactive/fig2_a_state_vs_retention.html
   share_path: /figures/fig-2-2/
-  accessibility_summary: Visual dependency chain for selected ASM element.
-  legend_overview: This explorer surfaces the dependency ancestry and downstream consequences of any selected element in the table.
-  legend_how_to_read: Choose an element, then inspect what must already exist below it and what becomes possible above it once it is present.
-  legend_why_it_matters: The dependency chain is the operational proof that periods are derived rather than assigned by taste or convention.
+  accessibility_summary: "Timeline comparison showing state elements ending with execution while retention elements persist longer within session boundaries."
+  legend_overview: "This figure clarifies why State and Retention are separate groups and why Retention must sit above State in the period structure."
+  legend_how_to_read: "Follow the time axis from process start through session continuation. State elements terminate with execution, while retention survives across a longer boundary."
+  legend_why_it_matters: "The distinction between live operational context and retained information is one of the chapter's foundational period-boundary arguments."
   legend_callouts:
-    - Upward chains show prerequisites.
-    - Downward chains show what the selected element enables.
-    - The explorer turns the table from a taxonomy into a structural argument.
+    - State tracks what is happening now.
+    - Retention preserves what happened for later use.
+    - Retention depends on prior state, which is why it occupies a higher period.
+
+- id: fig-2-3
+  chapter: 2
+  label: Figure 2.3
+  title: "Reason vs. Represent: Lm and Ec in Period 4"
+  caption: "The same input enters both Lm and Ec; Lm produces generated reasoning while Ec produces a dense vector representation."
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig2_b_reason_vs_represent.html
+  share_path: /figures/fig-2-3/
+  accessibility_summary: "Input/output comparison showing Lm generating semantic reasoning output while Ec encodes the same input into a vector."
+  legend_overview: "This figure isolates the categorical distinction between generating meaning and representing meaning."
+  legend_how_to_read: "Compare the same input passing through Lm and Ec. The contrast is in output type, not model scale."
+  legend_why_it_matters: "Period 4 has only two elements, and this figure explains why they are structurally distinct despite sharing dependency depth."
+  legend_callouts:
+    - Lm reasons; Ec encodes.
+    - Functional character is categorical rather than scalar.
+    - Shared period placement does not imply shared group membership.
+
+- id: fig-2-4
+  chapter: 2
+  label: Figure 2.4
+  title: "The Period Stack: Six Dependency Layers from Computation to Pattern"
+  caption: "Vertical cross-section showing P1 through P6 as stacked dependency layers above the sub-atomic substrate."
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig2_2_period_stack.html
+  share_path: /figures/fig-2-4/
+  accessibility_summary: "Layered period-stack diagram showing each ASM period, its elements, and the one-way dependency direction from higher to lower layers."
+  legend_overview: "This figure turns the period axis into a visible dependency stack, from raw computation through reasoning patterns."
+  legend_how_to_read: "Read from bottom to top. Each layer depends on everything below it, while nothing below depends on what sits above."
+  legend_why_it_matters: "The period stack makes the row axis falsifiable. If a lower layer depended on a higher one, the derivation would fail."
+  legend_callouts:
+    - P1 is the computational floor.
+    - P5 is shared by long-horizon retention and action because they share dependency depth.
+    - P6 is the last layer before composition begins.
+
+- id: fig-2-5
+  chapter: 2
+  label: Figure 2.5
+  title: "The Complete Agentic Periodic Table (v0.3)"
+  caption: "The full periodic table with 22 confirmed elements, 2 predicted gaps, and 3 boson-class exchange protocols."
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig2_3_complete_periodic_table.html
+  share_path: /figures/fig-2-5/
+  accessibility_summary: "Full chapter-2 table showing all confirmed elements, predicted gaps, and boson-class exchange protocols with period and group organization."
+  legend_overview: "This is the full inventory produced by the chapter's two-axis derivation."
+  legend_how_to_read: "Read rows as dependency-derived periods and columns as functional groups. The separate exchange panel shows boson-class protocols that do not occupy periods."
+  legend_why_it_matters: "The figure is the payoff of the chapter. Every later molecule, force law, and biological analogy refers back to this inventory."
+  legend_callouts:
+    - The main table contains fermion-class elements only.
+    - Predicted gaps are explicit structural claims, not placeholders.
+    - Exchange protocols are separated because they exist in interaction, not inside components.
+
+- id: fig-2-6
+  chapter: 2
+  label: Figure 2.6
+  title: "Wt vs. Ct: Two Kinds of Writing"
+  caption: "A decision schematic for classifying writes by structural intent: storage mutation versus interpreter-directed communication."
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig2_c_wt_vs_ct.html
+  share_path: /figures/fig-2-6/
+  accessibility_summary: "Branching decision diagram that classifies write operations as Wt or Ct based on whether the output targets storage or an interpreter."
+  legend_overview: "This figure gives the practical classification rule for the Action-group distinction between Wt and Ct."
+  legend_how_to_read: "Start at the decision prompt, then follow the intent-based branch into Wt or Ct examples and their different structural consequences."
+  legend_why_it_matters: "The Wt versus Ct boundary is load-bearing because Ct interactions fall under the A3 force law and Wt interactions do not."
+  legend_callouts:
+    - The distinction is about structural intent, not mechanism.
+    - Writing to storage is Wt.
+    - Writing to an interpreter is Ct.
+
+- id: fig-2-7
+  chapter: 2
+  label: Figure 2.7
+  title: "LLM Configuration Dimensions: Configuring an Lm Instance"
+  caption: "Five structural configuration dimensions specify how an Lm behaves in a molecular composition."
+  type: interactive
+  embed_mode: iframe
+  source_path: /interactive/fig2_4_llm_configuration_dimensions.html
+  share_path: /figures/fig-2-7/
+  accessibility_summary: "Diagram of an Lm element with five labeled configuration dimensions and example molecular notation."
+  legend_overview: "This figure shows why Lm is the only element that needs internal configuration notation inside ASM formulas."
+  legend_how_to_read: "Read the left-side dimensions, then map them to the central Lm instance and the example formulas shown below it."
+  legend_why_it_matters: "Configuration dimensions are structural, not descriptive. They determine substitution constraints and composition validity."
+  legend_callouts:
+    - Scale, reasoning mode, modality, context window, and provider are encoded explicitly.
+    - Unspecified dimensions mean open design choice, not missing data.
+    - Changing dimensions is a structural modification, not a cosmetic preference.
 
 - id: fig-3-1
   chapter: 3

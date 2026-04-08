@@ -33,7 +33,7 @@ export type ElementMeta = {
   name: string;
   number: number | string;
   group: string;
-  period: string;
+  period: string | null;
   kind: 'element' | 'boson' | 'predicted-gap';
   description: string;
   current_instantiation?: string;

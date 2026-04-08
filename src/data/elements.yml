@@ -177,7 +177,7 @@
 - symbol: ?s
   name: Interaction Skill
   number: "??"
-  group: Predicted Gap
+  group: Pattern
   period: P6
   kind: predicted-gap
   description: "Predicted gap. Real-time engagement adapting dynamically within a live exchange, distinct from Generation Skill."
@@ -186,24 +186,32 @@
   name: Tool Invocation Protocol
   number: Mc
   group: Exchange
-  period: P2
+  period: null
   kind: boson
-  description: "Logical protocol surface for tool discovery and invocation. Carries data and execution, not intent or authority."
+  description: "Mediates contract-declared discovery and invocation between cognitive elements and tool molecules. Carries data and execution, not intent or authority."
   current_instantiation: MCP
 
 - symbol: A2
   name: Governed Delegation Protocol
   number: A2
   group: Exchange
-  period: P4
+  period: null
   kind: boson
-  description: "Logical protocol surface for inter-agent delegation. Carries task, intent, and authority together."
+  description: "Mediates intent-and-authority-carrying delegation between registered cognitive molecules. Agent-to-tool interaction is Mc, not A2."
   current_instantiation: A2A
 
 - symbol: A3
   name: Human Interface Protocol
   number: A3
   group: Exchange
-  period: P6
+  period: null
   kind: boson
-  description: "Closes the intent chain. Delivers legible output to the human whose intent initiated execution."
+  description: "Mediates delivery of legible output to the human whose intent initiated execution. The only boson that closes an intent chain."
+
+- symbol: A2T
+  name: Termination Boson
+  number: A2T
+  group: Exchange
+  period: null
+  kind: predicted-gap
+  description: "Predicted exchange-family gap in the weak agentic force family, structurally implied as a termination counterpart to governed delegation."

@@ -43,7 +43,7 @@ const canonicalPath = `/${chapter.slug}/`;
 const chapterNumber = chapter.data.chapter_number;
 const chapterAccent = chapterAccents[chapterNumber] || chapterAccents[1];
 const isScaffolded = chapter.data.status === 'placeholder';
-const hasInlineFigurePlacement = chapter.slug === 'chapter-1-foundations';
+const hasInlineFigurePlacement = chapter.data.inline_figures;
 const chapterIndex = chapters.findIndex((item) => item.slug === chapter.slug);
 const previousChapter = chapterIndex > 0 ? chapters[chapterIndex - 1] : undefined;
 const nextChapter = chapterIndex < chapters.length - 1 ? chapters[chapterIndex + 1] : undefined;

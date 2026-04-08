@@ -3,6 +3,7 @@ title: "Chapter 1: Foundations"
 chapter_number: 1
 summary: "The epistemic gap, historical method, four-layer hierarchy, and the book's organizing logic."
 status: draft
+inline_figures: true
 figure_ids:
   - fig-1-1
   - fig-1-2

@@ -1,0 +1,105 @@
+name: Create Release Tag
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to create, for example v0.1.0
+        required: true
+        type: string
+      target:
+        description: Branch or commit SHA to tag
+        required: true
+        default: main
+        type: string
+      release_name:
+        description: Optional release title. Defaults to the tag value.
+        required: false
+        type: string
+      prerelease:
+        description: Mark the GitHub release as a prerelease
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  tag-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target || github.sha }}
+
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TAG="${{ inputs.tag }}"
+            TARGET="${{ inputs.target }}"
+            RELEASE_NAME="${{ inputs.release_name }}"
+            PRERELEASE="${{ inputs.prerelease }}"
+          else
+            VERSION="$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")"
+            TAG="v${VERSION#v}"
+            TARGET="${{ github.sha }}"
+            RELEASE_NAME=""
+            PRERELEASE="false"
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+          echo "release_name=$RELEASE_NAME" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
+
+      - name: Validate requested tag
+        id: validate
+        shell: bash
+        run: |
+          TAG="${{ steps.meta.outputs.tag }}"
+
+          if [[ ! "$TAG" =~ ^v?[0-9]+(\.[0-9]+){1,2}([.-][A-Za-z0-9._-]+)?$ ]]; then
+            echo "Tag must look like v0.1.0, 0.1.0, or v0.1.0-rc1"
+            exit 1
+          fi
+
+          if git rev-parse "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping release creation."
+            echo "tag_exists=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "tag_exists=false" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        if: steps.validate.outputs.tag_exists == 'false'
+        env:
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
+      - name: Publish GitHub release
+        if: steps.validate.outputs.tag_exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          target_commitish: ${{ steps.meta.outputs.target }}
+          name: ${{ steps.meta.outputs.release_name != '' && steps.meta.outputs.release_name || steps.meta.outputs.tag }}
+          generate_release_notes: true
+          prerelease: ${{ steps.meta.outputs.prerelease == 'true' }}
