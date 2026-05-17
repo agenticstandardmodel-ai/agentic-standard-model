@@ -8,6 +8,7 @@ import ReflexiveDiagram from './ReflexiveDiagram.astro';
 import StatelessCatalystDiagram from './StatelessCatalystDiagram.astro';
 import SensoryAgentDiagram from './SensoryAgentDiagram.astro';
 import ToolCompletenessDiagram from './ToolCompletenessDiagram.astro';
+import EvaluatorDiagram from './EvaluatorDiagram.astro';
 import EvaluatorPlaceholderDiagram from './EvaluatorPlaceholderDiagram.astro';
 
 type Props = {
@@ -27,7 +28,7 @@ const diagrams = {
   'stateless-catalyst': StatelessCatalystDiagram,
   'sensory-agent': SensoryAgentDiagram,
   'tool-molecule-completeness': ToolCompletenessDiagram,
-  'evaluator-agent': EvaluatorPlaceholderDiagram
+  'evaluator-agent': EvaluatorDiagram
 };
 
 const Diagram = diagrams[diagramId as keyof typeof diagrams] ?? EvaluatorPlaceholderDiagram;

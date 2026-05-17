@@ -1,0 +1,41 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<svg class="molecule-svg" width="500" height="205" viewBox="0 0 500 205" role="img" aria-label={title}>
+  <line x1="92" y1="88" x2="172" y2="88" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="228" y1="88" x2="346" y2="88" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="200" y1="116" x2="200" y2="132" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="170" y1="155" x2="190" y2="155" stroke="#6a9fd4" stroke-width="2"></line>
+  <line x1="215" y1="155" x2="235" y2="155" stroke="#6a9fd4" stroke-width="2"></line>
+
+  <circle cx="70" cy="88" r="22" fill="#280e1c" stroke="#D4537E" stroke-width="1"></circle>
+  <text x="70" y="84" text-anchor="middle" class="mol-sym-sm" fill="#ED93B1">Rt</text>
+  <text x="70" y="100" text-anchor="middle" class="mol-lbl">Read Tool</text>
+
+  <circle cx="200" cy="88" r="28" fill="#2e1308" stroke="#D85A30" stroke-width="1.5"></circle>
+  <text x="200" y="84" text-anchor="middle" class="mol-sym" fill="#F0997B">Lm</text>
+  <text x="200" y="106" text-anchor="middle" class="mol-lbl">LLM</text>
+
+  <circle cx="370" cy="88" r="24" fill="#0a2219" stroke="#1D9E75" stroke-width="1"></circle>
+  <text x="370" y="84" text-anchor="middle" class="mol-sym-sm" fill="#5DCAA5">Em</text>
+  <text x="370" y="100" text-anchor="middle" class="mol-lbl">Episodic Mem.</text>
+
+  <circle cx="150" cy="155" r="22" fill="#131e07" stroke="#639922" stroke-width="1"></circle>
+  <text x="150" y="160" text-anchor="middle" class="mol-sym-sm" fill="#97C459">Is</text>
+
+  <circle cx="255" cy="155" r="22" fill="#131e07" stroke="#639922" stroke-width="1"></circle>
+  <text x="255" y="160" text-anchor="middle" class="mol-sym-sm" fill="#97C459">Ds</text>
+
+  <text x="203" y="192" text-anchor="middle" class="mol-bond-label">Evaluation Core</text>
+
+  <rect x="410" y="8" width="70" height="22" rx="4" fill="#261c00" stroke="#EF9F27" stroke-width="0.75"></rect>
+  <text x="445" y="23" text-anchor="middle" class="mol-mono" fill="#EF9F27">[Mc]</text>
+
+  <text x="132" y="80" text-anchor="middle" class="mol-bond-label">cov</text>
+  <text x="287" y="80" text-anchor="middle" class="mol-bond-label">cov</text>
+</svg>
